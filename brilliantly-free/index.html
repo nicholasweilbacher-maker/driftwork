@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brilliantly Free</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── TOKENS ─── */
+    :root {
+      --bg:      #07090f;
+      --bg2:     #0b0d17;
+      --gold:    #e8b448;
+      --gold2:   #f5d482;
+      --amber:   #f07838;
+      --cream:   #fdf6e8;
+      --cream50: rgba(253,246,232,0.5);
+      --cream30: rgba(253,246,232,0.3);
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--sans);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      animation: riseIn 1.4s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+      margin-bottom: 1.8rem;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(5.5rem, 14vw, 13rem);
+      font-weight: 300;
+      line-height: 0.88;
+      letter-spacing: -0.025em;
+      opacity: 0;
+      animation: riseIn 1.4s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+    }
+
+    .hero-title .word1 { display: block; color: var(--cream); }
+    .hero-title .word2 { display: block; color: var(--gold); font-style: italic; }
+
+    .hero-sub {
+      margin-top: 2.5rem;
+      font-size: clamp(0.88rem, 1.5vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--cream50);
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      animation: riseIn 1.4s cubic-bezier(0.16,1,0.3,1) 0.8s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      opacity: 0;
+      animation: riseIn 1.4s ease 1.5s forwards;
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: shimmer 2.5s ease-in-out infinite;
+    }
+
+    .scroll-hint-text {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream30);
+    }
+
+    /* ─── CHAPTERS ─── */
+    .chapter {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 2rem;
+      position: relative;
+    }
+
+    .chapter-inner {
+      max-width: 860px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.d1 { transition-delay: 0.05s; }
+    .reveal.d2 { transition-delay: 0.2s;  }
+    .reveal.d3 { transition-delay: 0.38s; }
+    .reveal.d4 { transition-delay: 0.58s; }
+    .chapter.in-view .reveal { opacity: 1; transform: none; }
+
+    .chapter-rule {
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.45;
+      margin: 0 auto 1.4rem;
+    }
+
+    .chapter-num {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 1.4rem;
+    }
+
+    .chapter-heading {
+      font-family: var(--serif);
+      font-size: clamp(3.8rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.6rem;
+    }
+
+    .chapter-heading em { font-style: italic; color: var(--gold); }
+
+    .chapter-body {
+      font-size: clamp(0.98rem, 1.8vw, 1.18rem);
+      line-height: 1.9;
+      color: var(--cream50);
+      font-weight: 300;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    #see-you    { background: linear-gradient(180deg, var(--bg) 0%, #0a0c16 100%); }
+    #miss-you   { background: #0a0c16; }
+    #remembered { background: linear-gradient(180deg, #0a0c16 0%, #0e0b1c 100%); }
+    #send-off   { background: #0e0b1c; }
+
+    /* ─── CONSTELLATION ─── */
+    .constellation-wrap {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      margin-top: 4.5rem;
+    }
+
+    #constellationCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .word-chip {
+      position: absolute;
+      font-family: var(--sans);
+      font-size: clamp(0.68rem, 1.1vw, 0.84rem);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: rgba(253,246,232,0.38);
+      cursor: default;
+      white-space: nowrap;
+      transform-origin: center center;
+      animation: chipFloat linear infinite;
+      transition: color 0.35s ease, text-shadow 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      user-select: none;
+    }
+
+    .word-chip:hover {
+      color: var(--gold) !important;
+      text-shadow: 0 0 22px rgba(232,180,72,0.75), 0 0 48px rgba(232,180,72,0.3);
+      transform: scale(1.22) !important;
+      z-index: 10;
+    }
+
+    /* ─── MISS YOU PULSE ─── */
+    .pulse-ring-wrap {
+      margin-top: 4.5rem;
+      position: relative;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pulse-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(232,180,72,0.18);
+      animation: pulseRing linear infinite;
+    }
+
+    .pulse-core {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 18px 4px rgba(232,180,72,0.55);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─── SEND-OFF ─── */
+    .release-area {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .release-btn {
+      background: transparent;
+      border: 1px solid rgba(232,180,72,0.38);
+      color: var(--gold);
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      padding: 1.1rem 3.2rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease, border-color 0.4s ease, opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .release-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(232,180,72,0.08) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .release-btn:hover { border-color: var(--gold); background: rgba(232,180,72,0.05); }
+    .release-btn:hover::after { opacity: 1; }
+    .release-btn:active { background: rgba(232,180,72,0.12); }
+    .release-btn.fired { opacity: 0; transform: scale(0.95); pointer-events: none; }
+
+    .final-line {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 4.2vw, 3.4rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      letter-spacing: -0.015em;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 2.2s ease, transform 2.2s ease;
+    }
+
+    .final-line.show { opacity: 1; transform: none; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(232,180,72,0.07);
+    }
+
+    footer p {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(253,246,232,0.16);
+    }
+
+    /* ─── KEYFRAMES ─── */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes shimmer {
+      0%,100% { opacity: 0.28; transform: scaleY(0.75); }
+      50%      { opacity: 1;   transform: scaleY(1); }
+    }
+
+    @keyframes chipFloat {
+      0%   { translate: 0 0px; }
+      50%  { translate: 0 -10px; }
+      100% { translate: 0 0px; }
+    }
+
+    @keyframes pulseRing {
+      0%   { transform: scale(0.5); opacity: 0.6; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .constellation-wrap { height: 300px; }
+      .chapter { padding: 5.5rem 1.4rem; }
+      .chapter-heading { margin-bottom: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-inner">
+    <span class="hero-eyebrow">For the brilliant ones</span>
+    <h1 class="hero-title">
+      <span class="word1">Brilliantly</span>
+      <span class="word2">Free</span>
+    </h1>
+    <p class="hero-sub">A tribute to the talent, the craft, and the people<br>who made something worth making.</p>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-hint-line"></div>
+    <span class="scroll-hint-text">Scroll</span>
+  </div>
+</section>
+
+<section class="chapter" id="see-you">
+  <div class="chapter-inner">
+    <span class="chapter-rule reveal d1"></span>
+    <span class="chapter-num reveal d1">01 — Recognition</span>
+    <h2 class="chapter-heading reveal d2">We <em>See</em> You</h2>
+    <p class="chapter-body reveal d3">
+      Every late brief. Every campaign that just clicked.<br>
+      Every moment you made something better than it had to be —<br>
+      we saw that. Your craft didn't go unnoticed. Your care didn't either.
+    </p>
+    <div class="constellation-wrap reveal d4">
+      <canvas id="constellationCanvas"></canvas>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="miss-you">
+  <div class="chapter-inner">
+    <span class="chapter-rule reveal d1"></span>
+    <span class="chapter-num reveal d1">02 — Gratitude</span>
+    <h2 class="chapter-heading reveal d2">We Will<br><em>Miss You</em></h2>
+    <p class="chapter-body reveal d3">
+      Not just the work. The energy you brought to a room.<br>
+      The way you pushed back when something wasn't right.<br>
+      The standards you held without being asked to.<br>
+      That kind of presence leaves a mark.
+    </p>
+    <div class="pulse-ring-wrap reveal d4">
+      <div class="pulse-ring" style="width:70px;height:70px;animation-duration:3s;animation-delay:0s;"></div>
+      <div class="pulse-ring" style="width:70px;height:70px;animation-duration:3s;animation-delay:1s;"></div>
+      <div class="pulse-ring" style="width:70px;height:70px;animation-duration:3s;animation-delay:2s;"></div>
+      <div class="pulse-core"></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="remembered">
+  <div class="chapter-inner">
+    <span class="chapter-rule reveal d1"></span>
+    <span class="chapter-num reveal d1">03 — Legacy</span>
+    <h2 class="chapter-heading reveal d2">Your Work<br>Will Be<br><em>Remembered</em></h2>
+    <p class="chapter-body reveal d3">
+      The campaigns you touched live on.<br>
+      The people you influenced carry your standards forward.<br>
+      The bar you raised stays raised.<br>
+      Ideas don't disappear when you leave a building —<br>
+      they travel with you.
+    </p>
+  </div>
+</section>
+
+<section class="chapter" id="send-off">
+  <div class="chapter-inner">
+    <span class="chapter-rule reveal d1"></span>
+    <span class="chapter-num reveal d1">04 — What's Next</span>
+    <h2 class="chapter-heading reveal d2">Go Be<br><em>Brilliant</em></h2>
+    <p class="chapter-body reveal d3">
+      Whatever comes next — it's going to be better for having you in it.<br>
+      You were never defined by a client, a campaign, or a company.<br>
+      You are the work.
+    </p>
+    <div class="release-area reveal d4">
+      <button class="release-btn" id="releaseBtn">Release &amp; Move Forward</button>
+      <span class="final-line" id="finalLine">The best is still ahead of you.</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Made with love, by the people who worked alongside you &nbsp;·&nbsp; Brilliantly Free &nbsp;·&nbsp; 2026</p>
+</footer>
+
+<script>
+(function () {
+  const canvas = document.getElementById('heroCanvas');
+  const ctx    = canvas.getContext('2d');
+  const hero   = document.getElementById('hero');
+  let W, H, particles = [], mouse = { x: null, y: null };
+
+  function resize() { W = canvas.width = hero.offsetWidth; H = canvas.height = hero.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  hero.addEventListener('mousemove', e => { const r = hero.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+  hero.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+  hero.addEventListener('click', e => { const r = hero.getBoundingClientRect(); burst(e.clientX - r.left, e.clientY - r.top, 45); });
+
+  const COLORS = ['#e8b448','#f5d482','#f07838','#fdf6e8','#ffad50'];
+
+  class Ember {
+    constructor(x, y, isBurst) {
+      this.isBurst = isBurst;
+      this.x = x ?? Math.random() * W;
+      this.y = y ?? H + 6;
+      this.size  = isBurst ? Math.random() * 2.8 + 0.8 : Math.random() * 1.8 + 0.4;
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      if (isBurst) {
+        const angle = Math.random() * Math.PI * 2, spd = Math.random() * 6 + 2;
+        this.vx = Math.cos(angle) * spd; this.vy = Math.sin(angle) * spd - 3;
+        this.life = 1; this.decay = Math.random() * 0.018 + 0.008;
+      } else {
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = -(Math.random() * 0.75 + 0.22);
+        this.opacity = Math.random() * 0.85 + 0.15;
+        this.wobble = Math.random() * Math.PI * 2; this.wobbleSpd = (Math.random() - 0.5) * 0.026;
+      }
+    }
+    update() {
+      if (this.isBurst) { this.x += this.vx; this.y += this.vy; this.vy += 0.06; this.vx *= 0.982; this.life -= this.decay; }
+      else {
+        this.wobble += this.wobbleSpd; this.x += this.vx + Math.sin(this.wobble) * 0.28; this.y += this.vy;
+        if (mouse.x !== null) { const dx = this.x - mouse.x, dy = this.y - mouse.y, d2 = dx*dx+dy*dy; if (d2 < 14400) { const d = Math.sqrt(d2), f = (120-d)/120; this.x += (dx/d)*f*2; this.y += (dy/d)*f*2; } }
+      }
+    }
+    draw() {
+      ctx.save(); ctx.globalAlpha = this.isBurst ? Math.max(0, this.life) : this.opacity;
+      ctx.fillStyle = this.color; ctx.shadowBlur = this.isBurst ? 10 : 7; ctx.shadowColor = this.color;
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    }
+    dead() { return this.isBurst ? this.life <= 0 : this.y < -12; }
+  }
+
+  function burst(x, y, n) { for (let i = 0; i < n; i++) particles.push(new Ember(x, y, true)); }
+
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    if (particles.filter(p => !p.isBurst).length < 145) for (let i = 0; i < 3; i++) particles.push(new Ember(null, null, false));
+    particles = particles.filter(p => !p.dead());
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+const revealObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); }); }, { threshold: 0.14 });
+document.querySelectorAll('.chapter').forEach(c => revealObs.observe(c));
+
+(function () {
+  const WORDS = ['Your creativity','The late nights','Your instincts','Every revision','Your laughter','The big ideas','Your presence','Hard-won strategy','Sharp copy','Your patience','The small wins','Every pitch','Your honesty','Clean thinking','The details','Your hustle','Team spirit','Bold choices','Quiet expertise','Your integrity','Real craft','Your voice','The extra effort','Pure dedication'];
+  const wrap = document.querySelector('.constellation-wrap');
+  const cCanvas = document.getElementById('constellationCanvas');
+  const cCtx = cCanvas.getContext('2d');
+  let placed = [];
+
+  function build() {
+    cCanvas.width = wrap.offsetWidth; cCanvas.height = wrap.offsetHeight;
+    wrap.querySelectorAll('.word-chip').forEach(el => el.remove()); placed = [];
+    WORDS.forEach(word => {
+      const el = document.createElement('span'); el.className = 'word-chip'; el.textContent = word;
+      let x, y, tries = 0;
+      do { x = 2 + Math.random() * 88; y = 4 + Math.random() * 82; tries++; } while (tries < 40 && placed.some(p => Math.abs(p.x-x) < 14 && Math.abs(p.y-y) < 18));
+      placed.push({x, y});
+      el.style.left = x + '%'; el.style.top = y + '%';
+      el.style.animationDuration = (5 + Math.random() * 6) + 's';
+      el.style.animationDelay = -(Math.random() * 8) + 's';
+      el.style.fontSize = (0.68 + Math.random() * 0.3) + 'rem';
+      el.style.opacity = (0.26 + Math.random() * 0.46);
+      wrap.appendChild(el);
+    });
+    const W = cCanvas.width, H = cCanvas.height;
+    cCtx.clearRect(0, 0, W, H);
+    const pts = placed.map(p => ({ x: (p.x/100)*W, y: (p.y/100)*H }));
+    pts.forEach((a, i) => { pts.forEach((b, j) => { if (j <= i) return; const d = Math.hypot(a.x-b.x, a.y-b.y); if (d < 115) { const alpha = (1-d/115)*0.13; cCtx.beginPath(); cCtx.moveTo(a.x, a.y); cCtx.lineTo(b.x, b.y); cCtx.strokeStyle = `rgba(232,180,72,${alpha})`; cCtx.lineWidth = 0.5; cCtx.stroke(); } }); });
+  }
+  build(); window.addEventListener('resize', build);
+})();
+
+document.getElementById('releaseBtn').addEventListener('click', function () {
+  this.classList.add('fired');
+  const oc = document.createElement('canvas');
+  oc.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+  oc.width = window.innerWidth; oc.height = window.innerHeight;
+  document.body.appendChild(oc);
+  const octx = oc.getContext('2d');
+  const cx = window.innerWidth/2, cy = window.innerHeight*0.55;
+  const COLS = ['#e8b448','#f5d482','#f07838','#fdf6e8','#ffb060','#fff2cc'];
+  const embers = Array.from({length: 300}, () => { const angle = Math.random()*Math.PI*2, speed = Math.random()*10+2; return { x:cx, y:cy, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed-Math.random()*6, size:Math.random()*4.5+0.6, life:1, decay:Math.random()*0.005+0.003, color:COLS[Math.floor(Math.random()*COLS.length)] }; });
+  function animRelease() {
+    octx.clearRect(0, 0, oc.width, oc.height); let alive = false;
+    embers.forEach(e => { e.x+=e.vx; e.y+=e.vy; e.vy+=0.035; e.vx*=0.993; e.life-=e.decay; if (e.life>0) { alive=true; octx.save(); octx.globalAlpha=e.life; octx.fillStyle=e.color; octx.shadowBlur=14; octx.shadowColor=e.color; octx.beginPath(); octx.arc(e.x,e.y,e.size,0,Math.PI*2); octx.fill(); octx.restore(); } });
+    if (alive) requestAnimationFrame(animRelease); else document.body.removeChild(oc);
+  }
+  animRelease();
+  setTimeout(() => { document.getElementById('finalLine').classList.add('show'); }, 1900);
+});
+</script>
+
+</body>
+</html>
