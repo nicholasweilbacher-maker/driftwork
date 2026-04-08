@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Grimoire — Nick Weilbacher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dawn:    #1a0a2e;
+      --dusk:    #2d1035;
+      --horizon: #8b2252;
+      --ember:   #c94a1a;
+      --gold:    #d4943a;
+      --amber:   #e8b86d;
+      --mist:    rgba(255,240,220,0.06);
+      --fog:     rgba(200,170,220,0.08);
+      --text:    #f0e6d3;
+      --muted:   rgba(240,230,210,0.5);
+      --ink:     rgba(10,4,20,0.75);
+    }
+
+    html { height: 100%; }
+
+    body {
+      min-height: 100%;
+      font-family: 'Lora', serif;
+      color: var(--text);
+      background: var(--dawn);
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════════
+       ATMOSPHERIC BACKGROUND
+    ══════════════════════════════════════ */
+    #sky {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(
+          ellipse 140% 60% at 50% 100%,
+          #6b1a3a 0%,
+          #3d0e2a 30%,
+          #1a0625 60%,
+          #08030f 100%
+        );
+      transition: background 1.2s ease;
+    }
+
+    /* Horizon glow */
+    #sky::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 45%;
+      background: radial-gradient(
+        ellipse 80% 100% at 50% 100%,
+        rgba(180, 60, 60, 0.35) 0%,
+        rgba(120, 30, 80, 0.2) 40%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    /* Stars */
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Fog layers */
+    .fog-layer {
+      position: fixed;
+      bottom: 0;
+      left: -20%;
+      width: 140%;
+      pointer-events: none;
+      z-index: 2;
+      border-radius: 50%;
+      opacity: 0;
+      animation: driftFog linear infinite;
+    }
+    .fog-1 {
+      height: 200px;
+      background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(220,190,255,0.07) 0%, transparent 70%);
+      animation-duration: 28s;
+      animation-delay: 0s;
+    }
+    .fog-2 {
+      height: 280px;
+      left: -30%;
+      background: radial-gradient(ellipse 70% 100% at 40% 100%, rgba(255,200,180,0.06) 0%, transparent 70%);
+      animation-duration: 38s;
+      animation-delay: -12s;
+    }
+    .fog-3 {
+      height: 160px;
+      left: -10%;
+      background: radial-gradient(ellipse 50% 100% at 60% 100%, rgba(200,210,255,0.05) 0%, transparent 70%);
+      animation-duration: 22s;
+      animation-delay: -6s;
+    }
+
+    @keyframes driftFog {
+      0%   { opacity: 0;    transform: translateX(0) scaleX(1); }
+      10%  { opacity: 1; }
+      50%  { opacity: 0.7;  transform: translateX(8%) scaleX(1.04); }
+      90%  { opacity: 1; }
+      100% { opacity: 0;    transform: translateX(15%) scaleX(1); }
+    }
+
+    /* Floating embers / particles */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════
+       LAYOUT
+    ══════════════════════════════════════ */
+    #app {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px 60px;
+      gap: 0;
+    }
+
+    /* ══════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════ */
+    #header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 6px;
+      color: var(--gold);
+      opacity: 0.7;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: clamp(28px, 6vw, 52px);
+      color: var(--amber);
+      text-shadow:
+        0 0 40px rgba(212,148,58,0.6),
+        0 0 80px rgba(180,80,40,0.3);
+      letter-spacing: 6px;
+      animation: flickerTitle 8s ease-in-out infinite;
+    }
+
+    @keyframes flickerTitle {
+      0%, 100% { text-shadow: 0 0 40px rgba(212,148,58,0.6), 0 0 80px rgba(180,80,40,0.3); }
+      48%       { text-shadow: 0 0 50px rgba(212,148,58,0.8), 0 0 100px rgba(180,80,40,0.4); }
+      50%       { text-shadow: 0 0 30px rgba(212,148,58,0.4), 0 0 60px rgba(180,80,40,0.2); }
+      52%       { text-shadow: 0 0 50px rgba(212,148,58,0.8), 0 0 100px rgba(180,80,40,0.4); }
+    }
+
+    .title-rule {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 16px auto 0;
+      opacity: 0.5;
+    }
+
+    /* ══════════════════════════════════════
+       TOME CARD
+    ══════════════════════════════════════ */
+    #tome {
+      width: 100%;
+      max-width: 740px;
+      background: var(--ink);
+      border: 1px solid rgba(212,148,58,0.2);
+      border-radius: 2px;
+      padding: 48px 52px;
+      position: relative;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow:
+        0 0 60px rgba(100,20,40,0.5),
+        0 0 120px rgba(50,10,20,0.4),
+        inset 0 1px 0 rgba(212,148,58,0.1);
+    }
+
+    /* Corner ornaments */
+    .corner {
+      position: absolute;
+      font-size: 18px;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+    }
+    .corner-tl { top: 12px;    left: 16px; }
+    .corner-tr { top: 12px;    right: 16px; transform: scaleX(-1); }
+    .corner-bl { bottom: 12px; left: 16px;  transform: scaleY(-1); }
+    .corner-br { bottom: 12px; right: 16px; transform: scale(-1); }
+
+    /* Entry content */
+    .entry-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .entry-wrap.fading {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .entry-glyph {
+      font-size: 36px;
+      text-align: center;
+      filter: drop-shadow(0 0 12px rgba(220,160,80,0.6));
+    }
+
+    .entry-meta {
+      text-align: center;
+      border-bottom: 1px solid rgba(212,148,58,0.15);
+      padding-bottom: 22px;
+    }
+
+    .entry-vol {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+
+    .entry-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(16px, 3vw, 24px);
+      font-weight: 600;
+      color: var(--amber);
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(232,184,109,0.4);
+    }
+
+    .entry-body {
+      font-size: clamp(14px, 1.6vw, 16px);
+      line-height: 1.95;
+      color: var(--text);
+    }
+
+    .entry-body p { margin-bottom: 1.2em; }
+    .entry-body p:last-child { margin-bottom: 0; }
+
+    .entry-body em {
+      font-style: italic;
+      color: #e8c8a0;
+    }
+
+    .entry-body strong {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--amber);
+    }
+
+    /* ══════════════════════════════════════
+       PROGRESS ORBS
+    ══════════════════════════════════════ */
+    #orbs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+
+    .orb {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,148,58,0.4);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .orb.active {
+      background: var(--gold);
+      border-color: var(--amber);
+      box-shadow: 0 0 8px rgba(212,148,58,0.7);
+    }
+    .orb:hover:not(.active) {
+      border-color: var(--amber);
+      background: rgba(212,148,58,0.2);
+    }
+
+    /* ══════════════════════════════════════
+       NAVIGATION
+    ══════════════════════════════════════ */
+    #nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-top: 36px;
+    }
+
+    .nav-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      background: transparent;
+      border: 1px solid rgba(212,148,58,0.35);
+      color: var(--gold);
+      padding: 12px 28px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+      border-radius: 1px;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: rgba(212,148,58,0.1);
+      border-color: var(--amber);
+      color: var(--amber);
+      box-shadow: 0 0 20px rgba(212,148,58,0.2);
+    }
+    .nav-btn:disabled {
+      opacity: 0.2;
+      cursor: default;
+    }
+
+    .nav-counter {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      opacity: 0.5;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    /* ══════════════════════════════════════
+       CREDITS
+    ══════════════════════════════════════ */
+    #credits {
+      margin-top: 52px;
+      text-align: center;
+    }
+
+    .credits-rule {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,148,58,0.3), transparent);
+      margin: 0 auto 20px;
+    }
+
+    .credits-text {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .credits-name {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-style: normal;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-top: 6px;
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 600px) {
+      #tome { padding: 32px 24px; }
+      h1 { letter-spacing: 3px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Atmospheric layers -->
+<div id="sky"></div>
+<canvas id="stars"></canvas>
+<div class="fog-layer fog-1"></div>
+<div class="fog-layer fog-2"></div>
+<div class="fog-layer fog-3"></div>
+<canvas id="particles"></canvas>
+
+<div id="app">
+
+  <div id="header">
+    <p class="eyebrow">A Field Record of Shamanic Study</p>
+    <h1>The Grimoire</h1>
+    <div class="title-rule"></div>
+  </div>
+
+  <div id="tome">
+    <span class="corner corner-tl">✦</span>
+    <span class="corner corner-tr">✦</span>
+    <span class="corner corner-bl">✦</span>
+    <span class="corner corner-br">✦</span>
+
+    <div class="entry-wrap" id="entry-wrap">
+      <div class="entry-glyph" id="glyph"></div>
+      <div class="entry-meta">
+        <div class="entry-vol" id="vol"></div>
+        <div class="entry-title" id="title"></div>
+      </div>
+      <div class="entry-body" id="body"></div>
+    </div>
+
+    <div id="orbs"></div>
+  </div>
+
+  <div id="nav">
+    <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">← Prev</button>
+    <span class="nav-counter" id="counter">I / VIII</span>
+    <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next →</button>
+  </div>
+
+  <div id="credits">
+    <div class="credits-rule"></div>
+    <p class="credits-text">
+      Written from original graduate research
+      <span class="credits-name">Nick Weilbacher · SMU Master of Liberal Studies · 2019</span>
+    </p>
+  </div>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════
+   ENTRY DATA
+══════════════════════════════════════ */
+const entries = [
+  {
+    glyph: "🌿",
+    vol: "Volume I",
+    title: "The Shaman's Call",
+    body: `<p>Imagine a magical place that you may or may not have already visited. Take a deep breath. Think back to every place you have ever visited — or dream of visiting. Now compose your idea of the single most beautiful and magical place, in your mind.</p>
+<p>The picture you painted is <em>likely one of nature.</em> There is a connection we feel to the earth. The fact that our bodies continually heal and cleanse themselves is proof of a <strong>collective magical intention.</strong> As much as we evolve and move into closer living quarters, we should never forget our roots among plants and animals.</p>
+<p>As the old mythology goes, it was common to travel outside the village to find the medicine man or woman. The witch's hut was only found after a dangerous journey through a forbidden forest. <em>This is where you begin.</em></p>`
+  },
+  {
+    glyph: "🜏",
+    vol: "Volume II",
+    title: "Animism",
+    body: `<p>An <strong>animist worldview</strong> holds that there is spirit in everything. From the rock, to the bird, to the plant, and the sea — <em>everything is alive.</em></p>
+<p>Working with these spirits, in their realms, is at the core of shamanic practice. Without central leadership or authority — not counting nature itself — shamanism's roots reach deeply into the pre-history of mankind, when animist worldview prevailed across every continent.</p>
+<p>To find the assistance you needed, the more challenging, naturally pristine, and remote the place, the better. The land itself held power. The shaman was merely its <em>interpreter.</em></p>`
+  },
+  {
+    glyph: "🌊",
+    vol: "Volume III",
+    title: "The Confluence",
+    body: `<p>Consider standing at the base of a <strong>fifty-foot waterfall</strong>, cascading into an otherworldly tidal pool on the beach of an abandoned island, in the middle of the ocean.</p>
+<p>Or standing at the edge of an <em>active caldera</em> in a remote part of Iceland, watching two tectonic plates continuously rip apart in a hellish spectacle.</p>
+<p>What do these places share? Besides being ideal for foraging medicinal and magical compounds, they represent a <strong>confluence — where two separate worlds collide and become one.</strong> These are the places where the veil grows thin and the work becomes possible.</p>`
+  },
+  {
+    glyph: "🍃",
+    vol: "Volume IV",
+    title: "Ayahuasca",
+    body: `<p>Made from leaves of the <em>Psychotria viridis</em> shrub and stalks of the <em>Banisteriopsis caapi</em> vine, the brew releases a powerful DMT-fueled sensory experience — often with profound spiritual implications.</p>
+<p>For many, ayahuasca serves as a <strong>spiritual tune-up or sacrament</strong>, elevating an individual to higher states of conscious awareness. Across testimonials and ethnographic study, the same pattern emerges: nature may carry the treatment the western world cannot provide.</p>
+<p>Participants report that Grandmother does not always give what you want. <em>She gives what you require.</em></p>`
+  },
+  {
+    glyph: "❄",
+    vol: "Volume V",
+    title: "The Neural Reset",
+    body: `<p>Through repetitive conditioning found in daily routines, our brain's neural pathways become like <strong>grooves in a snowy embankment.</strong> These grooves carry our mental activity in a routine direction. Over time, the thought patterns deepen and take hold.</p>
+<p>Researchers describe certain plant medicines as acting like <em>fresh snowfall on that embankment.</em> After the storm passes, the grooves are not as deep. New neural pathways can form, and lasting behavior change becomes possible.</p>
+<p>One of the great challenges researchers identify: <strong>how to integrate the experience</strong> — to hold onto the new snow before the old grooves freeze back in.</p>`
+  },
+  {
+    glyph: "🌀",
+    vol: "Volume VI",
+    title: "Samskara",
+    body: `<p>After a month in the jungle — clean eating, strict physical and mental discipline, a 200-hour yoga teacher training — I returned changed. In retrospect, <em>this was a turning point.</em></p>
+<p>Yet the grooves in my psyche remained, albeit shallower for a time. Because of psychic <strong>samskara</strong> — the carved channels of habit in the mind — I slid back into old patterns. Doing what I conceived others wanted. Asking: <em>am I good enough?</em></p>
+<p>Fortunately, as I have gotten older, I have learned to appreciate the <strong>cyclical quality of time</strong>, providing seemingly unlimited opportunity to advance self-discovery. The path is not a line. <em>It is a spiral.</em></p>`
+  },
+  {
+    glyph: "🔥",
+    vol: "Volume VII",
+    title: "Grandmother Speaks",
+    body: `<p>Darrin described an exchange with a girl who said that <em>Grandmother Ayahuasca</em> had told her she needed to re-break up with her ex-boyfriend. In reaction to a thought of him, Grandmother cried:</p>
+<p><strong>"Reclaim your heart. You need to take it back. You are never going to move on without the piece of your heart you left in that relationship."</strong></p>
+<p><em>Ayahuasca shines light on areas in your life that need attention.</em> If you have been avoiding change, when she brings that issue to light, it can be very difficult to accept. She does not flatter. She does not lie.</p>`
+  },
+  {
+    glyph: "✦",
+    vol: "Volume VIII",
+    title: "Peeking Under the Veil",
+    body: `<p>Practitioners speak of glimpsing other realities — experiences they call <em>peeking under the veil.</em> It is these encounters at the edge of ordinary consciousness that carry the potential for genuine, lasting spiritual fulfillment.</p>
+<p>Many who arrive at ceremony carry a deep sense of isolation. Those who move through it often report the same thing: <strong>the need to belong dissolves.</strong> Belonging becomes something carried inward rather than sought outward.</p>
+<p>At dawn outside of Austin, a shaman looked at someone and said: <em>"You made it."</em> As if he had been aware of their journey the entire time. Perhaps he had been.</p>`
+  }
+];
+
+/* ══════════════════════════════════════
+   STATE & RENDER
+══════════════════════════════════════ */
+let current = 0;
+
+function buildOrbs() {
+  const el = document.getElementById('orbs');
+  el.innerHTML = '';
+  entries.forEach((_, i) => {
+    const orb = document.createElement('div');
+    orb.className = 'orb' + (i === current ? ' active' : '');
+    orb.onclick = () => { if (i !== current) { current = i; render(); } };
+    el.appendChild(orb);
+  });
+}
+
+function render(direction = 0) {
+  const e = entries[current];
+  const wrap = document.getElementById('entry-wrap');
+
+  wrap.classList.add('fading');
+
+  setTimeout(() => {
+    document.getElementById('glyph').textContent   = e.glyph;
+    document.getElementById('vol').textContent     = e.vol;
+    document.getElementById('title').textContent   = e.title;
+    document.getElementById('body').innerHTML      = e.body;
+    document.getElementById('counter').textContent = `${toRoman(current+1)} / ${toRoman(entries.length)}`;
+
+    document.getElementById('prev-btn').disabled = current === 0;
+    document.getElementById('next-btn').disabled = current === entries.length - 1;
+
+    buildOrbs();
+    updateSky();
+
+    wrap.classList.remove('fading');
+  }, 400);
+}
+
+function navigate(dir) {
+  const next = current + dir;
+  if (next < 0 || next >= entries.length) return;
+  current = next;
+  render(dir);
+}
+
+function toRoman(n) {
+  const map = [[8,'VIII'],[7,'VII'],[6,'VI'],[5,'V'],[4,'IV'],[3,'III'],[2,'II'],[1,'I']];
+  for (const [v,r] of map) if (n >= v) return r;
+  return '';
+}
+
+/* ══════════════════════════════════════
+   DYNAMIC SKY — shifts warm to cool
+   as entries progress
+══════════════════════════════════════ */
+const skyPalettes = [
+  { a: '#1a0a2e', b: '#6b1a3a' },  // deep dusk
+  { a: '#1c0b30', b: '#7a1f3a' },
+  { a: '#200c28', b: '#8b2040' },  // pre-dawn rose
+  { a: '#1e0e20', b: '#9e3030' },  // ember
+  { a: '#1a1020', b: '#7a3020' },  // burnt
+  { a: '#14101e', b: '#5a2540' },  // midnight
+  { a: '#0e0c1c', b: '#3a1a4a' },  // late night
+  { a: '#08060e', b: '#2a0e30' },  // void
+];
+
+function updateSky() {
+  const p = skyPalettes[current] || skyPalettes[0];
+  const sky = document.getElementById('sky');
+  sky.style.background = `radial-gradient(
+    ellipse 140% 60% at 50% 100%,
+    ${p.b} 0%, ${p.a} 55%, #060310 100%
+  )`;
+}
+
+/* ══════════════════════════════════════
+   STARS CANVAS
+══════════════════════════════════════ */
+function initStars() {
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createStars(n) {
+    stars = [];
+    for (let i = 0; i < n; i++) {
+      stars.push({
+        x:     Math.random() * canvas.width,
+        y:     Math.random() * canvas.height * 0.65,
+        r:     Math.random() * 1.2 + 0.2,
+        alpha: Math.random(),
+        speed: Math.random() * 0.008 + 0.003,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function drawStars(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const s of stars) {
+      const a = (Math.sin(t * s.speed + s.phase) * 0.4 + 0.6) * s.alpha;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,240,220,${a})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(drawStars);
+  }
+
+  resize();
+  window.addEventListener('resize', () => { resize(); createStars(180); });
+  createStars(180);
+  requestAnimationFrame(drawStars);
+}
+
+/* ══════════════════════════════════════
+   EMBERS CANVAS
+══════════════════════════════════════ */
+function initParticles() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let sparks = [];
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function spawnSpark() {
+    sparks.push({
+      x:     Math.random() * canvas.width,
+      y:     canvas.height * (0.6 + Math.random() * 0.4),
+      vx:    (Math.random() - 0.5) * 0.5,
+      vy:    -(Math.random() * 0.8 + 0.3),
+      life:  1,
+      decay: Math.random() * 0.006 + 0.003,
+      r:     Math.random() * 1.5 + 0.5,
+      hue:   20 + Math.random() * 40
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (Math.random() < 0.15) spawnSpark();
+
+    sparks = sparks.filter(s => s.life > 0);
+    for (const s of sparks) {
+      s.x    += s.vx + Math.sin(Date.now() * 0.001 + s.y) * 0.2;
+      s.y    += s.vy;
+      s.life -= s.decay;
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r * s.life, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${s.hue}, 90%, 70%, ${s.life * 0.7})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  draw();
+}
+
+/* ══════════════════════════════════════
+   KEYBOARD
+══════════════════════════════════════ */
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+});
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+initStars();
+initParticles();
+render();
+</script>
+</body>
+</html>
