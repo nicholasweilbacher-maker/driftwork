@@ -886,7 +886,7 @@
   <!-- ── PROGRESS BAR ────────────────────────────────── -->
   <div id="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
-  <!-- ── CONTROLS ────────────────────────────────────── 
+  <!-- ── CONTROLS ────────────────────────────────────── -->
   <div id="controls" role="toolbar" aria-label="Display controls">
     <button id="theme-toggle" aria-label="Switch to light mode">☀︎</button>
     <div class="ctrl-divider" aria-hidden="true"></div>
@@ -897,7 +897,7 @@
       <button class="lang-btn" data-lang="de" onclick="switchLang('de', this)" aria-label="Deutsch" aria-pressed="false">DE</button>
     </nav>
   </div>
-  <div id="google_translate_element" aria-hidden="true"></div>-->
+  <div id="google_translate_element" aria-hidden="true"></div>
 
   <!-- ── DISCLAIMER MODAL ────────────────────────────── -->
   <div id="disclaimer-overlay" role="dialog" aria-modal="true" aria-labelledby="disclaimer-title" aria-describedby="disclaimer-desc">
@@ -1179,10 +1179,8 @@
     }
 
     function switchLang(lang, btn) {
-      // Preserve disclaimer-dismissed state across the reload
-      sessionStorage.setItem('disclaimerSeen', '1');
-
       if (lang === 'en') {
+        // Clear translation cookies
         document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.' + window.location.hostname + '; path=/;';
       } else {
@@ -1237,14 +1235,9 @@
     var overlay = document.getElementById('disclaimer-overlay');
     var continueBtn = document.getElementById('disclaimer-continue');
 
-    // Skip disclaimer if already dismissed this session (e.g. after a translation reload)
-    if (sessionStorage.getItem('disclaimerSeen')) {
-      overlay.classList.add('hidden');
-    }
-
     continueBtn.addEventListener('click', function() {
-      sessionStorage.setItem('disclaimerSeen', '1');
       overlay.classList.add('hidden');
+      // Return focus to main content
       document.getElementById('main-content').focus();
     });
 
