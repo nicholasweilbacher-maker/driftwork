@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Thornwood — Ancient paths. Living community.</title>
+<meta name="description" content="The Thornwood — ancient paths, living community. A contemplative site about roots, place, and belonging.">
+<meta name="author" content="Nick (Weilbacher) McCarthy-Yates">
+<meta name="theme-color" content="#0b1a0b">
+<link rel="canonical" href="https://driftwork.dev/thornwood/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://driftwork.dev/thornwood/">
+<meta property="og:title" content="The Thornwood — Ancient paths. Living community.">
+<meta property="og:description" content="Ancient paths. Living community. Find your roots. Find your people.">
+<meta property="og:site_name" content="driftwork.dev">
+<meta property="og:image" content="https://driftwork.dev/images/og-thornwood.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Misty forest silhouette of thorny tree shapes in deep greens; serif title THE THORNWOOD — Ancient paths, living community.">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Thornwood — Ancient paths. Living community.">
+<meta name="twitter:description" content="Ancient paths. Living community. Find your roots. Find your people.">
+<meta name="twitter:image" content="https://driftwork.dev/images/og-thornwood.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--f0:#040d04;--f1:#0b1a0b;--bark:#8a6820;--gold:#d4a820;--goldb:#f0c830;--parch:#f0ddb0;--parch2:#c8a870;--moss:#3a5830}
+body{background:var(--f0);color:var(--parch);font-family:'IM Fell English',Georgia,serif;overflow-x:hidden;min-height:100vh}
+#root{min-height:100vh}
+
+@keyframes twk{0%,100%{opacity:.6}50%{opacity:.05}}
+@keyframes mst{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(6%) scaleY(1.1)}}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(1)}15%{opacity:1}50%{opacity:.75;transform:translate(var(--fx),var(--fy)) scale(1.4)}85%{opacity:.9}100%{opacity:0;transform:translate(calc(var(--fx)*.4),calc(var(--fy)*1.8)) scale(.5)}}
+@keyframes ffg{0%,100%{box-shadow:0 0 4px #f4e040,0 0 10px rgba(244,224,64,.2)}50%{box-shadow:0 0 12px #f4e040,0 0 28px rgba(244,224,64,.52)}}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes pgi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bth{0%,100%{border-color:rgba(138,104,32,.28)}50%{border-color:rgba(212,168,32,.65)}}
+@keyframes mng{0%,100%{filter:drop-shadow(0 0 8px rgba(200,220,255,.38))}50%{filter:drop-shadow(0 0 22px rgba(200,220,255,.8))}}
+@keyframes spn{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes sun{0%,100%{filter:drop-shadow(0 0 8px rgba(255,200,60,.5))}50%{filter:drop-shadow(0 0 22px rgba(255,200,60,.9))}}
+@keyframes imgz{from{transform:scale(1.08)}to{transform:scale(1)}}
+@keyframes prl{from{transform:scale(1.15) translateY(-5%)}to{transform:scale(1.15) translateY(2%)}}
+
+.dc-in{animation:pgi .4s ease forwards}
+.dc-float{animation:flt 4s ease-in-out infinite}
+.dc-nav{transition:background .2s,color .2s,border-left-color .2s;cursor:pointer}
+.dc-nav:hover{background:rgba(212,168,32,.09)!important;color:var(--goldb)!important}
+.dc-nav.active{background:rgba(212,168,32,.14)!important;color:var(--goldb)!important;border-left-color:var(--gold)!important}
+.dc-btn{transition:all .22s ease;cursor:pointer;border:none;font-family:inherit}
+.dc-btn:hover{filter:brightness(1.14);transform:translateY(-1px)}
+.dc-card{transition:transform .28s ease,box-shadow .28s ease}
+.dc-card:hover{transform:translateY(-4px);box-shadow:0 14px 44px rgba(0,0,0,.65)!important}
+.ph-zoom{overflow:hidden;position:relative}
+.ph-zoom img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 6s ease}
+.ph-zoom:hover img{transform:scale(1.07)}
+.oc-scene{perspective:1200px}
+.oc-inner{position:relative;transform-style:preserve-3d;transition:transform .78s cubic-bezier(.4,0,.2,1);width:100%;height:100%}
+.oc-inner.flipped{transform:rotateY(180deg)}
+.oc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden}
+.oc-rev{transform:rotateY(180deg)}
+textarea,input[type=text]{background:rgba(3,8,3,.92)!important;color:var(--parch)!important;border:1px solid rgba(138,104,32,.35)!important;font-family:'IM Fell English',serif!important;transition:border-color .3s,box-shadow .3s;outline:none}
+textarea:focus,input[type=text]:focus{border-color:var(--gold)!important;box-shadow:0 0 18px rgba(212,168,32,.2)!important}
+textarea::placeholder,input::placeholder{color:rgba(200,168,112,.26)!important;font-style:italic}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--f0)}
+::-webkit-scrollbar-thumb{background:#3a3010;border-radius:3px}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:998;opacity:.018;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px}
+</style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo, useCallback, useRef, memo } = React;
+
+/* ── Photos ── */
+const P = {
+  login:'https://images.unsplash.com/photo-1448375240890-ef261efe7027?w=1400&q=85',
+  hero:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=85',
+  sunbeam:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80',
+  mist:'https://images.unsplash.com/photo-1542401886-9274b6b38f33?w=900&q=80',
+  canopy:'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=900&q=80',
+  ancientT:'https://images.unsplash.com/photo-1518791841217-8a8fab61eb7e?w=900&q=80',
+  mountain:'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&q=80',
+  bark:'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80',
+  fogforest:'https://images.unsplash.com/photo-1520962880247-cfaf541c8724?w=900&q=80',
+  landscape:'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=900&q=80',
+  roots:'https://images.unsplash.com/photo-1511497584788-876760111969?w=900&q=80',
+  moss:'https://images.unsplash.com/photo-1448518184296-a22facf4c3a2?w=600&q=80',
+  path:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80',
+  winter:'https://images.unsplash.com/photo-1457269449834-928af64c684d?w=900&q=80',
+  oak:'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=900&q=80',
+  ferns:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80',
+  nightsky:'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=900&q=80',
+  waterfall:'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=900&q=80',
+  stones:'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=900&q=80',
+  dawn:'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=900&q=80',
+};
+
+/* ── Moon & Sun ── */
+function getMoonPhase(d=new Date()){const r=new Date(Date.UTC(2000,0,6,18,14));const dy=(d-r)/86400000;const c=29.53058867;return((dy%c)+c)%c/c;}
+function moonInfo(p){
+  if(p<.063)return{e:'🌑',n:'New Moon',t:'Set intentions in the dark. The seed dreams beneath.'};
+  if(p<.188)return{e:'🌒',n:'Waxing Crescent',t:'Something stirs. Follow the first green shoot.'};
+  if(p<.313)return{e:'🌓',n:'First Quarter',t:'Choose a direction and walk toward it.'};
+  if(p<.438)return{e:'🌔',n:'Waxing Gibbous',t:'The work deepens. Stay close to what is growing.'};
+  if(p<.563)return{e:'🌕',n:'Full Moon',t:'Everything is illuminated. Honor what you see.'};
+  if(p<.688)return{e:'🌖',n:'Waning Gibbous',t:'Share what the fullness revealed in you.'};
+  if(p<.813)return{e:'🌗',n:'Last Quarter',t:'Release what is no longer yours to carry.'};
+  return{e:'🌘',n:'Waning Crescent',t:'Rest. Prepare the ground for the next cycle.'};
+}
+function sunSign(d=new Date()){
+  const m=d.getMonth()+1,dy=d.getDate();
+  if((m===3&&dy>=21)||(m===4&&dy<=19))return{s:'Aries ♈',e:'🔥',t:'Begin before you are ready. First movement is sacred.'};
+  if((m===4&&dy>=20)||(m===5&&dy<=20))return{s:'Taurus ♉',e:'🌍',t:'Root into what feeds you. Slow is not behind.'};
+  if((m===5&&dy>=21)||(m===6&&dy<=20))return{s:'Gemini ♊',e:'🌬️',t:'Listen harder. The answer speaks in two voices.'};
+  if((m===6&&dy>=21)||(m===7&&dy<=22))return{s:'Cancer ♋',e:'💧',t:'Return to what you love. Memory is medicine.'};
+  if((m===7&&dy>=23)||(m===8&&dy<=22))return{s:'Leo ♌',e:'☀️',t:'Be seen fully. Withholding your light helps no one.'};
+  if((m===8&&dy>=23)||(m===9&&dy<=22))return{s:'Virgo ♍',e:'🌾',t:'Tend the details. What you care for, thrives.'};
+  if((m===9&&dy>=23)||(m===10&&dy<=22))return{s:'Libra ♎',e:'⚖️',t:'Find the still point between the opposites.'};
+  if((m===10&&dy>=23)||(m===11&&dy<=21))return{s:'Scorpio ♏',e:'🌑',t:'Descend without fear. What is hidden, transforms.'};
+  if((m===11&&dy>=22)||(m===12&&dy<=21))return{s:'Sagittarius ♐',e:'🏹',t:'Aim at what is true. Distance is not distance.'};
+  if((m===12&&dy>=22)||(m===1&&dy<=19))return{s:'Capricorn ♑',e:'🏔️',t:'Climb steadily. The mountain has always known you.'};
+  if((m===1&&dy>=20)||(m===2&&dy<=18))return{s:'Aquarius ♒',e:'⚡',t:'What you carry, you carry for everyone.'};
+  return{s:'Pisces ♓',e:'🌊',t:'Dissolve the boundary. The sea already knows the way.'};
+}
+function getDailyCard(cards){const d=new Date();const doy=Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);return cards[(d.getFullYear()*365+doy)%cards.length];}
+
+/* ── Oracle data ── */
+const OCATS=[
+  {key:'moon',label:'Moon & Stars',e:'🌙',accent:'#7ab0e0',bg:'rgba(12,12,42,.97)',img:P.nightsky},
+  {key:'forest',label:'Forest & Tree',e:'🌲',accent:'#4a9a5a',bg:'rgba(5,16,5,.97)',img:P.sunbeam},
+  {key:'water',label:'Water & Flow',e:'💧',accent:'#3aaac0',bg:'rgba(4,12,24,.97)',img:P.waterfall},
+  {key:'mountain',label:'Mountain & Stone',e:'🏔️',accent:'#9a9896',bg:'rgba(12,10,8,.97)',img:P.mountain},
+  {key:'earth',label:'Moss & Earth',e:'🌿',accent:'#6aaa48',bg:'rgba(6,14,4,.97)',img:P.moss},
+  {key:'wind',label:'Wind & Awen',e:'🌬️',accent:'#b0b8d0',bg:'rgba(8,8,18,.97)',img:P.mist},
+  {key:'spirit',label:'Nature Spirits',e:'✨',accent:'#b098e0',bg:'rgba(14,6,26,.97)',img:P.ancientT},
+];
+const CARDS=[
+  {id:1,cat:'moon',e:'🌑',title:'The New Moon Speaks',w:'In the dark of the moon, seeds dream of sunlight. Do not mistake the absence of light for the absence of life. Rest in the fertile dark — something sacred is being prepared in the silence of not-yet.',r:'What are you carrying beneath the surface, not yet ready to be seen?'},
+  {id:2,cat:'moon',e:'🌕',title:'The Full Moon Reveals',w:'The full moon hides nothing. It illuminates everything — the beautiful and the raw alike. What is true becomes impossible to deny on these nights. This is not a threat. It is a gift wrapped in silver.',r:'What truth has been circling you, waiting until you were ready to hold it?'},
+  {id:3,cat:'moon',e:'🌘',title:'The Waning Teaches Release',w:"What has served its purpose? The waning moon teaches the courage of release — not loss, but the sacred act of making space. What the moon lets go becomes the dark that holds the next seed.",r:'What are you holding past its time?'},
+  {id:4,cat:'moon',e:'⭐',title:'The Stars Remember',w:"The light you see from the stars left its source long before you were born. You stand in a river of ancient time each night you look up. The ancestors are not behind you — they burn above you, still.",r:"Which of your ancestors' stories live in your body, waiting to be honored?"},
+  {id:5,cat:'forest',e:'🌳',title:"The Oak's Ring",w:"The oak grows one ring at a time, never hurrying its strength. Roots go as deep as the tree is tall — what you cannot see equals what you can. Endurance is devotion.",r:'Where are you being called to trust the slow, ring-by-ring unfolding?'},
+  {id:6,cat:'forest',e:'🌿',title:'The Birch Begins',w:"The birch is always first to move into disturbed ground. After fire, after clearing, after ruin — the birch comes first. It does not wait for perfect conditions.",r:'What new growth is trying to move through you?'},
+  {id:7,cat:'forest',e:'🌑',title:"The Yew's Door",w:"The yew lives a thousand years, dies at its heartwood, and grows new trunks from the old. Death and rebirth are not opposites — they are the same door, entered from different sides.",r:'What part of you is dying so that something older and truer can live?'},
+  {id:8,cat:'forest',e:'🫐',title:"The Elder's Medicine",w:"The elder holds medicine and poison in the same berry. Which you receive depends on how you approach it. With reverence, it heals. With entitlement, it harms.",r:'How are you approaching the difficult things in your life?'},
+  {id:9,cat:'water',e:'🌊',title:'The River Does Not Worry',w:'The river does not worry about the sea. It simply flows toward what is lower, filling every hollow it finds along the way. It finds the path of least resistance and calls that path sacred.',r:'Where are you fighting the current?'},
+  {id:10,cat:'water',e:'💦',title:"The Waterfall's Leap",w:"What looks like falling is sometimes the fastest path to the valley. The waterfall does not resist the cliff. It accepts the drop as part of the journey. The roar and the mist are arrival.",r:'What cliff edge have you been standing at?'},
+  {id:11,cat:'water',e:'🪞',title:'The Still Pool Reflects',w:'Only still water shows the true face of the sky. You cannot see clearly while moving. A still pool holds both what is above and what is below in the same moment.',r:'When did you last be truly still? What reflected in the quiet?'},
+  {id:12,cat:'water',e:'🌧️',title:'The Rain Does Not Choose',w:'The rain does not decide who is worthy of nourishment. In this, it teaches grace — inspiration and care are unconditional. The land does not earn the rain.',r:'Where are you withholding your gifts, waiting for someone to deserve them?'},
+  {id:13,cat:'mountain',e:'🏔️',title:'The Mountain Waits',w:'The mountain does not go to the valley. It waits. All rivers, all weather, all journeys come to it eventually. To be the one others travel toward is a kind of power held for a million years.',r:'What would it mean to become the kind of stillness others travel toward?'},
+  {id:14,cat:'mountain',e:'🪨',title:'The Stone Remembers',w:'A stone remembers everything that has touched it — rain, fire, the hands of the long dead. It does not distinguish between important and incidental contact. All touch leaves its trace.',r:'What memory lives in your body that your mind released long ago?'},
+  {id:15,cat:'mountain',e:'⛰️',title:'The View from High Ground',w:'From the mountain, the forest appears as a single breathing creature. From inside it, you can barely see ten feet ahead. Both perspectives are true — you need both.',r:'What have you lost sight of by being too close?'},
+  {id:16,cat:'mountain',e:'🕳️',title:"The Cave's Invitation",w:"The cave was the first sacred space — dark, deep, holding the oldest art, the oldest fires, the oldest prayers. Going in is not hiding. Going in is return.",r:'What inner darkness are you being invited to enter?'},
+  {id:17,cat:'earth',e:'🌱',title:'The Moss Persists',w:'Moss grows where nothing else will — in the crack of stone, on the shade side, in the place after fire. It needs almost nothing. It grows a fraction of a millimeter and calls that forward.',r:'Where is something fragile and persistent trying to grow in your life?'},
+  {id:18,cat:'earth',e:'🍄',title:'The Root Web',w:'The roots of the old forest are woven together underground, sharing water through the fungal web. You are part of a network of invisible care that holds you whether you feel it or not.',r:'Who are you feeding quietly, without credit? Who is quietly feeding you?'},
+  {id:19,cat:'earth',e:'🌾',title:'Decay Is Generous',w:'The rotting log is not death — it is a city. More life lives in a cubic inch of healthy soil than in all the visible forest above it. What appears to be ending is becoming something richer.',r:'What in your life appears to be dying but is actually composting into something essential?'},
+  {id:20,cat:'earth',e:'🌰',title:"The Seed's Memory",w:"The seed holds the memory of the tree. It does not need to understand this to fulfill it. Some knowledge lives in the body — it does not travel through the thinking mind.",r:'What gift or wound is asking to be tended rather than transcended?'},
+  {id:21,cat:'wind',e:'✨',title:'Awen Arrives',w:'Awen comes on the breath — it cannot be summoned by will alone. It arrives when you make yourself receptive, when you stop trying to be the source and allow yourself to be the channel.',r:'When did inspiration last find you? What were the conditions that let it in?'},
+  {id:22,cat:'wind',e:'🍃',title:'The Wind Carries Seeds',w:'The wind carries seeds from trees it will never see again. In giving them away, it spreads the forest across centuries. It is generous in the way that costs nothing and changes everything.',r:'What are you meant to scatter?'},
+  {id:23,cat:'wind',e:'🫁',title:'The Breath Exchange',w:'Every breath is borrowed. You are breathing the same molecules as your ancestors, as the ancient forests, as the stars in formation. You are always in the middle of an exchange you did not begin.',r:'What are you breathing in right now?'},
+  {id:24,cat:'wind',e:'⛈️',title:"The Storm's Gift",w:"The storm does not apologize for its nature. In clearing the old and the dead, it prepares the ground for what is coming. Trees that survive learned to bend.",r:'What storm in your past cleared the ground for something essential in you?'},
+  {id:25,cat:'spirit',e:'🦌',title:'The Deer at the Edge',w:'The deer lives at the threshold — between the forest and the field, between the seen and the unseen. Grace is not timidity. It is perfect readiness.',r:'Where are you being called to live at the threshold?'},
+  {id:26,cat:'spirit',e:'🐦',title:"The Raven's Message",w:"The raven carries messages between worlds. Not all communication is spoken — some is felt, dreamed, found in the sudden appearance of a bird at the right moment.",r:'What message are you receiving but refusing to pass on?'},
+  {id:27,cat:'spirit',e:'🐟',title:'The Salmon Returns',w:'The salmon returns to the waters of its birth to give everything it has so the next generation can begin. It does not return because the journey is easy.',r:'What is asking you to return to your source?'},
+  {id:28,cat:'spirit',e:'🦢',title:"The Heron's Patience",w:"The heron waits at the edge of the water for as long as it takes. It does not rush the fish. It knows with its whole body that the fish will come.",r:'Where are you rushing what requires patience?'},
+];
+
+const NAV=[{k:'grove',e:'🌳',l:'The Grove'},{k:'gallery',e:'🖼️',l:'Gallery'},{k:'oracle',e:'🔮',l:'Oracle'},{k:'archive',e:'📚',l:'Archive'},{k:'journal',e:'📖',l:'Journal'},{k:'bardic',e:'🎭',l:'Bardic'}];
+const GALLERY_PHOTOS=[
+  {url:P.sunbeam,title:'Sunbeam Through Old Growth',loc:'Pacific Northwest'},
+  {url:P.canopy,title:'Cathedral Canopy',loc:'Appalachian Trail'},
+  {url:P.ancientT,title:'The Ancient One',loc:'Muir Woods'},
+  {url:P.mist,title:'Morning Mist & Birch',loc:'Vermont, Autumn'},
+  {url:P.roots,title:'Root Systems, Exposed',loc:'Olympic Peninsula'},
+  {url:P.fogforest,title:'Fog in the Valley Below',loc:'Cascade Range'},
+  {url:P.path,title:'The Path Continues',loc:'Scottish Highlands'},
+  {url:P.bark,title:'Bark as Map, Bark as Memory',loc:'Old Growth Reserve'},
+  {url:P.moss,title:'Moss on Stone After Rain',loc:'Great Smoky Mtns'},
+  {url:P.waterfall,title:"The Waterfall's Leap",loc:'Columbia River Gorge'},
+  {url:P.stones,title:'Standing Stones at Dawn',loc:'Dartmoor, England'},
+  {url:P.winter,title:'Winter Birch, First Light',loc:'New Hampshire'},
+  {url:P.oak,title:'Lone Oak, Storm Country',loc:'Irish Midlands'},
+  {url:P.dawn,title:'Dawn Over the Old Grove',loc:'Thornwood Gathering'},
+  {url:P.landscape,title:'Where the Paths Converge',loc:'Blue Ridge Mountains'},
+];
+const EVENTS=[
+  {d:'Mar 20, 2026',t:'Spring Equinox Circle',loc:'Virtual & In-Person'},
+  {d:'May 1, 2026',t:'Beltane Gathering',loc:'Northeast Region'},
+  {d:'Jun 21, 2026',t:'Summer Solstice Ceremony',loc:'Virtual & In-Person'},
+  {d:'Aug 1, 2026',t:'Lammas Harvest Circle',loc:'All Regions'},
+  {d:'Sep 22, 2026',t:'Autumn Equinox Retreat',loc:'Thornwood Annual Gathering'},
+  {d:'Oct 31, 2026',t:'Samhain: The Thinning',loc:'Virtual Ceremony'},
+];
+const ARCHIVE=[
+  {id:1,type:'writing',title:'Learning to Listen to Trees',author:'S. Merrill',date:'Dec 2025',img:P.ancientT,ex:'The practice began with twenty minutes of silence at the base of an oak. What I thought was stillness turned out to be full of conversation.'},
+  {id:2,type:'bardic',title:'Song for the Waning Year',author:'Community',date:'Oct 2025',img:P.dawn,ex:'A collective composition from our Samhain circle — voices layered like growth rings.'},
+  {id:3,type:'workshop',title:'Root Systems: Ancestor Altar Practice',author:'A. Thorngate',date:'Nov 2025',img:P.roots,ex:'What we place upon the altar speaks of who we are, and who made us possible.'},
+  {id:4,type:'writing',title:"The Grief We Didn't Name",author:'L. Yardley',date:'Sep 2025',img:P.mist,ex:"There are losses the culture doesn't make room for. The forest has always known how to hold what we cannot name."},
+  {id:5,type:'bardic',title:'Equinox Poem, Written at First Light',author:'S. Merrill',date:'Mar 2026',img:P.sunbeam,ex:'The world cracks open at its seams of green — seeds keeping their ancient promise from the dark.'},
+  {id:6,type:'workshop',title:'Working with Nemeton: Sacred Edges',author:'T. Rowan',date:'Jan 2026',img:P.fogforest,ex:'The boundary between worlds is thinner than we think, and thicker than we fear.'},
+  {id:7,type:'music',title:'Drumming Circle · Autumn Equinox',author:'Community',date:'Sep 2025',img:P.stones,ex:'Rhythm as prayer, sound as offering — recorded at the standing stones ceremony.'},
+  {id:8,type:'writing',title:'What the Vigil Returned',author:'K. Ashwood',date:'Aug 2025',img:P.nightsky,ex:'The long night offered visions I am still translating months later.'},
+  {id:9,type:'workshop',title:'Spirits of Place: Listening Practice',author:'T. Rowan',date:'Feb 2026',img:P.path,ex:'Every location has its own song. This session we learned to stop talking long enough to hear it.'},
+  {id:10,type:'bardic',title:'The Shed: Year One Totem',author:'Community',date:'Sep 2026',img:P.bark,ex:'Built from birchwood found on the path, carved over six months of daily practice.'},
+];
+const TYCFG={writing:{i:'📜',l:'Writing',c:'#8a6820'},bardic:{i:'🎭',l:'Bardic',c:'#6a3a8a'},workshop:{i:'🌿',l:'Workshop',c:'#2a6a3a'},music:{i:'🎵',l:'Music',c:'#8a3030'}};
+const MOODS=['🌿 Grounded','🌊 Flowing','🔥 Inspired','🌬️ Restless','🌙 Dreaming','⚡ Awakened','🍂 Releasing','✨ Present'];
+
+/* ── Storage (localStorage fallback) ── */
+const store={
+  get:(k)=>{try{const v=localStorage.getItem(k);return v?{value:v}:null;}catch(e){return null;}},
+  set:(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}},
+};
+
+/* ── Audio ── */
+function useAmbience(){
+  const s=useRef({ctx:null,master:null,active:false});
+  const[playing,setPlaying]=useState(false);
+  const stop=useCallback(()=>{
+    s.current.active=false;
+    if(s.current.master&&s.current.ctx){try{s.current.master.gain.linearRampToValueAtTime(.001,s.current.ctx.currentTime+2.5);}catch(e){}}
+    setTimeout(()=>{try{if(s.current.ctx)s.current.ctx.close();}catch(e){};s.current={ctx:null,master:null,active:false};setPlaying(false);},2800);
+  },[]);
+  const start=useCallback(()=>{
+    if(s.current.ctx)return;
+    try{
+      const ctx=new(window.AudioContext||window.webkitAudioContext)();
+      const master=ctx.createGain();master.gain.setValueAtTime(.001,ctx.currentTime);master.gain.linearRampToValueAtTime(.5,ctx.currentTime+5);master.connect(ctx.destination);
+      s.current={ctx,master,active:true};
+      const rl=ctx.sampleRate*5,rb=ctx.createBuffer(2,rl,ctx.sampleRate);
+      for(let c=0;c<2;c++){const d=rb.getChannelData(c);for(let i=0;i<rl;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/rl,2.2);}
+      const rev=ctx.createConvolver();rev.buffer=rb;
+      const rg=ctx.createGain();rg.gain.value=.52;rev.connect(rg);rg.connect(master);
+      const dry=ctx.createGain();dry.gain.value=.48;dry.connect(master);
+      const mix=n=>{n.connect(rev);n.connect(dry);};
+      [[54.5,.28],[81.7,.16],[109,.09],[163.4,.05]].forEach(([f,a],i)=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=f+(Math.random()-.5)*.8;g.gain.value=a*.15;o.connect(g);mix(g);o.start();
+        const lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=.022+i*.016;lg.gain.value=f*.004;lfo.connect(lg);lg.connect(o.frequency);lfo.start();
+      });
+      const nb=ctx.createBuffer(1,ctx.sampleRate*4,ctx.sampleRate);const nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+      const ns=ctx.createBufferSource();ns.buffer=nb;ns.loop=true;
+      const nf=ctx.createBiquadFilter();nf.type='bandpass';nf.frequency.value=370;nf.Q.value=.6;
+      const ng=ctx.createGain();ng.gain.value=.065;ns.connect(nf);nf.connect(ng);mix(ng);ns.start();
+      const penta=[261.63,329.63,392,523.25,587.33,659.25,783.99,880];
+      const chime=()=>{
+        if(!s.current.active||!s.current.ctx)return;
+        const t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain();
+        o.type='sine';o.frequency.value=penta[Math.floor(Math.random()*penta.length)];
+        g.gain.setValueAtTime(.001,t);g.gain.linearRampToValueAtTime(.12,t+.06);g.gain.exponentialRampToValueAtTime(.001,t+5);
+        o.connect(g);mix(g);o.start(t);o.stop(t+6);
+        if(s.current.active)setTimeout(chime,5000+Math.random()*14000);
+      };
+      setTimeout(chime,3500);setPlaying(true);
+    }catch(e){console.warn('Audio:',e);}
+  },[]);
+  const toggle=useCallback(()=>playing?stop():start(),[playing,stop,start]);
+  useEffect(()=>()=>{s.current.active=false;try{if(s.current.ctx)s.current.ctx.close();}catch(e){}},[]);
+  return{playing,toggle};
+}
+
+/* ── Background ── */
+const StarField=memo(()=>{
+  const stars=useMemo(()=>Array.from({length:140},(_,i)=>({id:i,left:`${Math.random()*100}%`,top:`${Math.random()*100}%`,size:.5+Math.random()*2,dur:`${2+Math.random()*5}s`,del:`${Math.random()*7}s`})),[]);
+  return(
+    <div style={{position:'fixed',inset:0,pointerEvents:'none',zIndex:0,overflow:'hidden'}}>
+      {stars.map(s=><div key={s.id} style={{position:'absolute',left:s.left,top:s.top,width:s.size,height:s.size,borderRadius:'50%',background:'#f0e8d0',animation:`twk ${s.dur} ${s.del} ease-in-out infinite`}}/>)}
+      <svg style={{position:'absolute',top:'6%',right:'4%',opacity:.07,pointerEvents:'none'}} width="110" height="130">
+        <line x1="38" y1="10" x2="76" y2="24" stroke="#f0ddb0" strokeWidth=".7"/>
+        <line x1="76" y1="24" x2="86" y2="58" stroke="#f0ddb0" strokeWidth=".7"/>
+        <line x1="38" y1="10" x2="28" y2="58" stroke="#f0ddb0" strokeWidth=".7"/>
+        <line x1="28" y1="58" x2="86" y2="58" stroke="#f0ddb0" strokeWidth=".7"/>
+        <line x1="28" y1="58" x2="18" y2="105" stroke="#f0ddb0" strokeWidth=".7"/>
+        <line x1="86" y1="58" x2="96" y2="105" stroke="#f0ddb0" strokeWidth=".7"/>
+        {[[38,10],[76,24],[28,58],[86,58],[18,105],[96,105]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r="1.8" fill="#f0e8c0"/>)}
+      </svg>
+    </div>
+  );
+});
+const MistLayer=memo(()=>(
+  <div style={{position:'fixed',inset:0,pointerEvents:'none',zIndex:1,overflow:'hidden'}}>
+    {[{w:'72%',h:105,top:'20%',left:'-6%',dur:'44s',del:'0s',op:.038},{w:'58%',h:82,top:'55%',left:'30%',dur:'58s',del:'-22s',op:.028},{w:'80%',h:90,top:'76%',left:'-14%',dur:'52s',del:'-38s',op:.034}].map((l,i)=>(
+      <div key={i} style={{position:'absolute',width:l.w,height:l.h,top:l.top,left:l.left,background:'radial-gradient(ellipse,rgba(180,220,180,1),transparent)',opacity:l.op,filter:'blur(32px)',animation:`mst ${l.dur} ${l.del} ease-in-out infinite`}}/>
+    ))}
+  </div>
+));
+const Fireflies=memo(()=>{
+  const ff=useMemo(()=>Array.from({length:24},(_,i)=>({id:i,left:`${2+Math.random()*94}%`,top:`${5+Math.random()*88}%`,size:1.4+Math.random()*2.8,dur:`${7+Math.random()*9}s`,del:`${Math.random()*10}s`,fx:`${(Math.random()-.5)*110}px`,fy:`${(Math.random()-.5)*88}px`})),[]);
+  return(
+    <div style={{position:'fixed',inset:0,pointerEvents:'none',zIndex:2,overflow:'hidden'}}>
+      {ff.map(f=><div key={f.id} style={{position:'absolute',left:f.left,top:f.top,width:f.size,height:f.size,borderRadius:'50%',background:'#f4e040','--fx':f.fx,'--fy':f.fy,opacity:0,animation:`fly ${f.dur} ${f.del} infinite ease-in-out, ffg ${f.dur} ${f.del} infinite ease-in-out`}}/>)}
+    </div>
+  );
+});
+
+/* ── UI helpers ── */
+function Divider({dim}){return(
+  <div style={{display:'flex',alignItems:'center',gap:10,margin:'16px 0',opacity:dim?0.48:0.54}}>
+    <div style={{flex:1,height:1,background:'linear-gradient(to right,transparent,#8a6820)'}}/>
+    <span style={{color:'#d4a820',fontSize:14,letterSpacing:3}}>✦ ᚛ ✦</span>
+    <div style={{flex:1,height:1,background:'linear-gradient(to left,transparent,#8a6820)'}}/>
+  </div>
+);}
+function PhotoBanner({url,h=220,overlay=.52,children}){return(
+  <div className="ph-zoom" style={{height:h,borderRadius:8,marginBottom:20,border:'1px solid rgba(138,104,32,.25)',position:'relative'}}>
+    <img src={url} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',animation:'imgz 1.4s ease forwards'}}/>
+    <div style={{position:'absolute',inset:0,background:`rgba(5,12,5,${overlay})`,borderRadius:8}}/>
+    <div style={{position:'relative',zIndex:1,height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-end',padding:22}}>{children}</div>
+  </div>
+);}
+
+/* ── Login ── */
+function Login({onLogin}){
+  const[name,setName]=useState('');
+  return(
+    <div style={{minHeight:'100vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:24,position:'relative',overflow:'hidden'}}>
+      <div style={{position:'absolute',inset:0,zIndex:0}}>
+        <img src={P.login} alt="" style={{width:'100%',height:'100%',objectFit:'cover',animation:'prl 20s ease-in-out infinite alternate'}}/>
+        <div style={{position:'absolute',inset:0,background:'rgba(4,10,4,.72)'}}/>
+        <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at 50% 40%,rgba(20,40,15,.4),rgba(4,10,4,.85))'}}/>
+      </div>
+      {[360,250,150].map((r,i)=>(
+        <div key={i} style={{position:'absolute',width:r,height:r,borderRadius:'50%',border:`1px solid rgba(212,168,32,${.05-i*.014})`,animation:`spn ${46+i*18}s linear infinite ${i%2?'reverse':''}`,zIndex:1}}/>
+      ))}
+      <div className="dc-float" style={{textAlign:'center',marginBottom:26,position:'relative',zIndex:2}}>
+        <div style={{fontSize:68,filter:'drop-shadow(0 0 26px rgba(212,168,32,.65))'}}>🌳</div>
+        <h1 style={{fontFamily:"'Cinzel Decorative',serif",fontSize:'clamp(22px,5vw,42px)',color:'#f0c830',letterSpacing:2,lineHeight:1.2,marginTop:10,textShadow:'0 0 30px rgba(240,200,48,.55)'}}>The Thornwood</h1>
+        <p style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:6,color:'rgba(200,176,120,.5)',textTransform:'uppercase',marginTop:6}}>Ancient paths. Living community.</p>
+        <p style={{fontStyle:'italic',color:'rgba(200,176,120,.4)',marginTop:8,fontSize:13}}>Find your roots. Find your people.</p>
+      </div>
+      <Divider/>
+      <div style={{position:'relative',zIndex:2,width:'100%',maxWidth:350,padding:'28px 26px',borderRadius:8,background:'rgba(4,10,4,.88)',backdropFilter:'blur(16px)',border:'1px solid rgba(138,104,32,.4)',animation:'bth 4s ease-in-out infinite'}}>
+        <p style={{color:'rgba(200,176,120,.62)',marginBottom:14,textAlign:'center',fontStyle:'italic',fontSize:15}}>Speak your name to enter the grove</p>
+        <input type="text" value={name} placeholder="Your name…" onChange={e=>setName(e.target.value)} onKeyDown={e=>e.key==='Enter'&&name.trim()&&onLogin(name.trim())} style={{width:'100%',padding:'11px 16px',borderRadius:4,fontSize:18,marginBottom:14}}/>
+        <button className="dc-btn" onClick={()=>name.trim()&&onLogin(name.trim())} style={{width:'100%',padding:'12px 0',background:'linear-gradient(135deg,#3a2408,#7a5018)',border:'1px solid #d4a820',borderRadius:4,color:'#f0c830',fontFamily:"'Cinzel',serif",fontSize:12,letterSpacing:4,textTransform:'uppercase'}}>Enter the Grove</button>
+        <p style={{textAlign:'center',marginTop:11,fontSize:11,color:'rgba(180,150,100,.28)',fontStyle:'italic'}}>Where seekers find their people</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Grove ── */
+function Grove({user,goTo}){
+  const moon=moonInfo(getMoonPhase());
+  const sun=sunSign();
+  const daily=getDailyCard(CARDS);
+  const cat=OCATS.find(c=>c.key===daily.cat);
+  return(
+    <div className="dc-in">
+      <PhotoBanner url={P.hero} h={200} overlay={.46}>
+        <p style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:4,color:'rgba(200,176,120,.5)',textTransform:'uppercase',marginBottom:5}}>Welcome back</p>
+        <h2 style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:'clamp(17px,3vw,26px)',lineHeight:1.2}}>{user}</h2>
+        <p style={{fontStyle:'italic',color:'rgba(200,176,120,.55)',marginTop:4,fontSize:13}}>The grove is listening.</p>
+      </PhotoBanner>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:16}}>
+        <div className="dc-card" style={{padding:'13px 15px',borderRadius:6,background:'rgba(12,12,42,.8)',border:'1px solid rgba(90,100,160,.28)',position:'relative',overflow:'hidden'}}>
+          <div style={{position:'absolute',inset:0,opacity:.08}}><img src={P.nightsky} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}}/></div>
+          <div style={{position:'relative'}}>
+            <div style={{fontSize:24,marginBottom:5,animation:'mng 4s ease-in-out infinite'}}>{moon.e}</div>
+            <p style={{fontFamily:"'Cinzel',serif",color:'#7ab0e0',fontSize:11,marginBottom:3}}>{moon.n}</p>
+            <p style={{fontSize:11,fontStyle:'italic',color:'rgba(180,200,240,.5)',lineHeight:1.5}}>{moon.t}</p>
+          </div>
+        </div>
+        <div className="dc-card" style={{padding:'13px 15px',borderRadius:6,background:'rgba(28,12,4,.8)',border:'1px solid rgba(160,100,30,.28)',position:'relative',overflow:'hidden'}}>
+          <div style={{position:'absolute',inset:0,opacity:.08}}><img src={P.dawn} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}}/></div>
+          <div style={{position:'relative'}}>
+            <div style={{fontSize:24,marginBottom:5,animation:'sun 4s ease-in-out infinite'}}>{sun.e}</div>
+            <p style={{fontFamily:"'Cinzel',serif",color:'#e0a040',fontSize:11,marginBottom:3}}>{sun.s}</p>
+            <p style={{fontSize:11,fontStyle:'italic',color:'rgba(220,180,120,.5)',lineHeight:1.5}}>{sun.t}</p>
+          </div>
+        </div>
+      </div>
+      <div className="dc-card" onClick={()=>goTo('oracle')} style={{padding:'16px 18px',borderRadius:8,marginBottom:16,cursor:'pointer',background:'linear-gradient(135deg,rgba(18,7,36,.9),rgba(8,5,18,.9))',border:'1px solid rgba(100,70,160,.32)',position:'relative',overflow:'hidden'}}>
+        <div style={{position:'absolute',top:0,right:0,bottom:0,width:'38%',opacity:.12}}>
+          <img src={cat && cat.img ? cat.img : P.ancientT} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}}/>
+          <div style={{position:'absolute',inset:0,background:'linear-gradient(to right,rgba(18,7,36,1),transparent)'}}/>
+        </div>
+        <p style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:4,color:'rgba(160,130,200,.45)',textTransform:'uppercase',marginBottom:7}}>Daily Oracle Drawing</p>
+        <div style={{display:'flex',alignItems:'center',gap:12,position:'relative'}}>
+          <span style={{fontSize:30}}>{daily.e}</span>
+          <div style={{flex:1}}>
+            <p style={{fontFamily:"'Cinzel',serif",color:'#d4a820',fontSize:14,marginBottom:3}}>{daily.title}</p>
+            <p style={{fontSize:12,fontStyle:'italic',color:'rgba(200,176,120,.52)',lineHeight:1.6}}>{daily.w.slice(0,85)}…</p>
+          </div>
+        </div>
+        <p style={{fontSize:10,color:'rgba(160,130,200,.38)',marginTop:9,textAlign:'right',fontStyle:'italic'}}>Enter the oracle →</p>
+      </div>
+      <h3 style={{fontFamily:"'Cinzel',serif",color:'#d4a820',marginBottom:10,fontSize:12,letterSpacing:3,textTransform:'uppercase'}}>⟡ Upcoming Gatherings</h3>
+      <div style={{display:'grid',gap:7,marginBottom:20}}>
+        {EVENTS.slice(0,4).map((ev,i)=>(
+          <div key={i} className="dc-card" style={{display:'flex',alignItems:'center',gap:12,padding:'10px 15px',borderRadius:4,background:'rgba(8,18,6,.8)',border:'1px solid rgba(58,88,48,.3)'}}>
+            <span style={{fontSize:16,minWidth:22}}>🕯️</span>
+            <div style={{flex:1}}>
+              <p style={{fontFamily:"'Cinzel',serif",color:'#f0ddb0',fontSize:13}}>{ev.t}</p>
+              <p style={{fontSize:11,color:'rgba(200,176,120,.4)',marginTop:1}}>{ev.d} · {ev.loc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Divider/>
+      <div style={{padding:'16px 20px',borderRadius:6,background:'rgba(12,5,26,.5)',border:'1px solid rgba(90,56,120,.22)',lineHeight:1.8}}>
+        <p style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:3,color:'rgba(160,130,200,.4)',textTransform:'uppercase',marginBottom:8}}>✦ From the Thornwood Teaching</p>
+        <p style={{fontStyle:'italic',color:'rgba(200,176,120,.58)',fontSize:15}}>"The old trees do not rush toward the light. They grow through decades of patience — their strength is the strength of accumulated seasons."</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Gallery ── */
+function Gallery(){
+  const[sel,setSel]=useState(null);
+  return(
+    <div className="dc-in">
+      <PhotoBanner url={P.canopy} h={160} overlay={.38}>
+        <h2 style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:'clamp(17px,3vw,24px)'}}>The Grove Gallery</h2>
+        <p style={{fontStyle:'italic',color:'rgba(200,176,120,.55)',fontSize:13,marginTop:4}}>Nature through the eyes of our community</p>
+      </PhotoBanner>
+      {sel&&(
+        <div style={{position:'fixed',inset:0,zIndex:100,background:'rgba(4,10,4,.95)',display:'flex',alignItems:'center',justifyContent:'center',padding:20,backdropFilter:'blur(12px)'}}>
+          <div className="dc-in" style={{maxWidth:700,width:'100%',position:'relative'}}>
+            <button className="dc-btn" onClick={()=>setSel(null)} style={{position:'absolute',top:-14,right:0,background:'none',border:'none',color:'rgba(200,176,120,.5)',fontSize:22,lineHeight:1,zIndex:2}}>✕</button>
+            <div style={{borderRadius:10,overflow:'hidden',border:'1px solid rgba(138,104,32,.35)'}}>
+              <img src={sel.url} alt={sel.title} style={{width:'100%',maxHeight:500,objectFit:'cover',display:'block'}}/>
+            </div>
+            <p style={{fontFamily:"'Cinzel',serif",color:'#d4a820',fontSize:16,marginTop:14}}>{sel.title}</p>
+            <p style={{fontSize:12,color:'rgba(200,176,120,.4)',marginTop:4,fontStyle:'italic'}}>📍 {sel.loc}</p>
+          </div>
+        </div>
+      )}
+      <div style={{columns:'2 220px',gap:10}}>
+        {GALLERY_PHOTOS.map((ph,i)=>(
+          <div key={i} className="ph-zoom dc-card" onClick={()=>setSel(ph)} style={{marginBottom:10,borderRadius:6,cursor:'pointer',border:'1px solid rgba(58,88,48,.25)',breakInside:'avoid',position:'relative',overflow:'hidden'}}>
+            <img src={ph.url} alt={ph.title} style={{width:'100%',display:'block',objectFit:'cover',aspectRatio:i%3===0?'4/3':i%3===1?'3/4':'16/9'}}/>
+            <div style={{position:'absolute',bottom:0,left:0,right:0,padding:'20px 12px 10px',background:'linear-gradient(transparent,rgba(4,10,4,.88))'}}>
+              <p style={{fontFamily:"'Cinzel',serif",color:'#f0ddb0',fontSize:11,marginBottom:2}}>{ph.title}</p>
+              <p style={{fontSize:10,color:'rgba(200,176,120,.4)'}}>📍 {ph.loc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Oracle ── */
+function Oracle(){
+  const daily=useMemo(()=>getDailyCard(CARDS),[]);
+  const[current,setCurrent]=useState(daily);
+  const[flipped,setFlipped]=useState(false);
+  const[catFilter,setCatFilter]=useState('all');
+  const[expanded,setExpanded]=useState(null);
+  useEffect(()=>{const t=setTimeout(()=>setFlipped(true),900);return()=>clearTimeout(t);},[]);
+  const drawAnother=useCallback(()=>{setFlipped(false);const nxt=CARDS[Math.floor(Math.random()*CARDS.length)];setTimeout(()=>setCurrent(nxt),420);setTimeout(()=>setFlipped(true),650);},[]);
+  const cat=OCATS.find(c=>c.key===current.cat)||OCATS[0];
+  const browsed=catFilter==='all'?CARDS:CARDS.filter(c=>c.cat===catFilter);
+  return(
+    <div className="dc-in">
+      <PhotoBanner url={P.nightsky} h={140} overlay={.55}>
+        <h2 style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:'clamp(17px,3vw,24px)'}}>Oracle of the Grove</h2>
+        <p style={{fontStyle:'italic',color:'rgba(200,176,120,.5)',fontSize:13,marginTop:4}}>Where the land speaks in the language of the soul</p>
+      </PhotoBanner>
+      <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginBottom:22}}>
+        <p style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:4,color:'rgba(200,176,120,.38)',textTransform:'uppercase',marginBottom:12}}>Your Drawing · {new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</p>
+        <div className="oc-scene" style={{width:'100%',maxWidth:330,height:430,cursor:'pointer'}} onClick={()=>setFlipped(f=>!f)}>
+          <div className={`oc-inner${flipped?' flipped':''}`}>
+            <div className="oc-face" style={{position:'relative',overflow:'hidden'}}>
+              <img src={P.ancientT} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>
+              <div style={{position:'absolute',inset:0,background:'rgba(5,14,5,.75)'}}/>
+              {[240,180,120].map((r,i)=><div key={i} style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:r,height:r,borderRadius:'50%',border:`1px solid rgba(212,168,32,${.09-i*.02})`,animation:`spn ${36+i*14}s linear infinite ${i%2?'reverse':''}`}}/>)}
+              <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:12}}>
+                <span style={{fontSize:44,filter:'drop-shadow(0 0 18px rgba(212,168,32,.6))'}}>🌳</span>
+                <p style={{fontFamily:"'Cinzel Decorative',serif",color:'#d4a820',fontSize:11,letterSpacing:2}}>The Thornwood</p>
+                <p style={{fontSize:9,color:'rgba(200,176,120,.35)',letterSpacing:3}}>oracle of the grove</p>
+              </div>
+              <p style={{position:'absolute',bottom:16,left:0,right:0,textAlign:'center',fontSize:10,color:'rgba(200,176,120,.22)',fontStyle:'italic'}}>tap to reveal</p>
+            </div>
+            <div className="oc-face oc-rev" style={{position:'relative',overflow:'hidden'}}>
+              <img src={cat.img} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>
+              <div style={{position:'absolute',inset:0,background:cat.bg}}/>
+              <div style={{position:'absolute',inset:0,padding:'20px 18px',display:'flex',flexDirection:'column'}}>
+                <div style={{height:2,borderRadius:2,background:`linear-gradient(90deg,${cat.accent},transparent)`,marginBottom:16}}/>
+                <div style={{display:'flex',alignItems:'center',gap:9,marginBottom:13}}>
+                  <span style={{fontSize:32}}>{current.e}</span>
+                  <div>
+                    <p style={{fontSize:9,color:cat.accent,letterSpacing:3,textTransform:'uppercase',marginBottom:2}}>{cat.label}</p>
+                    <p style={{fontFamily:"'Cinzel',serif",color:'#f0ddb0',fontSize:14,lineHeight:1.2}}>{current.title}</p>
+                  </div>
+                </div>
+                <p style={{fontStyle:'italic',color:'rgba(220,200,160,.8)',fontSize:13,lineHeight:1.85,flex:1,marginBottom:14}}>{current.w}</p>
+                <div style={{borderTop:`1px solid ${cat.accent}22`,paddingTop:12}}>
+                  <p style={{fontSize:9,color:cat.accent,letterSpacing:2,textTransform:'uppercase',marginBottom:5}}>Reflection</p>
+                  <p style={{fontStyle:'italic',color:'rgba(200,176,120,.52)',fontSize:12,lineHeight:1.7}}>"{current.r}"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button className="dc-btn" onClick={drawAnother} style={{marginTop:16,padding:'10px 24px',background:'linear-gradient(135deg,#3a2408,#6a4010)',border:'1px solid #d4a820',borderRadius:4,color:'#f0c830',fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:4,textTransform:'uppercase'}}>✦ Draw Another</button>
+      </div>
+      <Divider/>
+      <div style={{display:'flex',flexWrap:'wrap',gap:6,marginBottom:14}}>
+        {['all',...OCATS.map(c=>c.key)].map(k=>{const cfg=k==='all'?{e:'✦',label:'All',accent:'#d4a820'}:OCATS.find(c=>c.key===k);return(
+          <button key={k} className="dc-btn" onClick={()=>setCatFilter(k)} style={{padding:'4px 11px',borderRadius:20,fontSize:10,letterSpacing:1,fontFamily:"'Cinzel',serif",border:'1px solid',cursor:'pointer',background:catFilter===k?'rgba(212,168,32,.18)':'rgba(8,18,6,.8)',borderColor:catFilter===k?'#d4a820':'rgba(58,88,48,.3)',color:catFilter===k?'#f0c830':'rgba(200,176,120,.52)'}}>
+            {cfg.e} {k==='all'?'All':cfg.label}
+          </button>
+        );})}
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(195px,1fr))',gap:9}}>
+        {browsed.map(card=>{const cc=OCATS.find(c=>c.key===card.cat)||OCATS[0];const open=expanded===card.id;return(
+          <div key={card.id} className="dc-card" onClick={()=>setExpanded(open?null:card.id)} style={{borderRadius:8,background:cc.bg,border:`1px solid ${cc.accent}28`,cursor:'pointer',overflow:'hidden'}}>
+            {!open&&<div style={{height:80,overflow:'hidden',position:'relative'}}><img src={cc.img} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}}/><div style={{position:'absolute',inset:0,background:`${cc.bg}bb`}}/></div>}
+            <div style={{padding:'10px 13px'}}>
+              <div style={{display:'flex',gap:8,alignItems:'center',marginBottom:open?8:0}}>
+                <span style={{fontSize:18}}>{card.e}</span>
+                <p style={{fontFamily:"'Cinzel',serif",color:'#f0ddb0',fontSize:12,flex:1,lineHeight:1.3}}>{card.title}</p>
+                <span style={{color:cc.accent,fontSize:12,transition:'transform .3s',transform:open?'rotate(180deg)':''}}>▾</span>
+              </div>
+              {open&&<><p style={{fontSize:12,fontStyle:'italic',color:'rgba(200,176,120,.68)',lineHeight:1.75,marginBottom:8}}>{card.w}</p><p style={{fontSize:11,color:cc.accent,lineHeight:1.65,fontStyle:'italic'}}>"{card.r}"</p></>}
+            </div>
+          </div>
+        );})}
+      </div>
+    </div>
+  );
+}
+
+/* ── Archive ── */
+function Archive(){
+  const[filter,setFilter]=useState('all');
+  const[search,setSearch]=useState('');
+  const items=ARCHIVE.filter(a=>(filter==='all'||a.type===filter)&&(!search||a.title.toLowerCase().includes(search.toLowerCase())||a.author.toLowerCase().includes(search.toLowerCase())));
+  return(
+    <div className="dc-in">
+      <PhotoBanner url={P.roots} h={150} overlay={.52}>
+        <h2 style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:'clamp(17px,3vw,24px)'}}>The Archive</h2>
+        <p style={{fontStyle:'italic',color:'rgba(200,176,120,.52)',fontSize:13,marginTop:3}}>Writings, bardic arts, music, and workshops of the community</p>
+      </PhotoBanner>
+      <input type="text" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search the archive…" style={{width:'100%',padding:'9px 14px',borderRadius:4,fontSize:14,marginBottom:11}}/>
+      <div style={{display:'flex',flexWrap:'wrap',gap:6,marginBottom:18}}>
+        {['all',...Object.keys(TYCFG)].map(t=>(
+          <button key={t} className="dc-btn" onClick={()=>setFilter(t)} style={{padding:'4px 11px',borderRadius:20,fontSize:10,letterSpacing:1,fontFamily:"'Cinzel',serif",border:'1px solid',cursor:'pointer',background:filter===t?'rgba(212,168,32,.18)':'rgba(8,18,6,.8)',borderColor:filter===t?'#d4a820':'rgba(58,88,48,.3)',color:filter===t?'#f0c830':'rgba(200,176,120,.52)'}}>
+            {t==='all'?'✦ All':`${TYCFG[t].i} ${TYCFG[t].l}`}
+          </button>
+        ))}
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(260px,1fr))',gap:12}}>
+        {items.map(item=>{const cfg=TYCFG[item.type]||TYCFG.writing;return(
+          <div key={item.id} className="dc-card" style={{borderRadius:6,background:'rgba(7,14,6,.88)',border:'1px solid rgba(58,88,48,.28)',overflow:'hidden'}}>
+            <div className="ph-zoom" style={{height:130,position:'relative'}}>
+              <img src={item.img} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>
+              <div style={{position:'absolute',inset:0,background:'rgba(5,12,5,.45)'}}/>
+              <span style={{position:'absolute',top:10,right:10,fontSize:10,color:cfg.c,background:'rgba(4,10,4,.75)',padding:'2px 8px',borderRadius:20}}>{cfg.i} {cfg.l}</span>
+            </div>
+            <div style={{padding:'14px 16px'}}>
+              <h3 style={{fontFamily:"'Cinzel',serif",color:'#f0ddb0',fontSize:13,marginBottom:5,lineHeight:1.3}}>{item.title}</h3>
+              <p style={{fontSize:12,fontStyle:'italic',color:'rgba(200,176,120,.5)',lineHeight:1.65,marginBottom:10}}>{item.ex}</p>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:10,color:'rgba(180,150,100,.36)'}}><span>{item.author}</span><span>{item.date}</span></div>
+            </div>
+          </div>
+        );})}
+      </div>
+    </div>
+  );
+}
+
+/* ── Journal (uses localStorage) ── */
+function Journal({user}){
+  const[entries,setEntries]=useState([]);
+  const[composing,setComposing]=useState(false);
+  const[viewing,setViewing]=useState(null);
+  const[draft,setDraft]=useState({title:'',body:'',mood:MOODS[0]});
+  const[loading,setLoading]=useState(true);
+  const moon=moonInfo(getMoonPhase());
+  useEffect(()=>{try{const r=store.get(`tw_j_${user}`);if(r)setEntries(JSON.parse(r.value));}catch(e){};setLoading(false);},[user]);
+  const seal=useCallback(()=>{
+    if(!draft.body.trim())return;
+    const e={id:Date.now(),title:draft.title||'Untitled Entry',body:draft.body,mood:draft.mood,moon:`${moon.e} ${moon.n}`,date:new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})};
+    const upd=[e,...entries];setEntries(upd);store.set(`tw_j_${user}`,JSON.stringify(upd));
+    setDraft({title:'',body:'',mood:MOODS[0]});setComposing(false);
+  },[draft,entries,user,moon]);
+  const release=useCallback(id=>{const upd=entries.filter(e=>e.id!==id);setEntries(upd);store.set(`tw_j_${user}`,JSON.stringify(upd));if(viewing&&viewing.id===id)setViewing(null);},[entries,user,viewing]);
+  if(loading)return<div style={{padding:40,textAlign:'center',fontStyle:'italic',color:'rgba(200,176,120,.32)'}}>Opening the journal…</div>;
+  if(viewing)return(
+    <div className="dc-in">
+      <button className="dc-btn" onClick={()=>setViewing(null)} style={{background:'none',border:'none',color:'#d4a820',fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,marginBottom:20,padding:0}}>← Return</button>
+      <p style={{fontSize:10,color:'rgba(200,176,120,.36)',marginBottom:4}}>{viewing.date} · {viewing.moon} · {viewing.mood}</p>
+      <h2 style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:20,marginBottom:18}}>{viewing.title}</h2>
+      <Divider/>
+      <p style={{lineHeight:1.95,fontStyle:'italic',fontSize:16,color:'#f0ddb0',whiteSpace:'pre-wrap',marginBottom:28}}>{viewing.body}</p>
+      <Divider/>
+      <button className="dc-btn" onClick={()=>release(viewing.id)} style={{background:'rgba(70,10,10,.4)',border:'1px solid rgba(120,25,25,.38)',color:'rgba(200,100,100,.52)',padding:'7px 15px',borderRadius:4,fontSize:11,fontFamily:"'Cinzel',serif",letterSpacing:2}}>Release This Entry</button>
+    </div>
+  );
+  if(composing)return(
+    <div className="dc-in">
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:18}}>
+        <h2 style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:'clamp(15px,3vw,21px)'}}>New Entry</h2>
+        <button className="dc-btn" onClick={()=>setComposing(false)} style={{background:'none',border:'1px solid rgba(138,104,32,.28)',color:'rgba(200,176,120,.42)',padding:'5px 11px',borderRadius:4,fontSize:11,fontFamily:"'Cinzel',serif"}}>✕</button>
+      </div>
+      <input type="text" value={draft.title} onChange={e=>setDraft(d=>({...d,title:e.target.value}))} placeholder="Give this moment a name…" style={{width:'100%',padding:'10px 14px',borderRadius:4,fontSize:17,marginBottom:11}}/>
+      <div style={{display:'flex',flexWrap:'wrap',gap:6,marginBottom:13}}>
+        {MOODS.map(m=><button key={m} className="dc-btn" onClick={()=>setDraft(d=>({...d,mood:m}))} style={{padding:'3px 9px',borderRadius:20,fontSize:10,border:'1px solid',cursor:'pointer',background:draft.mood===m?'rgba(212,168,32,.17)':'rgba(8,18,6,.8)',borderColor:draft.mood===m?'#d4a820':'rgba(58,88,48,.3)',color:draft.mood===m?'#f0c830':'rgba(200,176,120,.48)'}}>{m}</button>)}
+      </div>
+      <textarea value={draft.body} onChange={e=>setDraft(d=>({...d,body:e.target.value}))} placeholder="What arose in you today? What did the land speak?…" style={{width:'100%',minHeight:270,padding:'13px 16px',borderRadius:4,fontSize:15,lineHeight:1.9,resize:'vertical'}}/>
+      <button className="dc-btn" onClick={seal} style={{width:'100%',padding:'12px 0',marginTop:13,background:'linear-gradient(135deg,#3a2408,#6a4010)',border:'1px solid #d4a820',borderRadius:4,color:'#f0c830',fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:4,textTransform:'uppercase'}}>Seal the Entry</button>
+    </div>
+  );
+  return(
+    <div className="dc-in">
+      <PhotoBanner url={P.fogforest} h={140} overlay={.55}>
+        <h2 style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:'clamp(17px,3vw,23px)'}}>My Journal</h2>
+        <p style={{fontStyle:'italic',color:'rgba(200,176,120,.5)',fontSize:13,marginTop:3}}>Private · Saved in your browser</p>
+      </PhotoBanner>
+      <div style={{display:'flex',justifyContent:'flex-end',marginBottom:16}}>
+        <button className="dc-btn" onClick={()=>setComposing(true)} style={{padding:'9px 18px',background:'linear-gradient(135deg,#3a2408,#6a4010)',border:'1px solid #d4a820',borderRadius:4,color:'#f0c830',fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:3,textTransform:'uppercase'}}>✦ New Entry</button>
+      </div>
+      {!entries.length?(
+        <div style={{textAlign:'center',padding:'50px 20px',border:'1px dashed rgba(138,104,32,.17)',borderRadius:8}}>
+          <p style={{fontSize:34,marginBottom:12}}>📖</p>
+          <p style={{fontStyle:'italic',color:'rgba(200,176,120,.32)',fontSize:16}}>The pages await your voice</p>
+        </div>
+      ):(
+        <div style={{display:'grid',gap:9}}>
+          {entries.map(e=>(
+            <div key={e.id} className="dc-card" onClick={()=>setViewing(e)} style={{padding:'15px 17px',borderRadius:6,background:'rgba(7,14,6,.85)',border:'1px solid rgba(58,88,48,.28)',cursor:'pointer'}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:10}}>
+                <div style={{flex:1}}>
+                  <p style={{fontSize:9,color:'rgba(200,176,120,.35)',marginBottom:3}}>{e.date} · {e.moon} · {e.mood}</p>
+                  <h3 style={{fontFamily:"'Cinzel',serif",color:'#f0ddb0',fontSize:14,marginBottom:4}}>{e.title}</h3>
+                  <p style={{fontSize:12,fontStyle:'italic',color:'rgba(200,176,120,.46)',lineHeight:1.6}}>{e.body.slice(0,100)}{e.body.length>100?'…':''}</p>
+                </div>
+                <span style={{fontSize:16,opacity:.28}}>→</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Bardic ── */
+function Bardic(){
+  const pieces=[
+    {type:'poem',title:'Before the Snowdrop',author:'S. Merrill',date:'Feb 2026',img:P.ferns,body:`Before the snowdrop dares,\nbefore the ground admits\nit ever knew warmth —\nsomething stirs.\n\nNot hope. Older than hope.\nThe memory of green.\n\nThe birch knows this.\nIt is always first.\nIt does not wait for permission.`},
+    {type:'story',title:'What Happened at the Threshold',author:'Community',date:'Nov 2025',img:P.path,body:`There was a moment before the rite began when we all stood at the edge of the cleared ground and no one spoke. The trees around us were listening in the way trees do — not passively, but as witnesses to something they had seen before.\n\nThe fire had not yet been lit. Something in that pause told us: what we step into now will change us in ways we cannot yet name.`},
+    {type:'poem',title:'Three Stones',author:'K. Ashwood',date:'Dec 2025',img:P.stones,body:`I set three stones upon the cloth.\nI did not choose them carefully —\nthey chose me from the riverbed.\n\nThey know the names\nI have only heard in dreams.\n\nI do not clean them.\nDirt is how the dead\nremember they were alive.`},
+  ];
+  return(
+    <div className="dc-in">
+      <PhotoBanner url={P.dawn} h={150} overlay={.45}>
+        <h2 style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:'clamp(17px,3vw,24px)'}}>The Bardic Circle</h2>
+        <p style={{fontStyle:'italic',color:'rgba(200,176,120,.52)',fontSize:13,marginTop:3}}>Poetry, story, song, and myth — the oral tradition kept living</p>
+      </PhotoBanner>
+      <Divider/>
+      {pieces.map((p,i)=>(
+        <div key={i} style={{marginBottom:32}}>
+          <div style={{borderRadius:6,overflow:'hidden',marginBottom:14,position:'relative',height:120}}>
+            <img src={p.img} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}}/>
+            <div style={{position:'absolute',inset:0,background:'rgba(5,12,5,.6)'}}/>
+            <div style={{position:'absolute',inset:0,padding:'14px 18px',display:'flex',flexDirection:'column',justifyContent:'flex-end'}}>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:3,color:'rgba(160,130,200,.55)',textTransform:'uppercase',marginBottom:3}}>{p.type}</span>
+              <h3 style={{fontFamily:"'Cinzel Decorative',serif",color:'#d4a820',fontSize:17}}>{p.title}</h3>
+            </div>
+          </div>
+          <div style={{padding:'16px 22px',borderLeft:'2px solid rgba(212,168,32,.25)',background:'rgba(10,5,22,.38)',borderRadius:'0 6px 6px 0',marginBottom:9}}>
+            <p style={{fontStyle:'italic',fontSize:15,lineHeight:2.15,color:'#f0ddb0',whiteSpace:'pre-wrap'}}>{p.body}</p>
+          </div>
+          <p style={{fontSize:11,color:'rgba(200,176,120,.3)',textAlign:'right'}}>— {p.author}, {p.date}</p>
+          {i<pieces.length-1&&<Divider dim/>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ── App Shell ── */
+function App({user,onLogout}){
+  const[page,setPage]=useState('grove');
+  const{playing,toggle}=useAmbience();
+  const moon=moonInfo(getMoonPhase());
+  const PAGES={grove:<Grove user={user} goTo={setPage}/>,gallery:<Gallery/>,oracle:<Oracle/>,archive:<Archive/>,journal:<Journal user={user}/>,bardic:<Bardic/>};
+  return(
+    <div style={{display:'flex',minHeight:'100vh'}}>
+      <div style={{width:215,minHeight:'100vh',flexShrink:0,background:'rgba(3,8,3,.96)',backdropFilter:'blur(20px)',borderRight:'1px solid rgba(58,88,48,.24)',display:'flex',flexDirection:'column',position:'sticky',top:0,height:'100vh',zIndex:10}}>
+        <div style={{position:'relative',overflow:'hidden',borderBottom:'1px solid rgba(58,88,48,.18)'}}>
+          <img src={P.bark} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',opacity:.18}}/>
+          <div style={{position:'relative',padding:'22px 16px 16px',textAlign:'center'}}>
+            <div className="dc-float" style={{fontSize:34,filter:'drop-shadow(0 0 12px rgba(212,168,32,.55))'}}>🌳</div>
+            <p style={{fontFamily:"'Cinzel Decorative',serif",color:'#f0c830',fontSize:12,letterSpacing:1,lineHeight:1.3,marginTop:7}}>The Thornwood</p>
+            <p style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:4,color:'rgba(200,176,120,.35)',textTransform:'uppercase',marginTop:2}}>Ancient paths. Living community.</p>
+          </div>
+        </div>
+        <div style={{padding:'10px 16px',borderBottom:'1px solid rgba(58,88,48,.13)',background:'rgba(12,12,40,.28)',textAlign:'center'}}>
+          <span style={{fontSize:20,display:'block',marginBottom:3,animation:'mng 4s ease-in-out infinite'}}>{moon.e}</span>
+          <p style={{fontFamily:"'Cinzel',serif",color:'rgba(160,190,230,.55)',fontSize:9,letterSpacing:1}}>{moon.n}</p>
+        </div>
+        <nav style={{flex:1,padding:'10px 0'}}>
+          {NAV.map(n=>(
+            <div key={n.k} className={`dc-nav${page===n.k?' active':''}`} onClick={()=>setPage(n.k)} style={{display:'flex',alignItems:'center',gap:9,padding:'10px 16px',fontSize:12,color:'rgba(200,176,120,.5)',borderLeft:'3px solid transparent'}}>
+              <span style={{fontSize:14}}>{n.e}</span>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1}}>{n.l}</span>
+            </div>
+          ))}
+        </nav>
+        <div style={{padding:'8px 12px',borderTop:'1px solid rgba(58,88,48,.13)'}}>
+          <button className="dc-btn" onClick={toggle} style={{width:'100%',padding:'7px 8px',background:playing?'rgba(58,88,48,.38)':'rgba(8,18,8,.55)',border:`1px solid ${playing?'rgba(74,122,64,.55)':'rgba(58,88,48,.24)'}`,borderRadius:4,color:playing?'#4a9a5a':'rgba(200,176,120,.3)',fontSize:10,fontFamily:"'Cinzel',serif",letterSpacing:2,display:'flex',alignItems:'center',justifyContent:'center',gap:7}}>
+            <span>{playing?'🔊':'🔇'}</span><span>{playing?'Grove Sound':'Sound Off'}</span>
+          </button>
+        </div>
+        <div style={{padding:'9px 16px 14px',borderTop:'1px solid rgba(58,88,48,.16)'}}>
+          <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:7}}>
+            <span style={{fontSize:12}}>🌿</span>
+            <span style={{fontSize:11,color:'rgba(200,176,120,.42)',fontStyle:'italic',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{user}</span>
+          </div>
+          <button className="dc-btn" onClick={onLogout} style={{width:'100%',padding:'6px 0',background:'none',border:'1px solid rgba(58,88,48,.24)',borderRadius:4,color:'rgba(200,176,120,.28)',fontSize:9,fontFamily:"'Cinzel',serif",letterSpacing:2}}>Leave Grove</button>
+        </div>
+      </div>
+      <main style={{flex:1,padding:'clamp(16px,4vw,44px)',maxWidth:920,overflow:'auto'}}>
+        {PAGES[page]}
+      </main>
+    </div>
+  );
+}
+
+/* ── Root ── */
+function ThornwoodApp(){
+  const[user,setUser]=useState(null);
+  return(
+    <>
+      <StarField/><MistLayer/><Fireflies/>
+      <div style={{position:'relative',zIndex:3}}>
+        {user?<App user={user} onLogout={()=>setUser(null)}/>:<Login onLogin={setUser}/>}
+      </div>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<ThornwoodApp/>);
+</script>
+</body>
+</html>
