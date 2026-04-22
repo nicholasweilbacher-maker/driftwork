@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Root System — A spring 2026 interactive portfolio by Nick (Weilbacher) McCarthy-Yates showcasing marketing automation, front-end development, and CRM strategy skills.">
+<title>Root System — Nick (Weilbacher) McCarthy-Yates</title>
+
+<link rel="canonical" href="https://driftwork.dev/root-system/">
+
+<!-- Open Graph / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Root System — Nick (Weilbacher) McCarthy-Yates">
+<meta property="og:description" content="What's visible grows from what's underneath. An interactive portfolio showcasing six years of marketing automation, front-end development, and CRM strategy.">
+<meta property="og:url" content="https://driftwork.dev/root-system/">
+<meta property="og:site_name" content="driftwork.dev">
+<meta property="og:image" content="https://driftwork.dev/images/og-root-system.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dark soil background with five green tree stems and spreading root systems below a horizon line; title ROOT SYSTEM — What's visible grows from what's underneath.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Root System — Nick (Weilbacher) McCarthy-Yates">
+<meta name="twitter:description" content="What's visible grows from what's underneath. Interactive portfolio — EN / ES / FR.">
+<meta name="twitter:image" content="https://driftwork.dev/images/og-root-system.png">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Nick (Weilbacher) McCarthy-Yates",
+    "jobTitle": "Campaign Engineer & Front-End Developer",
+    "url": "https://www.linkedin.com/in/nickweilbacher",
+    "knowsAbout": ["Salesforce Marketing Cloud", "Marketing Automation", "HTML/CSS", "SQL", "CRM Strategy", "Email Marketing", "Journey Builder"]
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --white: #FFFFFF;
+    --cream: #FAFAF7;
+    --charcoal: #1A1A1A;
+    --charcoal-mid: #3A3A3A;
+    --charcoal-light: #4A4A4A;
+    --sage: #4E7652;
+    --sage-deep: #3B5E3F;
+    --sage-accent: #7A9E7E;
+    --sage-light: #B8D4BA;
+    --coral: #B84D2F;
+    --coral-icon: #E8836B;
+    --sky: #4A7C96;
+    --sky-icon: #8AAEC4;
+    --gold: #7D6318;
+    --gold-icon: #D4A843;
+    --lavender: #5C4F8C;
+    --lavender-icon: #9B8EC4;
+    --moss: #3E5528;
+    --moss-icon: #5C7A3E;
+    --teal: #2D7373;
+    --teal-icon: #4BA3A3;
+    --focus-ring: #3B5E3F;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --white: #121212;
+      --cream: #1E1E1E;
+      --charcoal: #ECECEC;
+      --charcoal-mid: #CDCDCD;
+      --charcoal-light: #A8A8A8;
+      --sage: #8FBF94;
+      --sage-deep: #A3D1A8;
+      --sage-accent: #6B9B70;
+      --sage-light: #3A5E3E;
+      --coral: #F0967E;
+      --coral-icon: #E8836B;
+      --sky: #8CC0D8;
+      --sky-icon: #8AAEC4;
+      --gold: #E4BF5A;
+      --gold-icon: #D4A843;
+      --lavender: #B5A8E0;
+      --lavender-icon: #9B8EC4;
+      --moss: #8AAF6A;
+      --moss-icon: #5C7A3E;
+      --teal: #6DC4C4;
+      --teal-icon: #4BA3A3;
+      --focus-ring: #A3D1A8;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  .skip-link {
+    position: absolute; top: -100%; left: 1rem;
+    padding: 0.75rem 1.25rem; background: var(--sage-deep); color: var(--white);
+    font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 500;
+    text-decoration: none; border-radius: 0 0 8px 8px; z-index: 10000;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 0; outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+
+  *:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 4px; }
+
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999;
+  }
+
+  /* ─── LANGUAGE TOGGLE ─── */
+  .lang-toggle {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 10001;
+    display: flex;
+    gap: 0;
+    border-radius: 100px;
+    border: 1.5px solid var(--sage);
+    overflow: hidden;
+    background: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.4s forwards;
+  }
+
+  .lang-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.65rem 0.85rem;
+    min-width: 44px;
+    min-height: 44px;
+    border: none;
+    background: transparent;
+    color: var(--charcoal-light);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lang-btn.active {
+    background: var(--sage);
+    color: var(--white);
+  }
+
+  .lang-btn:not(.active):hover {
+    background: var(--cream);
+    color: var(--charcoal);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; position: relative; padding: 2rem;
+  }
+
+  .hero-tag {
+    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.8rem;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage);
+    margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 400; line-height: 1.05; text-align: center; letter-spacing: -0.02em;
+    color: var(--charcoal); opacity: 0; animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--sage-deep); }
+
+  .hero-subtitle {
+    font-family: 'Outfit', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 2vw, 1.25rem); color: var(--charcoal-mid);
+    margin-top: 1.5rem; text-align: center; max-width: 520px; line-height: 1.6;
+    opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; display: flex; flex-direction: column;
+    align-items: center; gap: 0.5rem; opacity: 0; animation: fadeUp 1s ease 1.2s forwards;
+  }
+  .scroll-hint span {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sage); font-weight: 600;
+  }
+
+  .scroll-line {
+    width: 1px; height: 40px; background: var(--sage-light);
+    position: relative; overflow: hidden;
+  }
+  .scroll-line::after {
+    content: ''; position: absolute; top: -40px; left: 0;
+    width: 1px; height: 40px; background: var(--sage-deep);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  .botanical-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .botanical-bg svg { position: absolute; opacity: 0; animation: floatIn 1.5s ease forwards; }
+  .botanical-bg .b1 { top: 8%; left: 5%; animation-delay: 0.4s; }
+  .botanical-bg .b2 { top: 15%; right: 8%; animation-delay: 0.7s; }
+  .botanical-bg .b3 { bottom: 20%; left: 10%; animation-delay: 1s; }
+  .botanical-bg .b4 { bottom: 12%; right: 6%; animation-delay: 1.3s; }
+  .botanical-bg .b5 { top: 45%; left: 3%; animation-delay: 0.9s; }
+  .botanical-bg .b6 { top: 40%; right: 4%; animation-delay: 1.1s; }
+
+  /* ─── GARDEN SECTION ─── */
+  .garden-section { padding: 6rem 2rem 8rem; max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.8rem;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 400; line-height: 1.2; margin-bottom: 3.5rem; max-width: 600px;
+    color: var(--charcoal);
+  }
+
+  /* ─── BLOOM CARDS ─── */
+  .bloom-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+  }
+
+  .bloom-card {
+    position: relative; background: var(--cream); border-radius: 16px;
+    padding: 2.5rem 2rem 2rem; cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden; border: 1px solid transparent;
+  }
+
+  .bloom-card:hover, .bloom-card.active {
+    transform: translateY(-4px); border-color: var(--sage-light);
+    box-shadow: 0 20px 60px -15px rgba(122, 158, 126, 0.15);
+  }
+  .bloom-card:focus-visible {
+    transform: translateY(-4px); border-color: var(--sage-deep);
+    box-shadow: 0 20px 60px -15px rgba(122, 158, 126, 0.15);
+  }
+
+  .bloom-card .seed-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem; transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .bloom-card:hover .seed-icon, .bloom-card:focus-visible .seed-icon,
+  .bloom-card.active .seed-icon { transform: scale(1.1); }
+
+  .seed-icon svg { transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+  .bloom-card:hover .seed-icon svg, .bloom-card:focus-visible .seed-icon svg,
+  .bloom-card.active .seed-icon svg { transform: rotate(15deg) scale(1.05); }
+
+  .bloom-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 400;
+    margin-bottom: 0.5rem; color: var(--charcoal); transition: color 0.4s ease;
+  }
+
+  .bloom-card .seed-label {
+    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--charcoal-light); font-weight: 500; margin-bottom: 1rem;
+  }
+
+  .bloom-card .bloom-text {
+    font-size: 0.95rem; line-height: 1.65; color: var(--charcoal-mid); font-weight: 400;
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .bloom-card:hover .bloom-text, .bloom-card:focus-visible .bloom-text,
+  .bloom-card.active .bloom-text { max-height: 200px; opacity: 1; margin-top: 0.5rem; }
+
+  .bloom-card .bloom-petals {
+    position: absolute; top: -10px; right: -10px; width: 80px; height: 80px;
+    opacity: 0; transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); pointer-events: none;
+  }
+  .bloom-card:hover .bloom-petals, .bloom-card:focus-visible .bloom-petals,
+  .bloom-card.active .bloom-petals { opacity: 0.12; transform: rotate(25deg) scale(1.2); }
+
+  .bloom-card[data-theme="sage"] .seed-icon { background: rgba(122,158,126,0.15); }
+  .bloom-card[data-theme="sage"]:hover h3, .bloom-card[data-theme="sage"]:focus-visible h3 { color: var(--sage-deep); }
+  .bloom-card[data-theme="coral"] .seed-icon { background: rgba(232,131,107,0.12); }
+  .bloom-card[data-theme="coral"]:hover h3, .bloom-card[data-theme="coral"]:focus-visible h3 { color: var(--coral); }
+  .bloom-card[data-theme="sky"] .seed-icon { background: rgba(138,174,196,0.12); }
+  .bloom-card[data-theme="sky"]:hover h3, .bloom-card[data-theme="sky"]:focus-visible h3 { color: var(--sky); }
+  .bloom-card[data-theme="gold"] .seed-icon { background: rgba(212,168,67,0.12); }
+  .bloom-card[data-theme="gold"]:hover h3, .bloom-card[data-theme="gold"]:focus-visible h3 { color: var(--gold); }
+  .bloom-card[data-theme="lavender"] .seed-icon { background: rgba(155,142,196,0.12); }
+  .bloom-card[data-theme="lavender"]:hover h3, .bloom-card[data-theme="lavender"]:focus-visible h3 { color: var(--lavender); }
+  .bloom-card[data-theme="moss"] .seed-icon { background: rgba(92,122,62,0.12); }
+  .bloom-card[data-theme="moss"]:hover h3, .bloom-card[data-theme="moss"]:focus-visible h3 { color: var(--moss); }
+
+  .bloom-card[data-theme="teal"] .seed-icon { background: rgba(75,163,163,0.12); }
+  .bloom-card[data-theme="teal"]:hover h3, .bloom-card[data-theme="teal"]:focus-visible h3 { color: var(--teal); }
+
+  /* ─── UNDER THE HOOD ─── */
+  .hood-section { padding: 4rem 2rem 6rem; max-width: 1100px; margin: 0 auto; }
+
+  .hood-toggle {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.85rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-deep);
+    cursor: pointer; padding: 0.75rem 1.25rem; border-radius: 100px;
+    border: 2px solid var(--sage); background: transparent;
+    transition: all 0.3s ease; margin-bottom: 2rem;
+  }
+  .hood-toggle:hover, .hood-toggle:focus-visible {
+    background: var(--sage-deep); color: var(--white); border-color: var(--sage-deep);
+  }
+  .hood-toggle .arrow { display: inline-block; transition: transform 0.3s ease; font-size: 0.65rem; }
+  .hood-toggle.open .arrow { transform: rotate(90deg); }
+
+  .hood-content { max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.23,1,0.32,1); }
+  .hood-content.open { max-height: 600px; }
+
+  .hood-inner {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; padding-top: 1rem;
+  }
+
+  .pipeline-step {
+    position: relative; padding: 1.5rem; background: var(--cream);
+    border-radius: 12px; opacity: 0; transform: translateY(16px); transition: all 0.4s ease;
+  }
+  .hood-content.open .pipeline-step { opacity: 1; transform: translateY(0); }
+  .hood-content.open .pipeline-step:nth-child(1) { transition-delay: 0.1s; }
+  .hood-content.open .pipeline-step:nth-child(2) { transition-delay: 0.2s; }
+  .hood-content.open .pipeline-step:nth-child(3) { transition-delay: 0.3s; }
+  .hood-content.open .pipeline-step:nth-child(4) { transition-delay: 0.4s; }
+
+  .pipeline-step .step-num {
+    font-family: 'Playfair Display', serif; font-size: 2rem;
+    color: var(--sage-accent); line-height: 1; margin-bottom: 0.75rem;
+  }
+  .pipeline-step h4 {
+    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; color: var(--charcoal);
+  }
+  .pipeline-step p { font-size: 0.85rem; line-height: 1.55; color: var(--charcoal-mid); font-weight: 400; }
+
+  /* ─── TAGLINE ─── */
+  .tagline-section { padding: 6rem 2rem 8rem; text-align: center; }
+
+  .tagline {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 400; font-style: italic; color: var(--sage-deep);
+    max-width: 580px; margin: 0 auto 2rem; line-height: 1.4;
+    opacity: 0; transform: translateY(20px); transition: all 0.8s ease;
+  }
+  .tagline.visible { opacity: 1; transform: translateY(0); }
+
+  .tagline-author {
+    font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 0.95rem;
+    color: var(--charcoal-mid); opacity: 0; transform: translateY(12px);
+    transition: all 0.8s ease 0.2s;
+  }
+  .tagline-author.visible { opacity: 1; transform: translateY(0); }
+
+  .tagline-author a {
+    color: var(--sage-deep); text-decoration: underline;
+    text-decoration-color: var(--sage-light); text-underline-offset: 3px;
+    transition: text-decoration-color 0.3s ease;
+  }
+  .tagline-author a:hover, .tagline-author a:focus-visible { text-decoration-color: var(--sage-deep); }
+
+  footer {
+    padding: 2rem; text-align: center; font-size: 0.8rem;
+    color: var(--charcoal-light); font-weight: 400;
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  }
+  footer .credit {
+    font-size: 0.7rem; color: var(--charcoal-light); opacity: 0.6;
+    font-weight: 400;
+  }
+  footer .credit a {
+    color: var(--charcoal-light); text-decoration: underline;
+    text-decoration-color: var(--sage-light); text-underline-offset: 2px;
+  }
+  footer .credit a:hover { text-decoration-color: var(--sage); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes floatIn { from { opacity: 0; transform: scale(0.8) translateY(10px); } to { opacity: 0.07; transform: scale(1) translateY(0); } }
+  @keyframes scrollPulse { 0% { top: -40px; } 100% { top: 40px; } }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .hero-tag, .hero-title, .hero-subtitle, .scroll-hint, .lang-toggle { opacity: 1; transform: none; }
+    .botanical-bg svg { opacity: 0.07; transform: none; }
+    .tagline, .tagline-author { opacity: 1; transform: none; }
+    .bloom-card .bloom-text { max-height: none; opacity: 1; margin-top: 0.5rem; }
+    .bloom-card:hover, .bloom-card.active { transform: none; }
+    .hood-content.open .pipeline-step { opacity: 1; transform: none; }
+  }
+
+  @media (forced-colors: active) {
+    .bloom-card { border: 2px solid ButtonText; }
+    .hood-toggle { border: 2px solid ButtonText; }
+  }
+
+  /* ─── DARK MODE OVERRIDES ─── */
+  @media (prefers-color-scheme: dark) {
+    body::after { opacity: 0.3; mix-blend-mode: soft-light; }
+    .botanical-bg svg { filter: brightness(0.6) saturate(0.7); }
+    .bloom-card[data-theme="sage"] .seed-icon svg { stroke: #8FBF94; }
+    .bloom-card[data-theme="coral"] .seed-icon svg { stroke: #F0967E; }
+    .bloom-card[data-theme="sky"] .seed-icon svg { stroke: #8CC0D8; }
+    .bloom-card[data-theme="gold"] .seed-icon svg { stroke: #E4BF5A; }
+    .bloom-card[data-theme="lavender"] .seed-icon svg { stroke: #B5A8E0; }
+    .bloom-card[data-theme="moss"] .seed-icon svg { stroke: #8AAF6A; }
+    .bloom-card[data-theme="teal"] .seed-icon svg { stroke: #6DC4C4; }
+    .bloom-card[data-theme="sage"] .seed-icon { background: rgba(143,191,148,0.15); }
+    .bloom-card[data-theme="coral"] .seed-icon { background: rgba(240,150,126,0.15); }
+    .bloom-card[data-theme="sky"] .seed-icon { background: rgba(140,192,216,0.15); }
+    .bloom-card[data-theme="gold"] .seed-icon { background: rgba(228,191,90,0.15); }
+    .bloom-card[data-theme="lavender"] .seed-icon { background: rgba(181,168,224,0.15); }
+    .bloom-card[data-theme="moss"] .seed-icon { background: rgba(138,175,106,0.15); }
+    .bloom-card[data-theme="teal"] .seed-icon { background: rgba(109,196,196,0.15); }
+    .bloom-card:hover, .bloom-card.active, .bloom-card:focus-visible {
+      box-shadow: 0 20px 60px -15px rgba(0,0,0,0.4); border-color: var(--sage);
+    }
+    .bloom-card[data-theme="sage"] .bloom-petals { fill: #8FBF94; }
+    .bloom-card[data-theme="coral"] .bloom-petals { fill: #F0967E; }
+    .bloom-card[data-theme="sky"] .bloom-petals { fill: #8CC0D8; }
+    .bloom-card[data-theme="gold"] .bloom-petals { fill: #E4BF5A; }
+    .bloom-card[data-theme="lavender"] .bloom-petals { fill: #B5A8E0; }
+    .bloom-card[data-theme="moss"] .bloom-petals { fill: #8AAF6A; }
+    .bloom-card[data-theme="teal"] .bloom-petals { fill: #6DC4C4; }
+    .skip-link { background: var(--sage); color: #121212; }
+    .hood-toggle:hover, .hood-toggle:focus-visible { background: var(--sage); color: #121212; border-color: var(--sage); }
+    .scroll-line { background: rgba(143,191,148,0.3); }
+    .scroll-line::after { background: var(--sage); }
+    .lang-btn.active { background: var(--sage); color: #121212; }
+  }
+
+  @media (max-width: 768px) {
+    .bloom-grid { grid-template-columns: 1fr; }
+    .hood-inner { grid-template-columns: 1fr; }
+    .botanical-bg svg { display: none; }
+    .hero { padding: 2rem 1.5rem; }
+    .garden-section, .hood-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .lang-toggle { top: 0.75rem; right: 0.75rem; }
+  }
+</style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" data-i18n="skip">Skip to main content</a>
+
+<!-- ═══════════ LANGUAGE TOGGLE ═══════════ -->
+<nav class="lang-toggle" aria-label="Language selector">
+  <button class="lang-btn active" data-lang="en" aria-pressed="true" aria-label="English">EN</button>
+  <button class="lang-btn" data-lang="es" aria-pressed="false" aria-label="Español">ES</button>
+  <button class="lang-btn" data-lang="fr" aria-pressed="false" aria-label="Français">FR</button>
+</nav>
+
+<main id="main-content">
+
+<!-- Screen reader: live region for language change announcements -->
+<div aria-live="polite" aria-atomic="true" class="sr-only" id="langAnnounce"></div>
+
+<!-- Screen reader: full content summary (bypasses interactive hover requirement) -->
+<section class="sr-only" aria-label="Content summary for screen readers">
+  <h2 data-i18n="srSummaryTitle">Portfolio Summary</h2>
+  <p data-i18n="srSummary">Nick (Weilbacher) McCarthy&#8209;Yates is a Campaign Engineer and Front-End Developer with six years of experience in marketing automation. Core skills: Front-End Craft (HTML, CSS, JavaScript for email and landing pages), Marketing Automation (Salesforce Marketing Cloud, Journey Builder, Automation Studio), Data and SQL (segmentation and personalization at scale), Quality Assurance (425 campaign reviews, 100+ zero-error deployments), Strategic Thinking (CRM lifecycle strategy for financial services), a forward focus on AI, health tech, and climate tech, and Inclusive Design (WCAG AA, keyboard navigation, screen readers, reduced motion, dark mode, multilingual). Workflow: Ingest data, Segment audiences, Orchestrate journeys, Deliver with full authentication.</p>
+</section>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="botanical-bg" aria-hidden="true">
+    <svg class="b1" width="60" height="80" viewBox="0 0 60 80" fill="none" role="presentation"><path d="M30 0C30 0 0 30 0 55C0 68.8 13.4 80 30 80C46.6 80 60 68.8 60 55C60 30 30 0 30 0Z" fill="#7A9E7E"/></svg>
+    <svg class="b2" width="50" height="50" viewBox="0 0 50 50" fill="none" role="presentation"><circle cx="25" cy="25" r="25" fill="#E8836B"/></svg>
+    <svg class="b3" width="40" height="70" viewBox="0 0 40 70" fill="none" role="presentation"><path d="M20 0C20 0 40 25 40 45C40 58.8 31 70 20 70C9 70 0 58.8 0 45C0 25 20 0 20 0Z" fill="#8AAEC4"/></svg>
+    <svg class="b4" width="55" height="55" viewBox="0 0 55 55" fill="none" role="presentation"><path d="M27.5 0L35 20L55 27.5L35 35L27.5 55L20 35L0 27.5L20 20Z" fill="#D4A843"/></svg>
+    <svg class="b5" width="35" height="60" viewBox="0 0 35 60" fill="none" role="presentation"><ellipse cx="17.5" cy="30" rx="17.5" ry="30" fill="#9B8EC4"/></svg>
+    <svg class="b6" width="45" height="65" viewBox="0 0 45 65" fill="none" role="presentation"><path d="M22.5 0C22.5 0 0 22 0 42C0 54.7 10.1 65 22.5 65C34.9 65 45 54.7 45 42C45 22 22.5 0 22.5 0Z" fill="#5C7A3E"/></svg>
+  </div>
+
+  <span class="hero-tag" aria-hidden="true" data-i18n="heroTag">Spring 2026</span>
+  <h1 class="hero-title" id="hero-heading"><em data-i18n="heroTitleEm">Root</em> <span data-i18n="heroTitleEnd">System</span></h1>
+  <p class="hero-subtitle" data-i18n="heroSub">What's visible grows from what's underneath.</p>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span data-i18n="explore">Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════ GARDEN ═══════════ -->
+<section class="garden-section" aria-labelledby="garden-heading">
+  <span class="section-label" data-i18n="gardenLabel">What's underground</span>
+  <h2 class="section-heading" id="garden-heading" data-i18n="gardenHeading">Deep roots, ready for the next season.</h2>
+
+  <div class="bloom-grid" role="list">
+
+    <article class="bloom-card" data-theme="sage" role="listitem" tabindex="0">
+      <svg class="bloom-petals" viewBox="0 0 80 80" fill="#7A9E7E" aria-hidden="true"><circle cx="40" cy="15" r="14"/><circle cx="62" cy="32" r="14"/><circle cx="55" cy="58" r="14"/><circle cx="25" cy="58" r="14"/><circle cx="18" cy="32" r="14"/><circle cx="40" cy="38" r="10"/></svg>
+      <div class="seed-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4E7652" stroke-width="1.5" stroke-linecap="round"><path d="M12 22V8M12 8C12 8 8 4 4 4C4 10 8 12 12 8ZM12 8C12 8 16 4 20 4C20 10 16 12 12 8Z"/></svg></div>
+      <span class="seed-label" data-i18n="root01">Root 01</span>
+      <h3 data-i18n="card1Title">Front-End Craft</h3>
+      <p class="bloom-text" data-i18n="card1Text">HTML, CSS, JavaScript — hand-coded email templates and landing pages, pixel-perfect across every client and device. Design systems that scale.</p>
+    </article>
+
+    <article class="bloom-card" data-theme="coral" role="listitem" tabindex="0">
+      <svg class="bloom-petals" viewBox="0 0 80 80" fill="#E8836B" aria-hidden="true"><circle cx="40" cy="15" r="14"/><circle cx="62" cy="32" r="14"/><circle cx="55" cy="58" r="14"/><circle cx="25" cy="58" r="14"/><circle cx="18" cy="32" r="14"/><circle cx="40" cy="38" r="10"/></svg>
+      <div class="seed-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8836B" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17M2 12L12 17L22 12"/></svg></div>
+      <span class="seed-label" data-i18n="root02">Root 02</span>
+      <h3 data-i18n="card2Title">Marketing Automation</h3>
+      <p class="bloom-text" data-i18n="card2Text">Salesforce Marketing Cloud, Journey Builder, Automation Studio — building the logic that sends the right message at the right moment, every time.</p>
+    </article>
+
+    <article class="bloom-card" data-theme="sky" role="listitem" tabindex="0">
+      <svg class="bloom-petals" viewBox="0 0 80 80" fill="#8AAEC4" aria-hidden="true"><circle cx="40" cy="15" r="14"/><circle cx="62" cy="32" r="14"/><circle cx="55" cy="58" r="14"/><circle cx="25" cy="58" r="14"/><circle cx="18" cy="32" r="14"/><circle cx="40" cy="38" r="10"/></svg>
+      <div class="seed-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8AAEC4" stroke-width="1.5" stroke-linecap="round"><path d="M4 6H20M4 12H14M4 18H18"/></svg></div>
+      <span class="seed-label" data-i18n="root03">Root 03</span>
+      <h3 data-i18n="card3Title">Data &amp; SQL</h3>
+      <p class="bloom-text" data-i18n="card3Text">SQL queries against millions of subscriber records. Data extensions, segmentation, personalization — turning raw data into relevant experiences.</p>
+    </article>
+
+    <article class="bloom-card" data-theme="gold" role="listitem" tabindex="0">
+      <svg class="bloom-petals" viewBox="0 0 80 80" fill="#D4A843" aria-hidden="true"><circle cx="40" cy="15" r="14"/><circle cx="62" cy="32" r="14"/><circle cx="55" cy="58" r="14"/><circle cx="25" cy="58" r="14"/><circle cx="18" cy="32" r="14"/><circle cx="40" cy="38" r="10"/></svg>
+      <div class="seed-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1.5" stroke-linecap="round"><path d="M9 12L11 14L15 10M21 12C21 16.97 17.97 20 13 20C8.03 20 5 16.97 5 12C5 7.03 8.03 4 13 4"/><path d="M3 8L5 12L3 16"/></svg></div>
+      <span class="seed-label" data-i18n="root04">Root 04</span>
+      <h3 data-i18n="card4Title">Quality Assurance</h3>
+      <p class="bloom-text" data-i18n="card4Text">425 campaign reviews in a single year. 100+ deployments, zero in-market errors. The unsexy discipline that protects the brand.</p>
+    </article>
+
+    <article class="bloom-card" data-theme="lavender" role="listitem" tabindex="0">
+      <svg class="bloom-petals" viewBox="0 0 80 80" fill="#9B8EC4" aria-hidden="true"><circle cx="40" cy="15" r="14"/><circle cx="62" cy="32" r="14"/><circle cx="55" cy="58" r="14"/><circle cx="25" cy="58" r="14"/><circle cx="18" cy="32" r="14"/><circle cx="40" cy="38" r="10"/></svg>
+      <div class="seed-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9B8EC4" stroke-width="1.5" stroke-linecap="round"><path d="M12 3C8 3 4 6 4 10C4 18 12 21 12 21C12 21 20 18 20 10C20 6 16 3 12 3Z"/><path d="M12 3V21"/></svg></div>
+      <span class="seed-label" data-i18n="root05">Root 05</span>
+      <h3 data-i18n="card5Title">Strategic Thinking</h3>
+      <p class="bloom-text" data-i18n="card5Text">CRM lifecycle strategy for enterprise financial services. Mapping customer journeys, optimizing send cadence, maximizing engagement without fatigue.</p>
+    </article>
+
+    <article class="bloom-card" data-theme="moss" role="listitem" tabindex="0">
+      <svg class="bloom-petals" viewBox="0 0 80 80" fill="#5C7A3E" aria-hidden="true"><circle cx="40" cy="15" r="14"/><circle cx="62" cy="32" r="14"/><circle cx="55" cy="58" r="14"/><circle cx="25" cy="58" r="14"/><circle cx="18" cy="32" r="14"/><circle cx="40" cy="38" r="10"/></svg>
+      <div class="seed-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="1.5" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12"/><path d="M22 2L12 12"/><path d="M16 2H22V8"/></svg></div>
+      <span class="seed-label" data-i18n="root06">Root 06</span>
+      <h3 data-i18n="card6Title">What's Next</h3>
+      <p class="bloom-text" data-i18n="card6Text">Building toward AI, health tech, and climate tech — where purpose meets engineering. Every skill above is a root system for what comes next.</p>
+    </article>
+
+    <article class="bloom-card" data-theme="teal" role="listitem" tabindex="0">
+      <svg class="bloom-petals" viewBox="0 0 80 80" fill="#4BA3A3" aria-hidden="true"><circle cx="40" cy="15" r="14"/><circle cx="62" cy="32" r="14"/><circle cx="55" cy="58" r="14"/><circle cx="25" cy="58" r="14"/><circle cx="18" cy="32" r="14"/><circle cx="40" cy="38" r="10"/></svg>
+      <div class="seed-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4BA3A3" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/><path d="M8 16h8"/></svg></div>
+      <span class="seed-label" data-i18n="root07">Root 07</span>
+      <h3 data-i18n="card7Title">Inclusive by Design</h3>
+      <p class="bloom-text" data-i18n="card7Text">This site was built accessibility-first: WCAG AA contrast, keyboard navigation, screen reader support, reduced motion, dark mode, three languages, and a full content summary for assistive technology. Because good engineering means everyone gets in.</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══════════ UNDER THE HOOD ═══════════ -->
+<section class="hood-section" aria-labelledby="hood-heading">
+  <span class="section-label" data-i18n="hoodLabel">Under the hood</span>
+  <h2 class="section-heading" id="hood-heading" style="margin-bottom: 2rem;" data-i18n="hoodHeading">How the system works — because I think in pipelines.</h2>
+
+  <button class="hood-toggle" id="hoodToggle" aria-expanded="false" aria-controls="hoodContent">
+    <span class="arrow" aria-hidden="true">▶</span> <span data-i18n="hoodBtn">Reveal the workflow</span>
+  </button>
+
+  <div class="hood-content" id="hoodContent" role="region" aria-labelledby="hoodToggle">
+    <div class="hood-inner">
+      <div class="pipeline-step">
+        <div class="step-num" aria-hidden="true">01</div>
+        <h4 data-i18n="step1Title">Ingest</h4>
+        <p data-i18n="step1Text">Data enters the system — subscriber records, behavioral signals, preference flags. Every campaign starts with clean, structured inputs.</p>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num" aria-hidden="true">02</div>
+        <h4 data-i18n="step2Title">Segment</h4>
+        <p data-i18n="step2Text">SQL queries slice audiences by behavior, lifecycle stage, and eligibility. The right message for the right person — at scale.</p>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num" aria-hidden="true">03</div>
+        <h4 data-i18n="step3Title">Orchestrate</h4>
+        <p data-i18n="step3Text">Journey Builder maps the logic. Automation Studio schedules the execution. AMPscript personalizes every touchpoint dynamically.</p>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num" aria-hidden="true">04</div>
+        <h4 data-i18n="step4Title">Deliver</h4>
+        <p data-i18n="step4Text">SPF, DKIM, DMARC — authenticated sends that land in the inbox, not spam. QA'd, tested, deployed. Zero errors, full confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CLOSING TAGLINE ═══════════ -->
+<section class="tagline-section" aria-labelledby="closing-tagline">
+  <p class="tagline" id="closing-tagline" data-i18n="tagline">"What's visible grows from what's underneath."</p>
+  <p class="tagline-author" id="taglineAuthor">
+    Nick (Weilbacher) McCarthy&#8209;Yates — <a href="https://www.linkedin.com/in/nickweilbacher" target="_blank" rel="noopener noreferrer"><span data-i18n="connect">Let's connect</span><span class="sr-only" data-i18n="newTab"> (opens LinkedIn in a new tab)</span></a>
+  </p>
+</section>
+
+</main>
+
+<footer role="contentinfo">
+  <span data-i18n="footer">Built with care, spring 2026.</span>
+  <span class="credit" data-i18n="credit">Made with <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude</a> by Anthropic</span>
+</footer>
+
+<script>
+const i18n = {
+  en: {
+    skip: "Skip to main content",
+    heroTag: "Spring 2026",
+    heroTitleEm: "Root",
+    heroTitleEnd: "System",
+    heroSub: "What's visible grows from what's underneath.",
+    explore: "Explore",
+    gardenLabel: "What's underground",
+    gardenHeading: "Deep roots, ready for the next season.",
+    root01: "Root 01", root02: "Root 02", root03: "Root 03",
+    root04: "Root 04", root05: "Root 05", root06: "Root 06", root07: "Root 07",
+    card1Title: "Front-End Craft",
+    card1Text: "HTML, CSS, JavaScript — hand-coded email templates and landing pages, pixel-perfect across every client and device. Design systems that scale.",
+    card2Title: "Marketing Automation",
+    card2Text: "Salesforce Marketing Cloud, Journey Builder, Automation Studio — building the logic that sends the right message at the right moment, every time.",
+    card3Title: "Data & SQL",
+    card3Text: "SQL queries against millions of subscriber records. Data extensions, segmentation, personalization — turning raw data into relevant experiences.",
+    card4Title: "Quality Assurance",
+    card4Text: "425 campaign reviews in a single year. 100+ deployments, zero in-market errors. The unsexy discipline that protects the brand.",
+    card5Title: "Strategic Thinking",
+    card5Text: "CRM lifecycle strategy for enterprise financial services. Mapping customer journeys, optimizing send cadence, maximizing engagement without fatigue.",
+    card6Title: "What's Next",
+    card6Text: "Building toward AI, health tech, and climate tech — where purpose meets engineering. Every skill above is a root system for what comes next.",
+    card7Title: "Inclusive by Design",
+    card7Text: "This site was built accessibility-first: WCAG AA contrast, keyboard navigation, screen reader support, reduced motion, dark mode, three languages, and a full content summary for assistive technology. Because good engineering means everyone gets in.",
+    hoodLabel: "Under the hood",
+    hoodHeading: "How the system works — because I think in pipelines.",
+    hoodBtn: "Reveal the workflow",
+    hoodBtnHide: "Hide the workflow",
+    step1Title: "Ingest",
+    step1Text: "Data enters the system — subscriber records, behavioral signals, preference flags. Every campaign starts with clean, structured inputs.",
+    step2Title: "Segment",
+    step2Text: "SQL queries slice audiences by behavior, lifecycle stage, and eligibility. The right message for the right person — at scale.",
+    step3Title: "Orchestrate",
+    step3Text: "Journey Builder maps the logic. Automation Studio schedules the execution. AMPscript personalizes every touchpoint dynamically.",
+    step4Title: "Deliver",
+    step4Text: "SPF, DKIM, DMARC — authenticated sends that land in the inbox, not spam. QA'd, tested, deployed. Zero errors, full confidence.",
+    tagline: "\"What's visible grows from what's underneath.\"",
+    connect: "Let's connect",
+    newTab: " (opens LinkedIn in a new tab)",
+    footer: "Built with care, spring 2026.",
+    credit: "Made with Claude by Anthropic",
+    activate: "activate to learn more",
+    expanded: "expanded",
+    srSummaryTitle: "Portfolio Summary",
+    srSummary: "Nick (Weilbacher) McCarthy&#8209;Yates is a Campaign Engineer and Front-End Developer with six years of experience in marketing automation. Core skills: Front-End Craft (HTML, CSS, JavaScript for email and landing pages), Marketing Automation (Salesforce Marketing Cloud, Journey Builder, Automation Studio), Data and SQL (segmentation and personalization at scale), Quality Assurance (425 campaign reviews, 100+ zero-error deployments), Strategic Thinking (CRM lifecycle strategy for financial services), a forward focus on AI, health tech, and climate tech, and Inclusive Design (WCAG AA, keyboard navigation, screen readers, reduced motion, dark mode, multilingual). Workflow: Ingest data, Segment audiences, Orchestrate journeys, Deliver with full authentication.",
+    langAnnounce: "Language changed to English"
+  },
+  es: {
+    skip: "Saltar al contenido principal",
+    heroTag: "Primavera 2026",
+    heroTitleEm: "Sistema",
+    heroTitleEnd: "Raíz",
+    heroSub: "Lo visible crece desde lo que está debajo.",
+    explore: "Explorar",
+    gardenLabel: "Lo subterráneo",
+    gardenHeading: "Raíces profundas, listas para la próxima temporada.",
+    root01: "Raíz 01", root02: "Raíz 02", root03: "Raíz 03",
+    root04: "Raíz 04", root05: "Raíz 05", root06: "Raíz 06", root07: "Raíz 07",
+    card1Title: "Desarrollo Front-End",
+    card1Text: "HTML, CSS, JavaScript — plantillas de correo y páginas de destino codificadas a mano, perfectas en cada cliente y dispositivo. Sistemas de diseño que escalan.",
+    card2Title: "Automatización de Marketing",
+    card2Text: "Salesforce Marketing Cloud, Journey Builder, Automation Studio — construyendo la lógica que envía el mensaje correcto en el momento justo, siempre.",
+    card3Title: "Datos y SQL",
+    card3Text: "Consultas SQL sobre millones de registros de suscriptores. Extensiones de datos, segmentación, personalización — convirtiendo datos crudos en experiencias relevantes.",
+    card4Title: "Aseguramiento de Calidad",
+    card4Text: "425 revisiones de campañas en un solo año. Más de 100 despliegues, cero errores en producción. La disciplina invisible que protege la marca.",
+    card5Title: "Pensamiento Estratégico",
+    card5Text: "Estrategia de ciclo de vida CRM para servicios financieros empresariales. Mapeo de recorridos del cliente, optimización de cadencia de envíos, maximización del engagement sin fatiga.",
+    card6Title: "Lo Que Viene",
+    card6Text: "Construyendo hacia IA, tecnología de salud y tecnología climática — donde el propósito se encuentra con la ingeniería. Cada habilidad anterior es un sistema de raíces para lo que sigue.",
+    card7Title: "Diseño Inclusivo",
+    card7Text: "Este sitio fue construido con accesibilidad primero: contraste WCAG AA, navegación por teclado, soporte para lectores de pantalla, movimiento reducido, modo oscuro, tres idiomas y un resumen completo para tecnología asistiva. Porque la buena ingeniería significa que todos entran.",
+    hoodLabel: "Bajo el capó",
+    hoodHeading: "Cómo funciona el sistema — porque pienso en flujos de trabajo.",
+    hoodBtn: "Revelar el flujo",
+    hoodBtnHide: "Ocultar el flujo",
+    step1Title: "Ingesta",
+    step1Text: "Los datos entran al sistema — registros de suscriptores, señales de comportamiento, preferencias. Cada campaña comienza con entradas limpias y estructuradas.",
+    step2Title: "Segmentar",
+    step2Text: "Consultas SQL segmentan audiencias por comportamiento, etapa del ciclo de vida y elegibilidad. El mensaje correcto para la persona correcta — a escala.",
+    step3Title: "Orquestar",
+    step3Text: "Journey Builder mapea la lógica. Automation Studio programa la ejecución. AMPscript personaliza cada punto de contacto dinámicamente.",
+    step4Title: "Entregar",
+    step4Text: "SPF, DKIM, DMARC — envíos autenticados que llegan a la bandeja de entrada, no al spam. Verificado, probado, desplegado. Cero errores, total confianza.",
+    tagline: "\"Lo visible crece desde lo que está debajo.\"",
+    connect: "Conectemos",
+    newTab: " (abre LinkedIn en una nueva pestaña)",
+    footer: "Hecho con cuidado, primavera 2026.",
+    credit: "Hecho con Claude de Anthropic",
+    activate: "activar para más información",
+    expanded: "expandido",
+    srSummaryTitle: "Resumen del portafolio",
+    srSummary: "Nick (Weilbacher) McCarthy&#8209;Yates es Ingeniero de Campañas y Desarrollador Front-End con seis años de experiencia en automatización de marketing. Competencias principales: Desarrollo Front-End (HTML, CSS, JavaScript para correos electrónicos y páginas de destino), Automatización de Marketing (Salesforce Marketing Cloud, Journey Builder, Automation Studio), Datos y SQL (segmentación y personalización a escala), Aseguramiento de Calidad (425 revisiones de campañas, más de 100 despliegues sin errores), Pensamiento Estratégico (estrategia de ciclo de vida CRM para servicios financieros), un enfoque futuro en IA, tecnología de salud y tecnología climática, y Diseño Inclusivo (WCAG AA, navegación por teclado, lectores de pantalla, movimiento reducido, modo oscuro, multilingüe). Flujo de trabajo: Ingestar datos, Segmentar audiencias, Orquestar recorridos, Entregar con autenticación completa.",
+    langAnnounce: "Idioma cambiado a español"
+  },
+  fr: {
+    skip: "Passer au contenu principal",
+    heroTag: "Printemps 2026",
+    heroTitleEm: "Système",
+    heroTitleEnd: "Racine",
+    heroSub: "Ce qui est visible pousse à partir de ce qui est en dessous.",
+    explore: "Explorer",
+    gardenLabel: "Ce qui est souterrain",
+    gardenHeading: "Des racines profondes, prêtes pour la prochaine saison.",
+    root01: "Racine 01", root02: "Racine 02", root03: "Racine 03",
+    root04: "Racine 04", root05: "Racine 05", root06: "Racine 06", root07: "Racine 07",
+    card1Title: "Développement Front-End",
+    card1Text: "HTML, CSS, JavaScript — modèles d'e-mails et pages de destination codés à la main, parfaits sur chaque client et appareil. Des systèmes de design qui évoluent.",
+    card2Title: "Automatisation Marketing",
+    card2Text: "Salesforce Marketing Cloud, Journey Builder, Automation Studio — construire la logique qui envoie le bon message au bon moment, à chaque fois.",
+    card3Title: "Données et SQL",
+    card3Text: "Requêtes SQL sur des millions d'enregistrements d'abonnés. Extensions de données, segmentation, personnalisation — transformer les données brutes en expériences pertinentes.",
+    card4Title: "Assurance Qualité",
+    card4Text: "425 revues de campagnes en une seule année. Plus de 100 déploiements, zéro erreur en production. La discipline discrète qui protège la marque.",
+    card5Title: "Réflexion Stratégique",
+    card5Text: "Stratégie de cycle de vie CRM pour les services financiers d'entreprise. Cartographie des parcours clients, optimisation de la cadence d'envoi, maximisation de l'engagement sans fatigue.",
+    card6Title: "La Suite",
+    card6Text: "Se diriger vers l'IA, la santé numérique et les technologies climatiques — là où le sens rencontre l'ingénierie. Chaque compétence ci-dessus est un système racinaire pour ce qui vient ensuite.",
+    card7Title: "Conception Inclusive",
+    card7Text: "Ce site a été conçu avec l'accessibilité en priorité : contraste WCAG AA, navigation au clavier, support des lecteurs d'écran, mouvement réduit, mode sombre, trois langues et un résumé complet pour les technologies d'assistance. Parce qu'une bonne ingénierie signifie que tout le monde entre.",
+    hoodLabel: "Sous le capot",
+    hoodHeading: "Comment le système fonctionne — parce que je pense en flux de travail.",
+    hoodBtn: "Révéler le flux",
+    hoodBtnHide: "Masquer le flux",
+    step1Title: "Ingestion",
+    step1Text: "Les données entrent dans le système — enregistrements d'abonnés, signaux comportementaux, préférences. Chaque campagne commence avec des entrées propres et structurées.",
+    step2Title: "Segmenter",
+    step2Text: "Les requêtes SQL découpent les audiences par comportement, étape du cycle de vie et éligibilité. Le bon message pour la bonne personne — à grande échelle.",
+    step3Title: "Orchestrer",
+    step3Text: "Journey Builder cartographie la logique. Automation Studio planifie l'exécution. AMPscript personnalise chaque point de contact dynamiquement.",
+    step4Title: "Livrer",
+    step4Text: "SPF, DKIM, DMARC — des envois authentifiés qui arrivent dans la boîte de réception, pas dans les spams. Vérifié, testé, déployé. Zéro erreur, confiance totale.",
+    tagline: "\"Ce qui est visible pousse à partir de ce qui est en dessous.\"",
+    connect: "Connectons-nous",
+    newTab: " (ouvre LinkedIn dans un nouvel onglet)",
+    footer: "Fait avec soin, printemps 2026.",
+    credit: "Fait avec Claude par Anthropic",
+    activate: "activer pour en savoir plus",
+    expanded: "développé",
+    srSummaryTitle: "Résumé du portfolio",
+    srSummary: "Nick (Weilbacher) McCarthy&#8209;Yates est Ingénieur Campagnes et Développeur Front-End avec six ans d'expérience en automatisation marketing. Compétences principales : Développement Front-End (HTML, CSS, JavaScript pour e-mails et pages de destination), Automatisation Marketing (Salesforce Marketing Cloud, Journey Builder, Automation Studio), Données et SQL (segmentation et personnalisation à grande échelle), Assurance Qualité (425 revues de campagnes, plus de 100 déploiements sans erreur), Réflexion Stratégique (stratégie de cycle de vie CRM pour les services financiers), une orientation future vers l'IA, la santé numérique et les technologies climatiques, et Conception Inclusive (WCAG AA, navigation au clavier, lecteurs d'écran, mouvement réduit, mode sombre, multilingue). Flux de travail : Ingestion des données, Segmentation des audiences, Orchestration des parcours, Livraison avec authentification complète.",
+    langAnnounce: "Langue changée en français"
+  }
+};
+
+let currentLang = 'en';
+
+function setLanguage(lang) {
+  currentLang = lang;
+  const strings = i18n[lang];
+  document.documentElement.setAttribute('lang', lang);
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (strings[key]) {
+      el.textContent = strings[key];
+    }
+  });
+
+  // Update toggle button state
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    const isActive = btn.dataset.lang === lang;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', String(isActive));
+  });
+
+  // Update hood toggle text based on open state
+  const hoodContent = document.getElementById('hoodContent');
+  const hoodBtnText = document.querySelector('#hoodToggle [data-i18n="hoodBtn"]');
+  if (hoodContent.classList.contains('open')) {
+    hoodBtnText.textContent = strings.hoodBtnHide;
+  }
+
+  // Update bloom card aria-labels
+  document.querySelectorAll('.bloom-card').forEach(card => {
+    const name = card.querySelector('h3').textContent;
+    const state = card.classList.contains('active') ? strings.expanded : strings.activate;
+    card.setAttribute('aria-label', `${name} — ${state}`);
+  });
+
+  // Announce language change to screen readers
+  const announce = document.getElementById('langAnnounce');
+  if (announce && strings.langAnnounce) {
+    announce.textContent = '';
+    setTimeout(() => { announce.textContent = strings.langAnnounce; }, 100);
+  }
+}
+
+// Language toggle
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+});
+
+// Hood toggle
+const hoodToggle = document.getElementById('hoodToggle');
+const hoodContent = document.getElementById('hoodContent');
+
+hoodToggle.addEventListener('click', () => {
+  const isOpen = hoodContent.classList.toggle('open');
+  hoodToggle.classList.toggle('open', isOpen);
+  hoodToggle.setAttribute('aria-expanded', String(isOpen));
+  hoodToggle.querySelector('.arrow').textContent = isOpen ? '▼' : '▶';
+  const btnText = hoodToggle.querySelector('[data-i18n="hoodBtn"]');
+  const strings = i18n[currentLang];
+  btnText.textContent = isOpen ? strings.hoodBtnHide : strings.hoodBtn;
+});
+
+// Reduced motion check
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Scroll reveal for tagline
+const closingTagline = document.getElementById('closing-tagline');
+const taglineAuthor = document.getElementById('taglineAuthor');
+
+if (prefersReducedMotion) {
+  closingTagline.classList.add('visible');
+  taglineAuthor.classList.add('visible');
+} else {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.3 });
+  observer.observe(closingTagline);
+  observer.observe(taglineAuthor);
+}
+
+// Bloom card interaction
+document.querySelectorAll('.bloom-card').forEach(card => {
+  const toggle = () => {
+    const strings = i18n[currentLang];
+    document.querySelectorAll('.bloom-card').forEach(c => {
+      if (c !== card) {
+        c.classList.remove('active');
+        const n = c.querySelector('h3').textContent;
+        c.setAttribute('aria-label', `${n} — ${strings.activate}`);
+      }
+    });
+    card.classList.toggle('active');
+    const name = card.querySelector('h3').textContent;
+    const state = card.classList.contains('active') ? strings.expanded : strings.activate;
+    card.setAttribute('aria-label', `${name} — ${state}`);
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
+
+// Stagger cards on scroll
+if (!prefersReducedMotion) {
+  const cards = document.querySelectorAll('.bloom-card');
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '0';
+        entry.target.style.transform = 'translateY(24px)';
+        setTimeout(() => {
+          entry.target.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, i * 100);
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(card => cardObserver.observe(card));
+}
+
+// Initialize aria-labels
+setLanguage('en');
+</script>
+
+</body>
+</html>
