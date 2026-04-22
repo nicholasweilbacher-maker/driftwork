@@ -1,0 +1,411 @@
+Delivered-To: nicholas.weilbacher@gmail.com
+Received: by 2002:a05:6358:491e:b0:281:bbc3:37c9 with SMTP id w30csp2431772rwn;
+        Tue, 3 Mar 2026 02:00:28 -0800 (PST)
+X-Forwarded-Encrypted: i=3; AJvYcCW60WT2s+2XmEeP7LZYLfxcBqIYxAwwUSVxYwmzKIzRS8mJbx5codycEfu+hYxUepBhRX53EPZIE+T/Eexn2IeeL3Fk@gmail.com
+X-Received: by 2002:a05:690e:1aa3:b0:64a:d80f:5c8 with SMTP id 956f58d0204a3-64cc209d884mr10342384d50.21.1772532028035;
+        Tue, 03 Mar 2026 02:00:28 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1772532028; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=Ng++d0zRZQxFcf6YhcsQdggVDGiIDCojvopJNmYfezyXW097MpRWH7BkfuTEyxERk1
+         6gaLlCRy3W/NVk74+5bsn5WunhUYT2SyNIsuNgQfA9SXY1/g9o7Hkk6ezaPmi7nw7s3S
+         xVDXbJlUph3hFK05NrCj7hCMMtw9bsVOm2sOHO/xk3leVQjoMvd2gHJJW/7zj/y0D0pF
+         cLxpADXuD9NBjVGYuSG4kEzJBIkDc9V6nfBk887C6ywHzdmilhqCfSWO2A+ca1JPLMaB
+         LpdaL7RYonnRBkBklNWpLRz4oCgPdUV+pZW7ftSDUFa4/GgKaovuPuXUWzsMW6HcuRP2
+         vEow==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=mime-version:msip_labels:content-language:accept-language
+         :message-id:date:thread-index:thread-topic:subject:to:from
+         :dkim-signature;
+        bh=weXAijqXXmkOiqmn/AbaAtQx0B6X/OIrpWCWBvOxm60=;
+        fh=JuIidNkE5cf8S1rpi7DdE46wepKUdtH/msUiRrnhZSw=;
+        b=bY5ZEKs0xDROfUjauWc9cm0W8sF63el41gQQsOHFXh73iivEv5wdeoiTPt0UI21LF4
+         SV25ys+9zuYETWZNXSy7zb8g0eOu5WI6sezEzrD8kgd6HzaYDL76BITPYzASxfLNKoh7
+         8WEo/R889KZN1/l+iLXZxvAPAz/kr7kJBRb2vl3AzREnrPbRt5vWYAsbdP2dxpDDR14m
+         gAbHTpFCfag8lcku3jAY67mHgTgswkzhYgcVaQ5aoTR8Pg2jILq5W/u3iNA77fz/cJhW
+         8xnTpNwGFIe6UFAjSnvUrh7AzYKVJyvx1DNKMxD4EhvVQn9UhQJsRVqfYvfYx5vmEmg+
+         OHsQ==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@ucc.ie header.s=selector2 header.b=yFZjlBi7;
+       arc=pass (i=1 spf=pass spfdomain=ucc.ie dkim=pass dkdomain=ucc.ie dmarc=pass fromdomain=ucc.ie);
+       spf=pass (google.com: domain of laoise.keevers@ucc.ie designates 2a01:111:f403:c207::3 as permitted sender) smtp.mailfrom=Laoise.Keevers@ucc.ie;
+       dmarc=pass (p=REJECT sp=QUARANTINE dis=NONE) header.from=ucc.ie
+Return-Path: <Laoise.Keevers@ucc.ie>
+Received: from MRWPR03CU001.outbound.protection.outlook.com (mail-francesouthazlp170110003.outbound.protection.outlook.com. [2a01:111:f403:c207::3])
+        by mx.google.com with ESMTPS id 956f58d0204a3-64cb768d268si12140675d50.273.2026.03.03.02.00.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Mar 2026 02:00:28 -0800 (PST)
+Received-SPF: pass (google.com: domain of laoise.keevers@ucc.ie designates 2a01:111:f403:c207::3 as permitted sender) client-ip=2a01:111:f403:c207::3;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@ucc.ie header.s=selector2 header.b=yFZjlBi7;
+       arc=pass (i=1 spf=pass spfdomain=ucc.ie dkim=pass dkdomain=ucc.ie dmarc=pass fromdomain=ucc.ie);
+       spf=pass (google.com: domain of laoise.keevers@ucc.ie designates 2a01:111:f403:c207::3 as permitted sender) smtp.mailfrom=Laoise.Keevers@ucc.ie;
+       dmarc=pass (p=REJECT sp=QUARANTINE dis=NONE) header.from=ucc.ie
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UzIBKTOCufOhy7srWfN7SSLVMCL8rf7IHlpBlylmOi5iRN2ez7AswW/gVFfo4cqicnBTAnnQl7mvQpIdYKMLnMyoLdfDdCjZXxKZZTGZxKMV5Gac02MONOmf92Xrwc6QKu5yh+eRE7nhxB/RfDHnJemlDqQOQNTRLJgyyhtrkSOwMVOuVe0N+l2Ztpv1qfB/HyQNhhAppqUAlbpmRwFbhZZyrSVt8dFzxgUx+vdyO7SqDA4cGYZS416ciJVpBpTAc3KqzXcFnAtMVOT8fQtZfs4UuZUw5xbS6BTtEeQFv0ArYPQjxuJeyBjHnfmSlsXSdM2YXX4te3uJ7LRUKTJpTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=weXAijqXXmkOiqmn/AbaAtQx0B6X/OIrpWCWBvOxm60=;
+ b=lq8jO6AgJiYsSQEsMgLEUxcWMwfmdITfzsi8CS88G71UEVKEnVxxRXMyd6ld4IcpAZc3wJwOrJSUOY3AE5wqAmDwWQvB221eFvgQ+iLY8MLNkGFwAOu/cFALsxOVp1xnPltb/9vOZrYgfUF/6Jfx7zjHncM5IoVUIX/owoQGZT9+zIpoq1rzfd6k/L4+MPBs28rtEZJCI2RQV8PCeQxE2J3uCUzbFh20RuRLzr7Uwwj+4qwPxcxUI7R3XOx7qDWCWTJ/vBmfq8KF/4E27IDM+odHKpc5oaHzY0Sp733ajiaLS5qtnOGI92NAetkS/WaBYdtC0Fim+0qhSd5kXkbV9w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ucc.ie; dmarc=pass action=none header.from=ucc.ie; dkim=pass
+ header.d=ucc.ie; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ucc.ie; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=weXAijqXXmkOiqmn/AbaAtQx0B6X/OIrpWCWBvOxm60=;
+ b=yFZjlBi7uOQBmQUq7s+/mnuGC2hk260QhXu+LHC5ekDcbpf/MkrXKdPP/W4uf4OmjwBDWryaHLlXXrue6vNi5nG7vE4cIdhnQBXiqNQHMoM5tfm8lHF/oKwuOwSqK1VWMLDZkcZ+2QlGFOKBekSk0OyxRa2a5h/h43W34Fi69Ic=
+Received: from AS8PR02MB10433.eurprd02.prod.outlook.com
+ (2603:10a6:20b:630::13) by AM7PR02MB6385.eurprd02.prod.outlook.com
+ (2603:10a6:20b:1b6::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
+ 2026 10:00:24 +0000
+Received: from AS8PR02MB10433.eurprd02.prod.outlook.com
+ ([fe80::2485:35cf:a6d2:f82a]) by AS8PR02MB10433.eurprd02.prod.outlook.com
+ ([fe80::2485:35cf:a6d2:f82a%4]) with mapi id 15.20.9654.020; Tue, 3 Mar 2026
+ 10:00:23 +0000
+From: Laoise Keevers <Laoise.Keevers@ucc.ie>
+To: Laoise Keevers <Laoise.Keevers@ucc.ie>
+Subject: =?Windows-1252?Q?Rang_O=EDche_D=E9_Luain_02/03/26_?=
+Thread-Topic: =?Windows-1252?Q?Rang_O=EDche_D=E9_Luain_02/03/26_?=
+Thread-Index: AQHcqvEG6JFLdjKAdEuUOq1hqkekjw==
+Date: Tue, 3 Mar 2026 10:00:23 +0000
+Message-ID:
+ <AS8PR02MB104332F0BA5A555A5BDC0F22FE77FA@AS8PR02MB10433.eurprd02.prod.outlook.com>
+Accept-Language: en-IE, ga-IE, en-GB, en-US
+Content-Language: en-IE
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ucc.ie;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS8PR02MB10433:EE_|AM7PR02MB6385:EE_
+x-ms-office365-filtering-correlation-id: bcba66c6-df57-405b-cb9f-08de790baffa
+x-ld-processed: 46fe5ca5-866f-4e42-92e9-ed8786245545,ExtAddr
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|19092799006|366016|376014|31052699007|7416014|39142699007|786006|1800799024|38070700021|8096899003;
+x-microsoft-antispam-message-info:
+ BExXaWNX2RBZkW1duM00YxBntYAwVX4Szr+qXETAc2WWdse7s6Ya4sCgpXqlVd2PgWgMf6BNsLdj0OagAplST2yrv4S4fOorbTFUIGvb4pWmro3aGMX8OQ1bfrHa1kYvE2EtMYk7wOT8g53m/tVFilLFtCP79BUouMplzFB8rxCnP1bhAOqJpMHM0fraS0C/URsp0az/a8MTRY0uWVUeLjZ8y0HmGL+FCgf3JbszTBMJ5pZIUEF6PF+HyzChT7r6Gxz/zvnpwhET+BpOGzMbFLiXM3k0Diei54tZbcvq4eJy3r5zE7RhdjZsrksSCftavPXfgPgrELV1VTmShRiF0eARRVnIxuTjG8Egk1tqiTg9L6w5wLlXhGrwqdUZgA0s2Af+hoW5+9HtY+vCOX1znTNzDuhZrk6LFkPuNo6/O/G/Q7vYraaJn6GqgTrUIPM3PuuPRw3UjiXa+vXwe0xBU4MeGK/BxYXPP5bMA7ZlY+VXxN5OYQZgZ1rtxVe8nxsbq9ZsSv1jmUoBKv8zxbTJ7vogOQHpiXj+aVWFPnhEN2zu1vAFHtld3BC9p5/Zy0AOlK6PVzpMV5fvupIZffi4PcrYWW2MjXPI0OX7IxTAROzZ43LC18VdNuMvkhvkMFhqzL/ZQC/VLOKu5vjglx7GCzvdAIPFMLZIQinYi+ou4MN96ZSRpHy6kpEdBmuI/XYg2Esy5rzinR9zrGxizB3ep/kVqd1kLoyAeX+N8CRPMB2rheNN6v9qi8/hgXi5uB/7SFzLXtnqLeUtF/k+uxjnV0rRpLsHTkt3j4tLvoBrhrI=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR02MB10433.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(19092799006)(366016)(376014)(31052699007)(7416014)(39142699007)(786006)(1800799024)(38070700021)(8096899003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?Windows-1252?Q?QbKJZtTDMB921VuW8OwhZiupKBQkMmjDkU999DeKPwazv0MOUdceI2It?=
+ =?Windows-1252?Q?nNGKmv/emsFtF4/I/UHAgRHIA62uz7aX2ZKja+Rn9rs7Is3YJFuKeuQY?=
+ =?Windows-1252?Q?mJY3R8Y6FNdidJrvkmge407pZjJtjDC4By+iNlUexHZvXk3j4HdkBfLy?=
+ =?Windows-1252?Q?ML2IPq4uJaElxJYbtSicspUxLAWFBUEiMnKYXOVId7OcKcraQvhHvY1P?=
+ =?Windows-1252?Q?m24xZzq1RDbnWPoNyjbihn8IeDCog/rVAJAxzR0hL1bWgu043Jf38qKL?=
+ =?Windows-1252?Q?jhijDgQeMB+zV9xKFJ46LqW4XkZCEwTVpLi74Y1gZmcmySmU4dS6nHxh?=
+ =?Windows-1252?Q?uqmSExzVQ2zlVRvJ+/piwsBH86FbsLsCLMC8WedmSPuRezvEGWEwh3kY?=
+ =?Windows-1252?Q?5ekP0hSC6tProq2BK6LOxNDAJo5vr/ehXvnymWxkKzpHIcu2Qev4UJq8?=
+ =?Windows-1252?Q?N7v2C2o76kw/6GYrFhhAn8pKwNnKS9tvHp8xLVJMeicV+UETK+WjaMvr?=
+ =?Windows-1252?Q?UmGBDMVyh1z75mjYZurqqv5tCHCEw7DwFI0q8yNnqy9r/S904wszxTuN?=
+ =?Windows-1252?Q?qhq9qnNs3VFxwnMqBKUqbAtgtIS8438ESvwSajY1Bf2EIzqzqby19zVc?=
+ =?Windows-1252?Q?xZEhrh4ZR7u7mOQNXlpqowD39mqt9p5kGRVA98aAPOV9VyUHi8tMWGI/?=
+ =?Windows-1252?Q?6CXTo/TDjvh/WAFPeIM5kfitobj70wza/iD/+9N+bNrb6sYSQ692PY/Z?=
+ =?Windows-1252?Q?DXyC0oyWJy6YIg67AWvH28L9asXc5tQ/pJV++btvvoFBJLzpP5fNI68s?=
+ =?Windows-1252?Q?4c7LCArFuOhO5zLJ6dJsVVm11VPDZYfRk+jUQxAehTmLcEtpxPwOc9Wd?=
+ =?Windows-1252?Q?4rK/WWkurDfijcm6pCL7vWm3X8LoxOggTJ7ciFx89lXMIJmm2CvK1o50?=
+ =?Windows-1252?Q?0DXwyLJxIna1HNR4iwDvRsmccrp0kgm6hZs/FRf4856DWbj+vgXVfo7V?=
+ =?Windows-1252?Q?suGBy4/b2E8FSSYw90JmmEYGhNByg35/OhfwwnedgzPDRUh/EK0q+OWD?=
+ =?Windows-1252?Q?8tDFjv9a9XeKD1d6HZvvZERm4SLI31ghjqW3YzQ6jVkS/qvucl64jEB7?=
+ =?Windows-1252?Q?hLSS984yidLq9MO7BpAJmnIgWos7sLBuyYMj0y3UiP5pFGyTAlNtFj0l?=
+ =?Windows-1252?Q?tni2ueGq7+/6271n82VRfRu9u+sjYcPDFhFfm992Ay5c5FHubVEyEprj?=
+ =?Windows-1252?Q?wLVvPIUG/OWgbmvw+paVgMAzuIjUe0K5rr2EPrBCEDvByaz3JpufVmhR?=
+ =?Windows-1252?Q?FjUwTyovR70bq3GH4CAgaGZf5lkLWFHu7GxujCHgjSekQFkrEmjIMMU7?=
+ =?Windows-1252?Q?osNffsLTRfTZRuhzJTW3/6uQcEazntY+J5/xZ4tiaXCZ+23pSDc12ceG?=
+ =?Windows-1252?Q?xZtLCaPZEyWcgLkxFAI3lr4mAGCq38R6gYP79V3uNYkqiHRKX23hq8Bz?=
+ =?Windows-1252?Q?0ETxNpJotfTNpurX8OxyJkCmAfZVhdt5r/kr38ZTMeKZxHWoIw8g87UA?=
+ =?Windows-1252?Q?+1eR66w7mmvOqiZJDRrXMW/tgxk8szBTriiusM7Mhi8jue8SRIV2Yoib?=
+ =?Windows-1252?Q?CU7a6chAqRUJFUQEixeMX378HKOiDO4dYb9VS45h56xw3fv/eRiA2arS?=
+ =?Windows-1252?Q?DC2Fd3WF/bvp2Wnl9MYe1CWABJWBw0udTo4D+lQAyF+xU+nL0aome3sX?=
+ =?Windows-1252?Q?0S7kw62E23O0ji09IurboQfRzquYdF24id0alN4gxRLmYfu5OaK1NVFu?=
+ =?Windows-1252?Q?SUAW5d3LVcfVJXnQZdjhpl3Hl+1o+f5UCGGemkntGzX4vaJ+?=
+Content-Type: multipart/alternative;
+	boundary="_000_AS8PR02MB104332F0BA5A555A5BDC0F22FE77FAAS8PR02MB10433eu_"
+MIME-Version: 1.0
+X-OriginatorOrg: ucc.ie
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR02MB10433.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bcba66c6-df57-405b-cb9f-08de790baffa
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Mar 2026 10:00:23.7117
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46fe5ca5-866f-4e42-92e9-ed8786245545
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: DhREVs0faUErp+O6X4slqjZ0B6yJiAHrTIJZ8DMszaYt5IQhrwAshH9SQcNydjOSP3TG9K+XD0Bp0nn2FTk5tw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR02MB6385
+
+--_000_AS8PR02MB104332F0BA5A555A5BDC0F22FE77FAAS8PR02MB10433eu_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+A chairde,
+
+T=E1 s=FAil agam go bhfuil sibh go maith!
+
+Our 'Seanfhocal' for this week was: 'is ait an mac an saol'
+Literal translation =3D Life is a strange son
+Meaning =3D Life is strange" or "such is life" It expresses the unpredictab=
+le, humorous, or bizarre nature of life.
+
+Last night:
+
+  *
+We completed Ceacht 12.1 on page 56 in pairs.
+  *
+We then completed the revision questions, Ceacht 12.2 & 12.3 on page 57/58 =
+orally in pairs.
+  *
+We also learnt a new word 'P=F3ig=EDn=ED Gr=E9ine' which is the word for fr=
+eckles but literally translates to 'little kisses from the sun'!
+  *
+We will be moving onto Caibidil 14 lch 62 an tseachtain seo chugainn!
+
+Remaining Class Dates:
+Monday 9th of March =96 Class 7-9pm
+Monday 16th of March =96 Class 7-9pm Official Last Class =96 Rescheduled
+Monday 23rd of March =96 Extra Class 7-9pm (Make up for the 09/02)
+Monday 30th of March =96 Extra Class 7-9pm (Rescheduled from the 16/03)
+
+Go raibh m=EDle maith agaibh.
+
+Le gach dea-ghu=ED,
+
+Laoise Nic =CDomhair
+
+Oifigeach Forbartha Gaeilge, Barr na gCnoc
+
+Ionad na Gaeilge Labhartha  | Col=E1iste na hOllscoile Corcaigh | Corcaigh =
+| =C9ire
+R=EDomhphost: Laoise.Keevers@ucc.ie | Su=EDomh: Barr na gCnoc<https://www.u=
+cc.ie/en/igl/activities/barrnagcnoc/>
+
+
+
+
+
+
+--_000_AS8PR02MB104332F0BA5A555A5BDC0F22FE77FAAS8PR02MB10433eu_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif, serif, EmojiFont; font-size: 12pt; color: b=
+lack;" class=3D"elementToProof">
+A chairde,&nbsp;</div>
+<div class=3D"elementToProof" id=3D"Signature">
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; backgroun=
+d-color: white; margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_=
+MSFontService, Calibri, Helvetica, sans-serif, serif, EmojiFont; font-size:=
+ 12pt; color: black;" class=3D"elementToProof">
+<br>
+</div>
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; backgroun=
+d-color: white; margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_=
+MSFontService, Calibri, Helvetica, sans-serif, serif, EmojiFont; font-size:=
+ 12pt; color: black;" class=3D"elementToProof">
+T=E1 s=FAil agam go bhfuil sibh go maith!</div>
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; backgroun=
+d-color: white; margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_=
+MSFontService, Calibri, Helvetica, sans-serif, serif, EmojiFont; font-size:=
+ 12pt; color: black;" class=3D"elementToProof">
+<br>
+</div>
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; line-heig=
+ht: 1em; background-color: white; margin: 0px; padding-bottom: 10px; font-f=
+amily: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, =
+sans-serif, serif, EmojiFont; font-size: 12pt; color: black;" class=3D"elem=
+entToProof">
+Our 'Seanfhocal' for this week was: <span style=3D"background-color: rgb(25=
+5, 255, 0);">
+<b>'is ait an mac an saol'</b></span></div>
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; backgroun=
+d-color: white; margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_=
+MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(=
+0, 0, 0);" class=3D"elementToProof">
+Literal translation =3D Life is a strange son</div>
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; backgroun=
+d-color: white; margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_=
+MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(=
+0, 0, 0);" class=3D"elementToProof">
+Meaning =3D <span style=3D"font-weight: bolder;">Life is strange</span><spa=
+n style=3D"font-weight: 500;">&quot; or &quot;</span><b>such is life</b><sp=
+an style=3D"font-weight: 500;">&quot;</span>&nbsp;It expresses the unpredic=
+table, humorous, or bizarre nature of life.&nbsp;</div>
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; backgroun=
+d-color: white; margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_=
+MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(=
+0, 0, 0);" class=3D"elementToProof">
+<br>
+</div>
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; backgroun=
+d-color: white; margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_=
+MSFontService, Calibri, Helvetica, sans-serif, serif, EmojiFont; font-size:=
+ 12pt; color: black;" class=3D"elementToProof">
+<b>Last night:</b></div>
+<ul style=3D"direction: ltr; text-align: left; margin-top: 0px; margin-bott=
+om: 0px; background-color: white;" data-editing-info=3D"{&quot;applyListSty=
+leFromLevel&quot;:false,&quot;unorderedStyleType&quot;:2}">
+<li style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, C=
+alibri, Helvetica, sans-serif; font-size: 12pt; color: black; list-style-ty=
+pe: &quot;- &quot;;">
+<div style=3D"direction: ltr; margin: 0px;" role=3D"presentation" class=3D"=
+elementToProof">
+We completed Ceacht 12.1 on page 56 in pairs.</div>
+</li><li style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontServi=
+ce, Calibri, Helvetica, sans-serif; font-size: 12pt; color: black; list-sty=
+le-type: &quot;- &quot;;">
+<div style=3D"direction: ltr; margin: 0px;" role=3D"presentation" class=3D"=
+elementToProof">
+We then completed the revision questions,&nbsp;Ceacht 12.2 &amp; 12.3 on pa=
+ge 57/58 orally in pairs.&nbsp;</div>
+</li><li style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontServi=
+ce, Calibri, Helvetica, sans-serif; font-size: 12pt; color: black; list-sty=
+le-type: &quot;- &quot;;">
+<div style=3D"direction: ltr; margin: 0px;" role=3D"presentation">We also l=
+earnt a new word
+<b>'P=F3ig=EDn=ED Gr=E9ine'</b>&nbsp;which is the word for <u>freckles</u>&=
+nbsp;but literally translates to 'little kisses from the sun'!&nbsp;</div>
+</li><li style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontServi=
+ce, Calibri, Helvetica, sans-serif; font-size: 12pt; color: black; list-sty=
+le-type: &quot;- &quot;;">
+<div style=3D"direction: ltr; margin: 0px; font-family: Aptos, Aptos_Embedd=
+edFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif, serif, EmojiFo=
+nt;" role=3D"presentation" class=3D"elementToProof">
+We will be moving onto Caibidil 14 lch 62 an tseachtain seo chugainn!</div>
+</li></ul>
+<div style=3D"direction: ltr; margin: 0px; font-family: Aptos, Aptos_Embedd=
+edFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif, serif, EmojiFo=
+nt; font-size: 12pt; color: black;">
+<br>
+</div>
+<div style=3D"direction: ltr; margin: 0px; font-family: Aptos, Aptos_Embedd=
+edFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif, serif, EmojiFo=
+nt; font-size: 12pt; color: black;">
+<b>Remaining Class Dates:&nbsp;</b></div>
+<div style=3D"direction: ltr; line-height: 1.392; margin: 0cm 0cm 8pt; font=
+-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica=
+, sans-serif, serif, EmojiFont; font-size: 12pt; color: black;" class=3D"el=
+ementToProof">
+Monday 9th&nbsp;of March =96 Class 7-9pm</div>
+<div style=3D"line-height: 1.392; margin: 0cm 0cm 8pt; font-family: Aptos, =
+Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif, se=
+rif, EmojiFont; font-size: 12pt; color: black;" class=3D"elementToProof">
+<span style=3D"background-color: rgb(255, 0, 0);"><b>Monday 16th&nbsp;of Ma=
+rch =96 Class 7-9pm Official Last Class =96 Rescheduled</b></span></div>
+<div style=3D"line-height: 1.392; margin: 0cm 0cm 8pt; font-family: Aptos, =
+Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif, se=
+rif, EmojiFont; font-size: 12pt; color: black;" class=3D"elementToProof">
+Monday 23rd&nbsp;of March =96 Extra Class 7-9pm (Make up for the 09/02)</di=
+v>
+<div style=3D"line-height: 1.392; margin: 0cm 0cm 8pt; font-family: Aptos, =
+Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif, se=
+rif, EmojiFont; font-size: 12pt; color: black;" class=3D"elementToProof">
+Monday 30th&nbsp;of March =96 Extra Class 7-9pm (Rescheduled from the 16/03=
+)</div>
+<div style=3D"line-height: 1.392; margin: 0cm 0cm 8pt; font-family: Aptos, =
+Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif, se=
+rif, EmojiFont; font-size: 12pt; color: black;" class=3D"elementToProof">
+<b><br>
+</b></div>
+<div style=3D"direction: ltr; text-align: left; text-indent: 0px; backgroun=
+d-color: white; margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_=
+MSFontService, Calibri, Helvetica, sans-serif, serif, EmojiFont; font-size:=
+ 12pt; color: black;" class=3D"elementToProof">
+Go raibh m=EDle maith agaibh.</div>
+<p style=3D"text-align: left; text-indent: 0px; background-color: white; ma=
+rgin: 1em 0px;" class=3D"elementToProof">
+<span style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService,=
+ Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">Le =
+gach dea-ghu=ED,&nbsp;</span></p>
+<p style=3D"text-align: left; text-indent: 0px; background-color: rgb(255, =
+255, 255); margin: 0px;" class=3D"elementToProof">
+<span style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService,=
+ Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 60, 105);">=
+<b>Laoise Nic =CDomhair</b></span></p>
+<div style=3D"text-align: left; text-indent: 0px; background-color: rgb(255=
+, 255, 255); margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSF=
+ontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, =
+60, 105);" class=3D"elementToProof">
+<b>Oifigeach Forbartha Gaeilge, Barr na gCnoc</b></div>
+<div style=3D"text-align: left; text-indent: 0px; background-color: rgb(255=
+, 255, 255); margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSF=
+ontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, =
+60, 105);" class=3D"elementToProof">
+<b><br>
+</b></div>
+<div style=3D"text-align: left; text-indent: 0px; background-color: rgb(255=
+, 255, 255); margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSF=
+ontService, Calibri, Helvetica, sans-serif;" class=3D"elementToProof">
+<span style=3D"font-size: 9pt; color: rgb(0, 60, 105);">Ionad na Gaeilge La=
+bhartha</span><span style=3D"font-size: 9pt; color: rgb(0, 0, 0);">&nbsp;</=
+span><span style=3D"font-size: 9pt; color: rgb(200, 38, 19);">&nbsp;</span>=
+<span style=3D"font-size: 9pt; color: rgb(206, 31, 44);"><b>|</b></span><sp=
+an style=3D"font-size: 12pt; color: rgb(206, 31, 44);"><b>&nbsp;</b></span>=
+<span style=3D"font-size: 9pt; color: rgb(0, 60, 105);">Col=E1iste
+ na hOllscoile Corcaigh</span><span style=3D"font-size: 9pt; color: rgb(200=
+, 38, 19);"><b>&nbsp;</b></span><span style=3D"font-size: 9pt; color: rgb(2=
+06, 31, 44);"><b>|</b>&nbsp;</span><span style=3D"font-size: 9pt; color: rg=
+b(0, 60, 105);">Corcaigh<b>&nbsp;</b></span><span style=3D"font-size: 9pt; =
+color: rgb(206, 31, 44);"><b>|</b>&nbsp;</span><span style=3D"font-size: 9p=
+t; color: rgb(0, 60, 105);">=C9ire</span></div>
+<div style=3D"text-align: left; text-indent: 0px; background-color: rgb(255=
+, 255, 255); margin: 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSF=
+ontService, Calibri, Helvetica, sans-serif; font-size: 9pt;" class=3D"eleme=
+ntToProof">
+<span style=3D"color: rgb(0, 60, 105); background-color: rgb(255, 255, 255)=
+;"><b>R=EDomhphost:</b>&nbsp;Laoise.Keevers@ucc.ie
+</span><span style=3D"color: rgb(206, 31, 44); background-color: rgb(255, 2=
+55, 255);">|</span><span style=3D"color: rgb(0, 60, 105); background-color:=
+ rgb(255, 255, 255);">&nbsp;<b>Su=EDomh:</b>&nbsp;<a style=3D"color: rgb(0,=
+ 60, 105); margin: 0px;" originalsrc=3D"https://www.ucc.ie/en/igl/activitie=
+s/barrnagcnoc/" rel=3D"noopener noreferrer" title=3D"Original URL: https://=
+www.ucc.ie/en/igl/activities/barrnagcnoc/. Click or tap if you trust this l=
+ink." class=3D"OWAAutoLink" id=3D"OWA28aee84c-89c6-5f4d-98db-8f2694c20ce3" =
+target=3D"_blank" href=3D"https://www.ucc.ie/en/igl/activities/barrnagcnoc/=
+">Barr
+ na gCnoc</a></span></div>
+<div style=3D"text-align: left; text-indent: 0px; background-color: white; =
+margin: 1em 0px; font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontServic=
+e, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 60, 105);=
+" class=3D"elementToProof">
+<b><br>
+</b></div>
+<div style=3D"text-align: left; text-indent: 0px; background-color: white; =
+margin: 0px; font-family: Calibri, sans-serif; font-size: 12pt; color: blac=
+k;" class=3D"elementToProof">
+<span style=3D"background-color: white;"><br>
+</span></div>
+<div style=3D"text-align: left; text-indent: 0px; background-color: white; =
+margin: 0px; font-family: Calibri, sans-serif; font-size: 10pt; color: blac=
+k;" class=3D"elementToProof">
+<span style=3D"background-color: white;"><b><br>
+</b></span></div>
+<div style=3D"text-align: left; text-indent: 0px; background-color: white; =
+margin: 0px; font-family: Calibri, sans-serif; font-size: 10pt; color: rgb(=
+23, 78, 134);" class=3D"elementToProof">
+<b><br>
+</b></div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+</div>
+</body>
+</html>
+
+--_000_AS8PR02MB104332F0BA5A555A5BDC0F22FE77FAAS8PR02MB10433eu_--
