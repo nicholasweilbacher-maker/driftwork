@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics 4 — cookieless -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QKHXVFXY4W', {
-    anonymize_ip: true,
-    client_storage: 'none'
-  });
-</script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Grimoire — Nick Weilbacher</title>
+  <meta name="theme-color" content="#1a0a2e"/>
+  <title>The Grimoire — A Field Record of Shamanic Study · Nick (Weilbacher) McCarthy-Yates</title>
+  <meta name="description" content="A field record of shamanic study — eight volumes on dreaming, ritual, and the threshold between worlds. Written from original graduate research by Nick (Weilbacher) McCarthy-Yates, SMU Master of Liberal Studies, 2019."/>
+  <meta name="author" content="Nick (Weilbacher) McCarthy-Yates"/>
+
+  <link rel="canonical" href="https://driftwork.dev/grimoire/"/>
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://driftwork.dev/grimoire/"/>
+  <meta property="og:title" content="The Grimoire — A Field Record of Shamanic Study"/>
+  <meta property="og:description" content="Eight volumes on dreaming, ritual, and the threshold between worlds. Written from original graduate research."/>
+  <meta property="og:site_name" content="driftwork.dev"/>
+  <meta property="og:image" content="https://driftwork.dev/images/og-grimoire.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="A dusk-violet sky with stars over distant mountains and a rising amber moon; serif title THE GRIMOIRE — A Field Record of Shamanic Study."/>
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="The Grimoire — A Field Record of Shamanic Study"/>
+  <meta name="twitter:description" content="Eight volumes on dreaming, ritual, and the threshold between worlds."/>
+  <meta name="twitter:image" content="https://driftwork.dev/images/og-grimoire.png"/>
+
+  <!-- Favicon: amber ember SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='9' r='5' fill='%23d4943a'/%3E%3Ccircle cx='8' cy='9' r='3' fill='%23e8b86d'/%3E%3Cpath d='M8 4 L9 1 L8 3 L7 1 Z' fill='%23c94a1a'/%3E%3C/svg%3E"/>
+
+  <!-- Google Analytics 4 — cookieless -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QKHXVFXY4W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QKHXVFXY4W', {
+      anonymize_ip: true,
+      client_storage: 'none'
+    });
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -400,7 +425,44 @@
       #tome { padding: 32px 24px; }
       h1 { letter-spacing: 3px; }
     }
+
+    /* ══════════════════════════════════════
+       A11y: focus, reduced motion, skip link
+    ══════════════════════════════════════ */
+    .nav-btn:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--gold);
+      color: var(--dawn);
+      font-family: 'Cinzel', serif;
+      padding: 10px 16px;
+      z-index: 9999;
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    .skip-link:focus {
+      left: 16px;
+      top: 16px;
+      outline: 2px solid var(--text);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
   </style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
 
@@ -411,6 +473,8 @@
 <div class="fog-layer fog-2"></div>
 <div class="fog-layer fog-3"></div>
 <canvas id="particles"></canvas>
+
+<a href="#tome" class="skip-link">Skip to content</a>
 
 <div id="app">
 
@@ -448,7 +512,7 @@
     <div class="credits-rule"></div>
     <p class="credits-text">
       Written from original graduate research
-      <span class="credits-name">Nick Weilbacher · SMU Master of Liberal Studies · 2019</span>
+      <span class="credits-name">Nick (Weilbacher) McCarthy&#8209;Yates · SMU Master of Liberal Studies · 2019</span>
     </p>
   </div>
 
