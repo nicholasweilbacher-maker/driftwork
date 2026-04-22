@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARCADE RUNNER — driftwork.dev</title>
+<meta name="description" content="A tiny CRT side-scroller. Jump the pits, dodge the spikes, collect the coins.">
+<meta name="author" content="Nick (Weilbacher) McCarthy-Yates">
+<meta name="theme-color" content="#0a0014">
+<link rel="canonical" href="https://driftwork.dev/arcade-runner/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://driftwork.dev/arcade-runner/">
+<meta property="og:title" content="ARCADE RUNNER — driftwork.dev">
+<meta property="og:description" content="A tiny CRT side-scroller. Jump the pits, dodge the spikes, collect the coins.">
+<meta property="og:site_name" content="driftwork.dev">
+<meta property="og:image" content="https://driftwork.dev/images/og-arcade-runner.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Neon pixel runner leaping over a spike in a scrolling CRT city; title ARCADE RUNNER.">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ARCADE RUNNER — driftwork.dev">
+<meta name="twitter:description" content="A tiny CRT side-scroller. Jump, dodge, collect.">
+<meta name="twitter:image" content="https://driftwork.dev/images/og-arcade-runner.png">
+
+<!-- Favicon: pixel coin -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='%23ffe100'/%3E%3Ccircle cx='8' cy='8' r='3.5' fill='%23ff6d00'/%3E%3C/svg%3E">
+
+<!-- Google Analytics 4 — cookieless (same as the rest of driftwork.dev) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QKHXVFXY4W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QKHXVFXY4W', { anonymize_ip: true, client_storage: 'none' });
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --crt-green:   #39ff14;
+    --neon-pink:   #ff2d95;
+    --neon-blue:   #00e5ff;
+    --neon-yellow: #ffe100;
+    --neon-orange: #ff6d00;
+    --neon-purple: #b066ff;
+    --dark-bg:     #0a0014;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(ellipse at center, #160028 0%, var(--dark-bg) 65%, #04000a 100%);
+    color: var(--crt-green);
+    font-family: 'VT323', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 12px;
+    min-height: 100vh;
+  }
+  /* CRT scanlines */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(0,0,0,0.18) 2px,
+      rgba(0,0,0,0.18) 3px
+    );
+    z-index: 10;
+  }
+
+  header {
+    text-align: center;
+    max-width: 960px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(0.9rem, 2.6vw, 1.6rem);
+    color: var(--neon-pink);
+    letter-spacing: 2px;
+    text-shadow:
+      2px 2px 0 var(--neon-yellow),
+      4px 4px 0 var(--neon-orange);
+    margin-bottom: 10px;
+  }
+  p.tag {
+    color: var(--crt-green);
+    font-size: 1.1rem;
+    opacity: 0.88;
+  }
+
+  .hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 960px;
+    padding: 8px 14px;
+    margin-bottom: 6px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.65rem;
+    color: var(--neon-yellow);
+    flex-wrap: wrap;
+  }
+  .hud .score  { color: var(--neon-yellow); }
+  .hud .coins  { color: var(--crt-green); }
+  .hud .lives  { color: var(--neon-pink); }
+  .hud .best   { color: var(--neon-blue); }
+
+  #game-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    border: 3px solid var(--neon-pink);
+    box-shadow:
+      0 0 8px  var(--neon-pink),
+      0 0 22px rgba(255,45,149,0.5),
+      inset 0 0 12px rgba(176,102,255,0.2);
+    background: #03000a;
+    aspect-ratio: 960 / 320;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  #overlay {
+    position: absolute; inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: rgba(10,0,30,0.72);
+    color: var(--crt-green);
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+    padding: 20px;
+    z-index: 2;
+  }
+  #overlay.hidden { display: none; }
+  #overlay h2 {
+    font-size: clamp(0.8rem, 2.2vw, 1.3rem);
+    color: var(--neon-yellow);
+  }
+  #overlay p {
+    font-family: 'VT323', monospace;
+    font-size: 1.15rem;
+    color: #e8e8ff;
+    max-width: 560px;
+  }
+  #overlay button {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    padding: 12px 22px;
+    border: 2px solid var(--crt-green);
+    background: transparent;
+    color: var(--crt-green);
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: all 0.15s;
+  }
+  #overlay button:hover,
+  #overlay button:focus-visible {
+    background: rgba(57,255,20,0.16);
+    box-shadow: 0 0 18px rgba(57,255,20,0.55);
+    outline: none;
+  }
+
+  .controls {
+    margin-top: 14px;
+    color: #cfcff0;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .controls kbd {
+    display: inline-block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    padding: 4px 8px;
+    margin: 0 2px;
+    background: #1a0a2e;
+    border: 1px solid var(--neon-purple);
+    color: var(--neon-purple);
+    border-radius: 3px;
+  }
+
+  .links {
+    margin-top: 20px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+  }
+  .links a {
+    color: var(--neon-blue);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--neon-blue);
+    padding-bottom: 2px;
+  }
+  .links a:hover,
+  .links a:focus-visible {
+    color: var(--neon-yellow);
+    border-color: var(--neon-yellow);
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::before { animation: none; }
+  }
+</style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+
+<header>
+  <h1>ARCADE RUNNER</h1>
+  <p class="tag">Jump the pits. Dodge the spikes. Grab the coins.</p>
+</header>
+
+<div class="hud">
+  <span class="score" id="score">SCORE 0000</span>
+  <span class="coins" id="coins">COINS 0</span>
+  <span class="lives" id="lives">LIVES ♥♥♥</span>
+  <span class="best"  id="best">BEST 0000</span>
+</div>
+
+<div id="game-wrap">
+  <canvas id="game" width="960" height="320" aria-label="Arcade runner game canvas"></canvas>
+  <div id="overlay" role="dialog" aria-labelledby="overlay-title">
+    <h2 id="overlay-title">PRESS START</h2>
+    <p id="overlay-body">Press <strong>SPACE</strong> / tap the screen to start.<br>
+       Jump with <strong>SPACE</strong> or <strong>↑</strong>. Double-jump is allowed.</p>
+    <button id="start-btn" type="button">INSERT COIN ▶</button>
+  </div>
+</div>
+
+<p class="controls">
+  <kbd>SPACE</kbd> or <kbd>↑</kbd> jump &nbsp; · &nbsp;
+  <kbd>P</kbd> pause &nbsp; · &nbsp;
+  <kbd>M</kbd> mute &nbsp; · &nbsp; tap on mobile
+</p>
+
+<div class="links">
+  <a href="/">◀ BACK TO ARCADE</a>
+  <a href="/#bonus" target="_blank" rel="noopener noreferrer">MORE BONUS LEVELS</a>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ======================================================================
+  // Canvas & scaling
+  // ======================================================================
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+
+  const W = canvas.width;
+  const H = canvas.height;
+
+  // ======================================================================
+  // World
+  // ======================================================================
+  const GROUND_Y = H - 60;
+  const GRAVITY = 0.75;
+
+  const state = {
+    running: false,
+    paused: false,
+    muted: false,
+    tick: 0,
+    speed: 5,
+    score: 0,
+    coins: 0,
+    lives: 3,
+    best: +(localStorage.getItem('driftwork_runner_best') || 0) || 0,
+  };
+
+  // Try to use local storage for best score; fall back silently if blocked.
+  function saveBest() {
+    try { localStorage.setItem('driftwork_runner_best', String(state.best)); }
+    catch (_) { /* ignore */ }
+  }
+
+  // ======================================================================
+  // Player — pixel avatar
+  // ======================================================================
+  const player = {
+    x: 120,
+    y: GROUND_Y - 48,
+    w: 40,
+    h: 48,
+    vy: 0,
+    jumps: 0,          // allow up to 2 (double jump)
+    invuln: 0,
+  };
+
+  function drawDefaultAvatar(px, py) {
+    // Tiny pixel-art face centered on the upper body.
+    // 16x16 grid of pixels scaled up. Colors pulled from the site palette.
+    const px4 = Math.round(px);
+    const py4 = Math.round(py);
+
+    // Body — neon jumpsuit
+    ctx.fillStyle = '#b066ff';
+    ctx.fillRect(px4 + 6, py4 + 22, 28, 22);
+    // Legs
+    ctx.fillStyle = '#5a0a6b';
+    ctx.fillRect(px4 + 8, py4 + 40, 10, 8);
+    ctx.fillRect(px4 + 22, py4 + 40, 10, 8);
+    // Head / face base (skin-neutral pink highlight so it reads at 48px)
+    ctx.fillStyle = '#f4c8a8';
+    ctx.fillRect(px4 + 10, py4 + 4, 20, 20);
+    // Hair (dark warm brown)
+    ctx.fillStyle = '#2a1a0f';
+    ctx.fillRect(px4 + 10, py4 + 2, 20, 6);
+    ctx.fillRect(px4 + 8, py4 + 6, 4, 6);
+    ctx.fillRect(px4 + 28, py4 + 6, 4, 6);
+    // Eyes
+    ctx.fillStyle = '#0a0014';
+    ctx.fillRect(px4 + 14, py4 + 12, 3, 3);
+    ctx.fillRect(px4 + 23, py4 + 12, 3, 3);
+    // Smile
+    ctx.fillRect(px4 + 17, py4 + 18, 6, 2);
+    // Pink scarf / collar
+    ctx.fillStyle = '#ff2d95';
+    ctx.fillRect(px4 + 8, py4 + 22, 24, 3);
+    // Arms (a beat of animation — swing with stride)
+    const swing = Math.sin(state.tick / 6) * 3;
+    ctx.fillStyle = '#b066ff';
+    ctx.fillRect(px4 + 2, py4 + 22 + swing, 6, 14);
+    ctx.fillRect(px4 + 32, py4 + 22 - swing, 6, 14);
+  }
+
+  function drawPlayer() {
+    const blinking = state.invuln > 0 && Math.floor(state.invuln / 4) % 2 === 0;
+    if (blinking) return; // flicker during i-frames
+    drawDefaultAvatar(player.x, player.y);
+  }
+
+  // ======================================================================
+  // Obstacles, pits, coins — procedurally spawned from a distance counter
+  // ======================================================================
+  const entities = []; // each: { type, x, y, w, h, ... }
+
+  function spawn() {
+    // Min gap so the game stays fair as speed ramps up
+    const lastX = entities.length ? entities[entities.length - 1].x : 0;
+    if (lastX > W - 180) return;
+
+    const r = Math.random();
+    if (r < 0.4) {
+      // spike
+      entities.push({ type: 'spike', x: W + 40, y: GROUND_Y - 22, w: 22, h: 22 });
+    } else if (r < 0.65) {
+      // pit (hazard on the ground)
+      const width = 60 + Math.floor(Math.random() * 60);
+      entities.push({ type: 'pit', x: W + 40, y: GROUND_Y, w: width, h: 60 });
+    } else if (r < 0.9) {
+      // coin arc
+      const baseY = GROUND_Y - 90 - Math.floor(Math.random() * 40);
+      for (let i = 0; i < 5; i++) {
+        entities.push({
+          type: 'coin',
+          x: W + 40 + i * 26,
+          y: baseY - Math.sin(i / 4 * Math.PI) * 22,
+          w: 16, h: 16, picked: false,
+        });
+      }
+    } else {
+      // floating platform with spike on top — advanced
+      entities.push({ type: 'spike', x: W + 40, y: GROUND_Y - 22, w: 22, h: 22 });
+      entities.push({ type: 'spike', x: W + 70, y: GROUND_Y - 22, w: 22, h: 22 });
+    }
+  }
+
+  function drawSpike(e) {
+    ctx.fillStyle = '#ff2d95';
+    ctx.beginPath();
+    ctx.moveTo(e.x, e.y + e.h);
+    ctx.lineTo(e.x + e.w / 2, e.y);
+    ctx.lineTo(e.x + e.w, e.y + e.h);
+    ctx.closePath();
+    ctx.fill();
+    // highlight
+    ctx.fillStyle = '#ffb8da';
+    ctx.beginPath();
+    ctx.moveTo(e.x + e.w / 2, e.y);
+    ctx.lineTo(e.x + e.w / 2 + 2, e.y + 8);
+    ctx.lineTo(e.x + e.w / 2 - 2, e.y + 8);
+    ctx.closePath();
+    ctx.fill();
+  }
+  function drawPit(e) {
+    // Cut into the ground — draw a black band over the ground line
+    ctx.fillStyle = '#04000a';
+    ctx.fillRect(e.x, e.y, e.w, e.h);
+    // neon edge markers
+    ctx.fillStyle = '#ff6d00';
+    ctx.fillRect(e.x - 2, e.y, 2, 6);
+    ctx.fillRect(e.x + e.w, e.y, 2, 6);
+  }
+  function drawCoin(e) {
+    if (e.picked) return;
+    // spin effect via scaled width
+    const s = Math.abs(Math.sin((state.tick + e.x) / 8));
+    const w = Math.max(3, e.w * s);
+    const cx = e.x + e.w / 2;
+    ctx.fillStyle = '#ffe100';
+    ctx.fillRect(cx - w / 2, e.y, w, e.h);
+    ctx.fillStyle = '#ff6d00';
+    ctx.fillRect(cx - w / 2 + 2, e.y + 4, Math.max(1, w - 4), e.h - 8);
+  }
+
+  // ======================================================================
+  // World / parallax
+  // ======================================================================
+  const stars = Array.from({ length: 60 }, () => ({
+    x: Math.random() * W,
+    y: Math.random() * (GROUND_Y - 30),
+    s: Math.random() < 0.3 ? 2 : 1,
+    v: 0.4 + Math.random() * 0.8,
+  }));
+  const buildings = Array.from({ length: 14 }, (_, i) => ({
+    x: i * 110 + Math.random() * 40,
+    w: 60 + Math.random() * 40,
+    h: 60 + Math.random() * 100,
+    hue: ['#39ff14','#00e5ff','#b066ff','#ff2d95'][i % 4],
+  }));
+
+  function drawBackground() {
+    // grid horizon glow
+    const g = ctx.createLinearGradient(0, 0, 0, GROUND_Y);
+    g.addColorStop(0, '#0a0014');
+    g.addColorStop(1, '#2a0050');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, GROUND_Y);
+
+    // stars
+    ctx.fillStyle = '#ffffff';
+    for (const s of stars) {
+      s.x -= s.v * (state.running ? 1 : 0.2);
+      if (s.x < 0) { s.x = W; s.y = Math.random() * (GROUND_Y - 30); }
+      ctx.fillRect(Math.round(s.x), Math.round(s.y), s.s, s.s);
+    }
+
+    // city silhouettes — mid-parallax
+    for (const b of buildings) {
+      b.x -= state.speed * 0.3 * (state.running ? 1 : 0.15);
+      if (b.x + b.w < 0) {
+        b.x = W + Math.random() * 40;
+        b.w = 60 + Math.random() * 40;
+        b.h = 60 + Math.random() * 100;
+      }
+      const y = GROUND_Y - b.h;
+      ctx.fillStyle = 'rgba(10,0,20,0.9)';
+      ctx.fillRect(b.x, y, b.w, b.h);
+      // neon window glow
+      ctx.fillStyle = b.hue;
+      ctx.globalAlpha = 0.24;
+      ctx.fillRect(b.x + 4, y + 8, b.w - 8, 2);
+      ctx.globalAlpha = 1;
+    }
+
+    // ground grid
+    ctx.fillStyle = '#1a0033';
+    ctx.fillRect(0, GROUND_Y, W, H - GROUND_Y);
+    ctx.strokeStyle = 'rgba(176,102,255,0.55)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, GROUND_Y + 0.5);
+    ctx.lineTo(W, GROUND_Y + 0.5);
+    ctx.stroke();
+    // perspective lines
+    const offset = (state.tick * state.speed) % 60;
+    ctx.strokeStyle = 'rgba(57,255,20,0.25)';
+    for (let x = -offset; x < W; x += 60) {
+      ctx.beginPath();
+      ctx.moveTo(x, GROUND_Y);
+      ctx.lineTo(x + 300, H + 40);
+      ctx.stroke();
+    }
+  }
+
+  // ======================================================================
+  // Audio — tiny beep synth (Web Audio, only on demand)
+  // ======================================================================
+  let audioCtx = null;
+  function ensureAudio() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+      catch (_) { audioCtx = null; }
+    }
+    return audioCtx;
+  }
+  function beep(freq, dur, type) {
+    if (state.muted) return;
+    const ac = ensureAudio();
+    if (!ac) return;
+    const o = ac.createOscillator();
+    const g = ac.createGain();
+    o.type = type || 'square';
+    o.frequency.value = freq;
+    g.gain.value = 0.06;
+    o.connect(g);
+    g.connect(ac.destination);
+    o.start();
+    g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+    o.stop(ac.currentTime + dur);
+  }
+
+  // ======================================================================
+  // Input
+  // ======================================================================
+  function tryJump() {
+    if (!state.running) { startGame(); return; }
+    if (state.paused) return;
+    if (player.jumps < 2) {
+      player.vy = player.jumps === 0 ? -13 : -11; // double jump a little weaker
+      player.jumps += 1;
+      beep(520 + player.jumps * 80, 0.08);
+    }
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' || e.code === 'ArrowUp') { e.preventDefault(); tryJump(); }
+    else if (e.key === 'p' || e.key === 'P') togglePause();
+    else if (e.key === 'm' || e.key === 'M') { state.muted = !state.muted; }
+  });
+  canvas.addEventListener('pointerdown', (e) => { e.preventDefault(); tryJump(); });
+
+  document.getElementById('start-btn').addEventListener('click', startGame);
+
+  function togglePause() {
+    if (!state.running) return;
+    state.paused = !state.paused;
+    if (state.paused) {
+      showOverlay('PAUSED', 'Press P to resume.');
+    } else {
+      hideOverlay();
+      requestAnimationFrame(loop);
+    }
+  }
+
+  // ======================================================================
+  // Overlay / screen states
+  // ======================================================================
+  const overlay = document.getElementById('overlay');
+  const overlayTitle = document.getElementById('overlay-title');
+  const overlayBody = document.getElementById('overlay-body');
+  const startBtn = document.getElementById('start-btn');
+
+  function showOverlay(title, bodyHtml, btn) {
+    overlayTitle.textContent = title;
+    overlayBody.innerHTML = bodyHtml;
+    startBtn.textContent = btn || 'INSERT COIN ▶';
+    overlay.classList.remove('hidden');
+  }
+  function hideOverlay() { overlay.classList.add('hidden'); }
+
+  function startGame() {
+    // reset
+    state.running = true;
+    state.paused = false;
+    state.tick = 0;
+    state.speed = 5;
+    state.score = 0;
+    state.coins = 0;
+    state.lives = 3;
+    player.x = 120;
+    player.y = GROUND_Y - player.h;
+    player.vy = 0;
+    player.jumps = 0;
+    player.invuln = 60;
+    entities.length = 0;
+    hideOverlay();
+    beep(440, 0.08); beep(660, 0.12);
+    requestAnimationFrame(loop);
+  }
+
+  function gameOver() {
+    state.running = false;
+    if (state.score > state.best) { state.best = state.score; saveBest(); }
+    beep(180, 0.22, 'sawtooth'); beep(120, 0.34, 'sawtooth');
+    showOverlay(
+      'GAME OVER',
+      `Score <strong style="color:#ffe100">${state.score}</strong> &nbsp; · &nbsp; Coins <strong style="color:#39ff14">${state.coins}</strong><br>
+       Best <strong style="color:#00e5ff">${state.best}</strong>`,
+      'PLAY AGAIN ▶'
+    );
+  }
+
+  // ======================================================================
+  // Physics & main loop
+  // ======================================================================
+  function collide(a, b) {
+    return a.x < b.x + b.w &&
+           a.x + a.w > b.x &&
+           a.y < b.y + b.h &&
+           a.y + a.h > b.y;
+  }
+
+  function step() {
+    state.tick++;
+    // difficulty ramp
+    if (state.tick % 600 === 0 && state.speed < 11) state.speed += 0.6;
+
+    // physics
+    player.vy += GRAVITY;
+    player.y += player.vy;
+    if (player.y >= GROUND_Y - player.h) {
+      player.y = GROUND_Y - player.h;
+      player.vy = 0;
+      player.jumps = 0;
+    }
+    if (player.invuln > 0) player.invuln--;
+
+    // scroll world
+    for (const e of entities) {
+      e.x -= state.speed;
+    }
+    // prune off-screen
+    while (entities.length && entities[0].x + (entities[0].w || 16) < -10) entities.shift();
+
+    if (Math.random() < 0.025 + state.speed * 0.0035) spawn();
+
+    // score accumulates with distance
+    state.score += 1;
+
+    // collisions
+    for (const e of entities) {
+      if (e.picked) continue;
+      const hit = collide(player, e);
+      if (!hit) continue;
+      if (e.type === 'coin') {
+        e.picked = true;
+        state.coins += 1;
+        state.score += 25;
+        beep(900, 0.06);
+      } else if (e.type === 'spike' || e.type === 'pit') {
+        if (player.invuln <= 0) {
+          state.lives -= 1;
+          player.invuln = 90;
+          beep(220, 0.2, 'square');
+          // bump
+          player.vy = -9;
+          if (state.lives <= 0) { gameOver(); return; }
+        }
+      }
+    }
+
+    // Falling into a pit the clean way — if standing over a pit and not jumping
+    for (const e of entities) {
+      if (e.type !== 'pit') continue;
+      const standingOn = player.y + player.h >= GROUND_Y - 1 &&
+                         player.x + player.w > e.x &&
+                         player.x < e.x + e.w;
+      if (standingOn && player.invuln <= 0) {
+        state.lives -= 1;
+        player.invuln = 90;
+        player.y = GROUND_Y - player.h - 40;
+        player.vy = -10;
+        beep(200, 0.22, 'sawtooth');
+        if (state.lives <= 0) { gameOver(); return; }
+      }
+    }
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    drawBackground();
+    for (const e of entities) {
+      if (e.type === 'spike') drawSpike(e);
+      else if (e.type === 'pit') drawPit(e);
+      else if (e.type === 'coin') drawCoin(e);
+    }
+    drawPlayer();
+
+    // HUD DOM sync
+    document.getElementById('score').textContent = 'SCORE ' + String(state.score).padStart(4, '0');
+    document.getElementById('coins').textContent = 'COINS ' + state.coins;
+    document.getElementById('lives').textContent = 'LIVES ' + (state.lives > 0 ? '♥'.repeat(state.lives) : '—');
+    document.getElementById('best').textContent = 'BEST ' + String(state.best).padStart(4, '0');
+  }
+
+  function loop() {
+    if (!state.running || state.paused) return;
+    step();
+    if (!state.running) return; // game over called inside step
+    render();
+    requestAnimationFrame(loop);
+  }
+
+  // Draw an idle title screen once on load so the canvas isn't blank behind overlay
+  render();
+
+})();
+</script>
+</body>
+</html>
