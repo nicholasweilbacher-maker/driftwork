@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow common noise
+Disallow: /tmp/
+Disallow: /__pycache__/
+
+Sitemap: https://driftwork.dev/sitemap.xml
