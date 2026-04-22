@@ -1,8 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics 4 — cookieless -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0014">
+
+<title>Nick (Weilbacher) McCarthy-Yates — Email Channel Ops & SFMC Specialist</title>
+<meta name="description" content="Nick (Weilbacher) McCarthy-Yates — Digital Marketing Operations & Email Channel Specialist. 10+ years in Salesforce Marketing Cloud, email production, and campaign deployment. Currently remote within the Omnicom network.">
+<meta name="author" content="Nick (Weilbacher) McCarthy-Yates">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://driftwork.dev/">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://driftwork.dev/">
+<meta property="og:title" content="Nick (Weilbacher) McCarthy-Yates — Email Channel Ops & SFMC Specialist">
+<meta property="og:description" content="Retro-arcade portfolio for a Salesforce Marketing Cloud specialist in the Omnicom network. 10+ years of campaign ops, email production, and deployment.">
+<meta property="og:site_name" content="driftwork.dev">
+<meta property="og:image" content="https://driftwork.dev/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Neon arcade title card reading NICK (WEILBACHER) McCARTHY-YATES — EMAIL CHANNEL OPS x SFMC SPECIALIST, driftwork.dev, with pixel hearts and a CRT grid background.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nick (Weilbacher) McCarthy-Yates — Email Channel Ops & SFMC Specialist">
+<meta name="twitter:description" content="Retro-arcade portfolio for a Salesforce Marketing Cloud specialist in the Omnicom network.">
+<meta name="twitter:image" content="https://driftwork.dev/images/og-image.png">
+<meta name="twitter:image:alt" content="Neon arcade title card for Nick (Weilbacher) McCarthy-Yates's driftwork.dev portfolio.">
+
+<!-- Favicon: pixel heart SVG, inline so there's no extra request -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cpath fill='%23ff2d95' d='M3 4h3v1h1V4h2v1h1V4h3v3h-1v1h-1v1h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1V9H3V8H2V7H3z'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- Structured data: Person schema for search engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nick (Weilbacher) McCarthy-Yates",
+  "url": "https://driftwork.dev/",
+  "jobTitle": "Digital Marketing Operations & Email Channel Specialist",
+  "worksFor": { "@type": "Organization", "name": "RAPP (Omnicom Group)" },
+  "knowsAbout": ["Salesforce Marketing Cloud","Email Marketing Operations","AMPscript","Journey Builder","Email Deliverability","Campaign Production","Audience Segmentation"],
+  "sameAs": ["https://www.linkedin.com/in/nick-weilbacher/"]
+}
+</script>
+
+<!-- Google Analytics 4 — cookieless -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QKHXVFXY4W"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -12,10 +61,6 @@
     client_storage: 'none'
   });
 </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NICK WEILBACHER — SELECT YOUR QUEST</title>
-<meta name="description" content="Nick Weilbacher — Digital Marketing Operations & Email Channel Specialist. Retro arcade portfolio.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
 
@@ -25,6 +70,7 @@
   --neon-blue: #00e5ff;
   --neon-yellow: #ffe100;
   --neon-orange: #ff6d00;
+  --neon-purple: #b066ff;
   --deep-purple: #1a0030;
   --dark-bg: #0a0014;
   --grid-color: rgba(57, 255, 20, 0.08);
@@ -202,21 +248,74 @@ body {
   opacity: 0.7;
 }
 
+/* ========== PRIMARY SITE NAV (links to /about /work) ========== */
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 0.4rem;
+  font-family: 'Press Start 2P', monospace;
+  flex-wrap: wrap;
+}
+.site-nav-brand {
+  color: var(--crt-green);
+  text-decoration: none;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px rgba(57,255,20,0.4);
+}
+.site-nav-brand:hover { text-shadow: 0 0 12px var(--crt-green); }
+.site-nav-links {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.site-nav-links a {
+  color: #c9c1d8;
+  text-decoration: none;
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.site-nav-links a:hover {
+  color: var(--neon-pink);
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 10px rgba(255,45,149,0.35);
+}
+.site-nav-arcade { color: var(--neon-yellow) !important; }
+.site-nav-arcade:hover { color: var(--neon-yellow) !important; border-color: var(--neon-yellow) !important; box-shadow: 0 0 10px rgba(255,225,0,0.4) !important; }
+
+@media (max-width: 640px) {
+  .site-nav { padding: 0.8rem 1rem 0.3rem; }
+  .site-nav-brand { font-size: 0.55rem; }
+  .site-nav-links a { font-size: 0.48rem; padding: 5px 8px; }
+}
+
 /* ========== NAVIGATION / LEVEL SELECT ========== */
 .level-select {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  flex-wrap: nowrap;          /* desktop: single line, no orphaned items */
+  gap: 0.6rem;
   padding: 1rem 1rem 2rem;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Allow wrapping only on narrow viewports (phones / small tablets) */
+@media (max-width: 820px) {
+  .level-select { flex-wrap: wrap; }
 }
 
 .level-btn {
   font-family: 'Press Start 2P', monospace;
   font-size: 0.5rem;
-  padding: 10px 16px;
+  padding: 10px 14px;
   border: 2px solid;
   background: transparent;
   cursor: pointer;
@@ -224,6 +323,8 @@ body {
   transition: all 0.15s;
   position: relative;
   letter-spacing: 1px;
+  white-space: nowrap;        /* never break a single label across lines */
+  flex: 0 0 auto;
 }
 .level-btn::before {
   content: '▸ ';
@@ -238,6 +339,7 @@ body {
 .level-btn[data-level="skills"] { color: var(--neon-blue);   border-color: var(--neon-blue); }
 .level-btn[data-level="clients"]{ color: var(--neon-yellow); border-color: var(--neon-yellow); }
 .level-btn[data-level="contact"]{ color: var(--neon-orange); border-color: var(--neon-orange); }
+.level-btn[data-level="bonus"]  { color: var(--neon-purple); border-color: var(--neon-purple); }
 
 .level-btn:hover, .level-btn.active {
   transform: scale(1.08);
@@ -247,6 +349,7 @@ body {
 .level-btn[data-level="skills"]:hover,  .level-btn[data-level="skills"].active { background: rgba(0,229,255,0.15);  box-shadow: 0 0 20px rgba(0,229,255,0.4); }
 .level-btn[data-level="clients"]:hover, .level-btn[data-level="clients"].active{ background: rgba(255,225,0,0.15);  box-shadow: 0 0 20px rgba(255,225,0,0.4); }
 .level-btn[data-level="contact"]:hover, .level-btn[data-level="contact"].active{ background: rgba(255,109,0,0.15);  box-shadow: 0 0 20px rgba(255,109,0,0.4); }
+.level-btn[data-level="bonus"]:hover,   .level-btn[data-level="bonus"].active  { background: rgba(176,102,255,0.15);box-shadow: 0 0 20px rgba(176,102,255,0.45); }
 
 /* ========== SECTIONS / GAME PANELS ========== */
 .game-panel {
@@ -297,6 +400,9 @@ body {
 
 #contact-panel .panel-box{ border-color: var(--neon-orange); }
 #contact-panel h2        { color: var(--neon-orange); text-shadow: 0 0 10px var(--neon-orange); }
+
+#bonus-panel .panel-box  { border-color: var(--neon-purple); }
+#bonus-panel h2          { color: var(--neon-purple); text-shadow: 0 0 10px var(--neon-purple); }
 
 /* TEXT STYLING */
 .panel-box p, .panel-box li {
@@ -521,6 +627,37 @@ body {
   letter-spacing: 1px;
   line-height: 2;
 }
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.5rem;
+}
+.footer-social a {
+  color: var(--neon-pink);
+  text-decoration: none;
+  padding: 4px 10px;
+  border: 1px solid var(--neon-pink);
+  letter-spacing: 1.2px;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.footer-social a:hover {
+  background: var(--neon-pink);
+  color: #000;
+  box-shadow: 0 0 12px rgba(255,45,149,0.5);
+}
+.footer-social a.sec {
+  color: var(--crt-green);
+  border-color: var(--crt-green);
+}
+.footer-social a.sec:hover {
+  background: var(--crt-green);
+  color: #000;
+  box-shadow: 0 0 12px rgba(57,255,20,0.5);
+}
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 600px) {
@@ -575,27 +712,249 @@ body {
   letter-spacing: 8px;
   opacity: 0.3;
 }
+
+/* ========== SKIP LINK (a11y) ========== */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 10002;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: #000;
+  background: var(--neon-yellow);
+  padding: 10px 14px;
+  text-decoration: none;
+  border: 2px solid #000;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 16px;
+  outline: 3px solid var(--crt-green);
+}
+
+/* ========== FOCUS-VISIBLE (keyboard a11y) ========== */
+.level-btn:focus-visible,
+.contact-link:focus-visible,
+.sound-toggle:focus-visible,
+.skip-boot:focus-visible,
+.bonus-card:focus-visible {
+  outline: 3px solid var(--neon-yellow);
+  outline-offset: 3px;
+}
+
+/* ========== SKIP-INTRO BUTTON ========== */
+.skip-boot {
+  margin-top: 1.2rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: #888;
+  background: transparent;
+  border: 1px solid #444;
+  padding: 8px 14px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.15s;
+}
+.skip-boot:hover {
+  color: var(--crt-green);
+  border-color: var(--crt-green);
+  background: rgba(57,255,20,0.1);
+}
+
+/* ========== BONUS LEVELS PANEL ========== */
+.bonus-intro {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  color: #c8c8c8;
+  margin-bottom: 1.4rem;
+  line-height: 1.5;
+}
+
+.bonus-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+.bonus-card {
+  display: block;
+  position: relative;
+  padding: 1rem 1.2rem;
+  border: 2px solid var(--accent, var(--neon-purple));
+  background: rgba(0,0,0,0.35);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.18s, background 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  overflow: hidden;
+}
+.bonus-card::before {
+  content: '▸';
+  position: absolute;
+  left: -18px;
+  top: 1rem;
+  color: var(--accent, var(--neon-purple));
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  opacity: 0;
+  transition: all 0.18s;
+}
+.bonus-card:hover,
+.bonus-card:focus-visible {
+  transform: translateX(6px);
+  background: rgba(0,0,0,0.55);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent, var(--neon-purple)) 35%, transparent);
+}
+.bonus-card:hover::before,
+.bonus-card:focus-visible::before { opacity: 1; left: -14px; }
+
+.bonus-card .bonus-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: var(--accent, var(--neon-purple));
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 8px color-mix(in srgb, var(--accent, var(--neon-purple)) 45%, transparent);
+}
+.bonus-card .bonus-sub {
+  font-family: 'VT323', monospace;
+  font-size: 1.15rem;
+  color: #c8c8c8;
+  line-height: 1.35;
+}
+.bonus-card .bonus-tag {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.4rem;
+  color: #999;
+  border: 1px solid #444;
+  padding: 3px 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.bonus-card .bonus-cta {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+  color: var(--accent, var(--neon-purple));
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+@media (min-width: 700px) {
+  .bonus-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ========== TOAST (1UP / power-up feedback) ========== */
+#toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  z-index: 10005;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.8rem;
+  color: var(--neon-yellow);
+  text-shadow:
+    0 0 10px var(--neon-pink),
+    0 0 22px var(--neon-yellow);
+  letter-spacing: 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+#toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .grid-bg { animation: none; transform: none; }
+  .typewriter { animation: none; border-right: none; white-space: normal; }
+  .star { animation: none; opacity: 0.6; }
+  .coin-icon { animation: none; }
+  .pixel-heart { animation: none; }
+  .arcade-header h1 { animation: none; }
+  .power-up { animation: none; }
+}
+
+/* ========== FOOTER CONTRAST FIX ========== */
+.arcade-footer { color: #8a8a8a; }
+
+/* ========== PRINT STYLESHEET ========== */
+@media print {
+  .crt-overlay, .grid-bg, .stars, #boot-screen,
+  .sound-toggle, .coin-counter, .skip-link, #toast { display: none !important; }
+  body {
+    background: #fff !important;
+    color: #111 !important;
+    cursor: auto;
+  }
+  .arcade-header h1, .panel-box h2, .xp-entry .role,
+  .skill-label, .bonus-title, .contact-link, .level-btn {
+    color: #111 !important;
+    text-shadow: none !important;
+    background: transparent !important;
+    -webkit-text-fill-color: #111 !important;
+    filter: none !important;
+  }
+  .level-select { display: none; }
+  .game-panel { display: block !important; page-break-inside: avoid; }
+  .panel-box {
+    border: 1px solid #999 !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
+    color: #111 !important;
+  }
+  .panel-box p, .panel-box li,
+  .xp-entry .company, .xp-entry .years, .xp-entry .desc,
+  .skill-pct, .bonus-sub, .bonus-intro {
+    color: #222 !important;
+  }
+  .skill-bar-fill { background: #444 !important; }
+  a { color: #004a99 !important; text-decoration: underline; }
+  a[href^="http"]::after,
+  a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #555; }
+}
 </style>
 </head>
 <body>
 
+<!-- Skip link (keyboard a11y) -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <!-- CRT Overlay -->
-<div class="crt-overlay"></div>
+<div class="crt-overlay" aria-hidden="true"></div>
 
 <!-- Stars -->
-<div class="stars" id="stars"></div>
+<div class="stars" id="stars" aria-hidden="true"></div>
 
 <!-- Grid -->
-<div class="grid-bg"></div>
+<div class="grid-bg" aria-hidden="true"></div>
 
 <!-- Boot Screen -->
-<div id="boot-screen">
+<div id="boot-screen" role="dialog" aria-label="Intro sequence" aria-live="polite">
   <div class="boot-text" id="boot-text"></div>
   <div class="boot-prompt" id="boot-prompt" style="display:none;">► INSERT COIN TO START ◄</div>
+  <button type="button" class="skip-boot" id="skip-boot" aria-label="Skip intro and go straight to portfolio">SKIP INTRO ►</button>
 </div>
 
 <!-- Sound Toggle -->
-<button class="sound-toggle" id="sound-toggle" title="Toggle Music">♪ SOUND: OFF</button>
+<button class="sound-toggle" id="sound-toggle" title="Toggle chiptune music" aria-pressed="false" aria-label="Toggle background music">♪ SOUND: OFF</button>
+
+<!-- 1UP Toast -->
+<div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <!-- Coin Counter -->
 <div class="coin-counter" id="coin-counter" style="display:none;">
@@ -604,27 +963,38 @@ body {
 </div>
 
 <!-- ========== MAIN CONTENT ========== -->
-<main id="main-content" style="display:none;">
+<main id="main-content" tabindex="-1" style="display:none;">
+
+  <!-- Primary site nav (persistent links to standalone pages) -->
+  <nav class="site-nav" aria-label="Primary site navigation">
+    <a href="/" class="site-nav-brand" aria-current="page">DRIFTWORK.DEV</a>
+    <div class="site-nav-links">
+      <a href="/about/">ABOUT</a>
+      <a href="/work/">WORK</a>
+      <a href="#bonus-panel" data-level="bonus" class="site-nav-arcade">ARCADE</a>
+    </div>
+  </nav>
 
   <header class="arcade-header">
-    <h1 class="glitch">NICK WEILBACHER</h1>
+    <h1 class="glitch">NICK (WEILBACHER) McCARTHY&#8209;YATES</h1>
     <div class="subtitle">DIGITAL MARKETING OPS &nbsp;×&nbsp; EMAIL CHANNEL SPECIALIST</div>
     <div class="hi-score">HI-SCORE: 10+ YRS CAMPAIGN OPERATIONS &nbsp; &nbsp; ★ &nbsp; LEVEL: SENIOR</div>
   </header>
 
   <!-- Level Select Nav -->
-  <nav class="level-select" role="navigation" aria-label="Section navigation">
-    <button class="level-btn active" data-level="bio">PLAYER BIO</button>
-    <button class="level-btn" data-level="xp">EXPERIENCE</button>
-    <button class="level-btn" data-level="skills">SKILL TREE</button>
-    <button class="level-btn" data-level="clients">QUEST LOG</button>
-    <button class="level-btn" data-level="contact">WARP ZONE</button>
+  <nav class="level-select" aria-label="Section navigation">
+    <button class="level-btn active" data-level="bio" aria-controls="bio-panel">PLAYER BIO</button>
+    <button class="level-btn" data-level="xp" aria-controls="xp-panel">EXPERIENCE</button>
+    <button class="level-btn" data-level="skills" aria-controls="skills-panel">SKILL TREE</button>
+    <button class="level-btn" data-level="clients" aria-controls="clients-panel">QUEST LOG</button>
+    <button class="level-btn" data-level="contact" aria-controls="contact-panel">WARP ZONE</button>
+    <button class="level-btn" data-level="bonus" aria-controls="bonus-panel">BONUS LEVELS</button>
   </nav>
 
   <!-- ===== BIO ===== -->
-  <section class="game-panel active" id="bio-panel">
+  <section class="game-panel active" id="bio-panel" aria-labelledby="bio-heading">
     <div class="panel-box">
-      <h2><span class="icon">⬤</span> PLAYER BIO</h2>
+      <h2 id="bio-heading"><span class="icon" aria-hidden="true">⬤</span> PLAYER BIO</h2>
       <p>
         Marketing campaign operations specialist with deep expertise in
         <span class="highlight">Salesforce Marketing Cloud</span>. I build, deploy,
@@ -652,9 +1022,9 @@ body {
   </section>
 
   <!-- ===== EXPERIENCE ===== -->
-  <section class="game-panel" id="xp-panel">
+  <section class="game-panel" id="xp-panel" aria-labelledby="xp-heading">
     <div class="panel-box">
-      <h2><span class="icon">⬤</span> EXPERIENCE LOG</h2>
+      <h2 id="xp-heading"><span class="icon" aria-hidden="true">⬤</span> EXPERIENCE LOG</h2>
 
       <div class="xp-entry">
         <div class="role">EMAIL CHANNEL OPS MANAGER</div>
@@ -691,9 +1061,9 @@ body {
   </section>
 
   <!-- ===== SKILLS ===== -->
-  <section class="game-panel" id="skills-panel">
+  <section class="game-panel" id="skills-panel" aria-labelledby="skills-heading">
     <div class="panel-box">
-      <h2><span class="icon">⬤</span> SKILL TREE</h2>
+      <h2 id="skills-heading"><span class="icon" aria-hidden="true">⬤</span> SKILL TREE</h2>
 
       <div class="skill-row">
         <div class="skill-label">SALESFORCE MARKETING CLOUD</div>
@@ -746,9 +1116,9 @@ body {
   </section>
 
   <!-- ===== CLIENTS / INDUSTRIES ===== -->
-  <section class="game-panel" id="clients-panel">
+  <section class="game-panel" id="clients-panel" aria-labelledby="clients-heading">
     <div class="panel-box">
-      <h2><span class="icon">⬤</span> QUEST LOG — INDUSTRIES SERVED</h2>
+      <h2 id="clients-heading"><span class="icon" aria-hidden="true">⬤</span> QUEST LOG — INDUSTRIES SERVED</h2>
       <p>Campaign operations across diverse, high-regulation, and purpose-driven verticals.</p>
       <div class="tag-grid">
         <span class="tag financial">💰 FINANCIAL SERVICES</span>
@@ -773,13 +1143,13 @@ body {
   </section>
 
   <!-- ===== CONTACT ===== -->
-  <section class="game-panel" id="contact-panel">
+  <section class="game-panel" id="contact-panel" aria-labelledby="contact-heading">
     <div class="panel-box">
-      <h2><span class="icon">⬤</span> WARP ZONE — GET IN TOUCH</h2>
+      <h2 id="contact-heading"><span class="icon" aria-hidden="true">⬤</span> WARP ZONE — GET IN TOUCH</h2>
       <p>Ready to team up? Pick your portal.</p>
       <div class="contact-links">
-        <a href="mailto:nicholas.weilbacher@gmail.com" class="contact-link">
-          <span class="link-icon">✉</span> nicholas.weilbacher@gmail.com
+        <a href="mailto:n626@proton.me" class="contact-link">
+          <span class="link-icon">✉</span> n626@proton.me
         </a>
         <a href="https://www.linkedin.com/in/nick-weilbacher/" target="_blank" rel="noopener" class="contact-link">
           <span class="link-icon">◈</span> LINKEDIN PROFILE
@@ -793,8 +1163,28 @@ body {
     </div>
   </section>
 
+  <!-- ===== BONUS LEVELS (driftwork archive) ===== -->
+  <section class="game-panel" id="bonus-panel" aria-labelledby="bonus-heading">
+    <div class="panel-box">
+      <h2 id="bonus-heading"><span class="icon" aria-hidden="true">⬤</span> BONUS LEVELS — UNLOCKED</h2>
+      <p class="bonus-intro">
+        Side quests and outside-the-brief writing.
+        Each page is its own world — pick one and wander.
+      </p>
+      <div class="bonus-grid" id="bonus-grid"><!-- populated by JS --></div>
+      <div class="pixel-divider">· · · · · · · · · ·</div>
+      <p style="font-size:1.05rem; color:#8a8a8a;">
+        More bonus levels will appear here as new pages get built.
+      </p>
+    </div>
+  </section>
+
   <footer class="arcade-footer">
-    © 2026 NICK WEILBACHER &nbsp;|&nbsp; ALL RIGHTS RESERVED<br>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/nick-weilbacher/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+      <a href="mailto:n626@proton.me" class="sec">EMAIL</a>
+    </div>
+    © 2026 NICK (WEILBACHER) McCARTHY&#8209;YATES &nbsp;|&nbsp; ALL RIGHTS RESERVED<br>
     BUILT WITH ♥ AND 8-BIT DREAMS
   </footer>
 
@@ -1038,7 +1428,7 @@ let coins = 0;
 // BOOT SEQUENCE
 // ========================================
 const bootLines = [
-  'WEILBACHER SYSTEMS v8.6 (c) 1989',
+  'McCARTHY&#8209;YATES SYSTEMS v8.6 (c) 1989',
   'MEMORY TEST... 640K OK',
   'LOADING CAMPAIGN_ENGINE.ROM ......... OK',
   'SFMC MODULE DETECTED ............... OK',
@@ -1093,6 +1483,7 @@ function startGame() {
 }
 
 bootPrompt.addEventListener('click', startGame);
+document.getElementById('skip-boot').addEventListener('click', startGame);
 document.addEventListener('keydown', function bootKey(e) {
   if (!document.getElementById('boot-screen').classList.contains('hidden')) {
     startGame();
@@ -1129,7 +1520,9 @@ document.querySelectorAll('.level-btn').forEach(btn => {
 // ========================================
 document.getElementById('sound-toggle').addEventListener('click', () => {
   soundOn = !soundOn;
-  document.getElementById('sound-toggle').textContent = soundOn ? '♪ SOUND: ON' : '♪ SOUND: OFF';
+  const btn = document.getElementById('sound-toggle');
+  btn.textContent = soundOn ? '♪ SOUND: ON' : '♪ SOUND: OFF';
+  btn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
   if (soundOn) {
     chip.startSong();
   } else {
@@ -1152,21 +1545,186 @@ document.querySelectorAll('.tag').forEach(tag => {
 });
 
 // ========================================
-// KEYBOARD NAV (arrow keys like a game)
+// KEYBOARD NAV (arrow keys + number keys)
 // ========================================
 document.addEventListener('keydown', (e) => {
+  // Don't steal keys while boot screen is up
+  if (!document.getElementById('boot-screen').classList.contains('hidden')) return;
+
   const btns = [...document.querySelectorAll('.level-btn')];
   const activeIdx = btns.findIndex(b => b.classList.contains('active'));
+
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
     e.preventDefault();
     const next = (activeIdx + 1) % btns.length;
     btns[next].click();
+    btns[next].focus();
   } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
     e.preventDefault();
     const prev = (activeIdx - 1 + btns.length) % btns.length;
     btns[prev].click();
+    btns[prev].focus();
+  } else if (/^[1-9]$/.test(e.key)) {
+    // Number keys jump directly to a level
+    const idx = parseInt(e.key, 10) - 1;
+    if (idx < btns.length) {
+      e.preventDefault();
+      btns[idx].click();
+      btns[idx].focus();
+    }
   }
 });
+
+// ========================================
+// BONUS LEVELS — data-driven cards
+// To add a new page: append an entry below. That's it.
+// ========================================
+const bonusLevels = [
+  {
+    title: 'ABOUT',
+    subtitle: 'Who I am, how I work, and what I get up to off the clock. The readable version.',
+    href: '/about/',
+    accent: '#39ff14', // crt green
+    tag: 'PROFILE',
+    internal: true
+  },
+  {
+    title: 'WORK',
+    subtitle: 'Experience, skills, and a 16-year track record in email marketing &amp; CRM operations.',
+    href: '/work/',
+    accent: '#ffe100', // yellow
+    tag: 'RESUME',
+    internal: true
+  },
+  {
+    title: 'ARCADE RUNNER',
+    subtitle: 'A tiny CRT side-scroller \u2014 jump the pits, dodge the spikes, grab the coins. Starring a pixel-me.',
+    href: 'arcade-runner/',
+    accent: '#ff2d95', // neon pink
+    tag: 'MINI GAME'
+  },
+  {
+    title: 'AETHER DRUM',
+    subtitle: 'A playable steel tongue drum \u2014 Celtic, Akebono, Hijaz, and Pygmy scales in the browser.',
+    href: 'aether-drum/',
+    accent: '#7fdcdc', // teal
+    tag: 'INTERACTIVE'
+  },
+  {
+    title: 'HERE LIES ONE',
+    subtitle: 'A study of John Keats, memento mori, and the unbearable beauty of passing things. Five poems, scroll-animated.',
+    href: 'john-keats/keats.html',
+    accent: '#c9a96e', // aged parchment
+    tag: 'LITERARY STUDY'
+  },
+  {
+    title: 'ROOT SYSTEM',
+    subtitle: 'What\u2019s visible grows from what\u2019s underneath. An interactive portfolio, spring 2026.',
+    href: 'root-system/',
+    accent: '#7fbf4f', // new-growth green
+    tag: 'PORTFOLIO'
+  },
+  {
+    title: 'THE THORNWOOD',
+    subtitle: 'Ancient paths. Living community. Find your roots. Find your people.',
+    href: 'thornwood/',
+    accent: '#a3725a', // woodland bark
+    tag: 'COMMUNITY'
+  },
+  {
+    title: 'FOGHLAIM GAEILGE',
+    subtitle: 'An interactive beginner Irish language app \u2014 flashcards, quizzes, and pronunciation.',
+    href: 'gaelige/',
+    accent: '#3a9d5d', // irish green
+    tag: 'LANGUAGE APP'
+  },
+  {
+    title: 'NEVER GROW UP',
+    subtitle: 'A literary exploration of masculinity in American literature, from Peter Pan to Catcher in the Rye.',
+    href: 'never-grow-up/never-grow-up.html',
+    accent: '#ff2d95', // pink
+    tag: 'ESSAY \u00B7 2019'
+  },
+  {
+    title: 'THE GRIMOIRE',
+    subtitle: 'A field record of shamanic study. Eight volumes, one tome.',
+    href: 'grimoire/',
+    accent: '#d4943a', // gold
+    tag: 'FIELD RECORD'
+  },
+  {
+    title: 'BRILLIANTLY FREE',
+    subtitle: 'A tribute to the talent, the craft, and the people who made something worth making.',
+    href: 'brilliantly-free/',
+    accent: '#e8b448', // amber
+    tag: 'TRIBUTE'
+  }
+];
+
+(function renderBonusCards() {
+  const grid = document.getElementById('bonus-grid');
+  if (!grid) return;
+  grid.innerHTML = bonusLevels.map(b => {
+    const target = b.internal ? '' : ' target="_blank" rel="noopener noreferrer"';
+    const tabNote = b.internal ? '' : ' (opens in a new tab)';
+    return `
+    <a class="bonus-card" href="${b.href}"${target} style="--accent:${b.accent}" aria-label="${b.title} \u2014 ${b.subtitle}${tabNote}">
+      <div class="bonus-title">${b.title}</div>
+      <div class="bonus-sub">${b.subtitle}</div>
+      ${b.tag ? `<span class="bonus-tag">${b.tag}</span>` : ''}
+      <span class="bonus-cta" aria-hidden="true">PRESS START \u25B6</span>
+    </a>
+  `;
+  }).join('');
+})();
+
+// ========================================
+// TOAST (for 1UP and power-ups)
+// ========================================
+function showToast(msg, ms = 1500) {
+  const el = document.getElementById('toast');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), ms);
+}
+
+// ========================================
+// KONAMI CODE EASTER EGG — ↑↑↓↓←→←→BA
+// ========================================
+const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiBuffer = [];
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('boot-screen').classList.contains('hidden')) return;
+  konamiBuffer.push(e.key.length === 1 ? e.key.toLowerCase() : e.key);
+  if (konamiBuffer.length > KONAMI.length) konamiBuffer.shift();
+  if (konamiBuffer.length === KONAMI.length &&
+      konamiBuffer.every((k, i) => k === KONAMI[i])) {
+    konamiBuffer = [];
+    triggerGodMode();
+  }
+});
+
+function triggerGodMode() {
+  showToast('1UP! +99 COINS', 1800);
+  for (let i = 0; i < 99; i++) setTimeout(addCoin, i * 12);
+  // Brief rainbow border cycle on the active panel
+  const panel = document.querySelector('.game-panel.active .panel-box');
+  if (panel) {
+    const palette = ['#39ff14','#ff2d95','#00e5ff','#ffe100','#ff6d00','#b066ff'];
+    let i = 0;
+    const original = panel.style.borderColor;
+    const iv = setInterval(() => {
+      panel.style.borderColor = palette[i % palette.length];
+      i++;
+      if (i > palette.length * 3) {
+        clearInterval(iv);
+        panel.style.borderColor = original;
+      }
+    }, 120);
+  }
+}
 </script>
 </body>
 </html>
