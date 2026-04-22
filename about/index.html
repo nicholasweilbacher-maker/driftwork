@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#0a0014"/>
+  <title>About — Nick (Weilbacher) McCarthy-Yates · driftwork.dev</title>
+  <meta name="description" content="Campaign Engineer and Salesforce Marketing Cloud specialist. 16+ years across email marketing, CRM operations, and automation. Based in New England."/>
+  <meta name="author" content="Nick (Weilbacher) McCarthy-Yates"/>
+
+  <link rel="canonical" href="https://driftwork.dev/about/"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile"/>
+  <meta property="og:url" content="https://driftwork.dev/about/"/>
+  <meta property="og:title" content="About — Nick (Weilbacher) McCarthy-Yates"/>
+  <meta property="og:description" content="Campaign Engineer and Salesforce Marketing Cloud specialist. 16+ years across email marketing, CRM operations, and automation."/>
+  <meta property="og:site_name" content="driftwork.dev"/>
+  <meta property="og:image" content="https://driftwork.dev/images/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="About — Nick (Weilbacher) McCarthy-Yates"/>
+  <meta name="twitter:description" content="Campaign Engineer and Salesforce Marketing Cloud specialist."/>
+  <meta name="twitter:image" content="https://driftwork.dev/images/og-image.png"/>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nick (Weilbacher) McCarthy-Yates",
+    "url": "https://driftwork.dev/about/",
+    "jobTitle": "Campaign Engineer",
+    "worksFor": { "@type": "Organization", "name": "RAPP / Omnicom Precision Marketing Group" },
+    "email": "mailto:n626@proton.me",
+    "sameAs": ["https://www.linkedin.com/in/nick-weilbacher/"]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0014'/%3E%3Ctext x='8' y='12' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle' fill='%2339ff14'%3ED%3C/text%3E%3C/svg%3E"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+
+  <!-- Google Analytics 4 — cookieless -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QKHXVFXY4W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QKHXVFXY4W', { anonymize_ip: true, client_storage: 'none' });
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0014;
+      --bg-card:   #150a26;
+      --border:    #2a1440;
+      --green:     #39ff14;
+      --pink:      #ff2d95;
+      --blue:      #00e5ff;
+      --yellow:    #ffe100;
+      --text:      #e8e0f5;
+      --muted:     #8c82a0;
+      --dim:       #5c5572;
+    }
+
+    html { height: 100%; scroll-behavior: smooth; }
+    body {
+      min-height: 100%;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    /* subtle CRT grid backdrop */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(57,255,20,0.04) 1px, transparent 1px) 0 0 / 40px 40px,
+        linear-gradient(180deg, rgba(57,255,20,0.04) 1px, transparent 1px) 0 0 / 40px 40px;
+      z-index: 0;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.25) 0px, rgba(0,0,0,0.25) 1px, transparent 1px, transparent 3px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* top nav */
+    nav.site-nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(10, 0, 20, 0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.7rem;
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .brand:hover { text-shadow: 0 0 6px var(--green); }
+    .nav-links {
+      display: flex; gap: 14px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.05em;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 8px;
+      border: 1px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-links a:hover { color: var(--pink); border-color: var(--pink); }
+    .nav-links a.current { color: var(--green); border-color: var(--green); }
+
+    /* page header */
+    header.page-head {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 70px 24px 30px;
+      text-align: left;
+    }
+    .eyebrow {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    h1 .hl {
+      background: linear-gradient(180deg, var(--yellow) 0%, var(--pink) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .role-line {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--pink);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* main content */
+    main { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+    section.card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px 28px;
+      margin-bottom: 24px;
+    }
+    section.card h2 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.8rem;
+      color: var(--green);
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    section.card h2::before { content: "> "; color: var(--green); }
+
+    .card p { margin-bottom: 14px; color: var(--text); }
+    .card p:last-child { margin-bottom: 0; }
+    .card strong { color: var(--yellow); font-weight: 600; }
+    .card em { color: var(--blue); font-style: normal; font-weight: 500; }
+
+    /* contact block */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    @media (max-width: 560px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-tile {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 18px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .contact-tile:hover { border-color: var(--pink); transform: translateY(-2px); }
+    .contact-tile .label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .contact-tile .value {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--green);
+      font-size: 0.95rem;
+      word-break: break-all;
+    }
+
+    footer {
+      position: relative; z-index: 2;
+      max-width: 860px; margin: 0 auto;
+      padding: 30px 24px 60px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--dim);
+      text-align: center;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--pink); }
+    footer .footer-links {
+      display: flex; gap: 18px; justify-content: center;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+
+    .skip-link {
+      position: absolute; left: -9999px;
+      background: var(--green); color: var(--bg);
+      padding: 8px 12px; font-family: 'Press Start 2P', monospace; font-size: 0.6rem;
+    }
+    .skip-link:focus { left: 8px; top: 8px; z-index: 20; }
+
+    a:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="site-nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="/" class="brand">DRIFTWORK.DEV</a>
+      <div class="nav-links">
+        <a href="/about/" class="current" aria-current="page">About</a>
+        <a href="/work/">Work</a>
+        <a href="/#levels">Arcade</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <div class="eyebrow">// about</div>
+    <h1>Nick <span class="hl">(Weilbacher) McCarthy&#8209;Yates</span></h1>
+    <p class="role-line">Campaign Engineer &nbsp;·&nbsp; Salesforce Marketing Cloud &nbsp;·&nbsp; Marketing Automation</p>
+  </header>
+
+  <main id="main">
+    <section class="card" aria-labelledby="intro">
+      <h2 id="intro">Professional Profile</h2>
+      <p>
+        I&rsquo;m a <strong>Campaign Engineer</strong> specialising in Salesforce Marketing Cloud and
+        marketing automation. Sixteen years in the email and CRM space &mdash; from front-end production
+        at Scientific American to enterprise CRM operations at an
+        <em>Omnicom Precision Marketing Group</em> agency.
+      </p>
+      <p>
+        My work sits at the intersection of strategy and execution: translating creative briefs and
+        business rules into production-ready campaigns that perform at scale. I bridge the gap
+        between <strong>campaign management</strong>, <strong>development</strong>, and <strong>QA teams</strong>
+        &mdash; people tend to remember I&rsquo;m the remote person who&rsquo;s easier to work with than the one
+        down the hall.
+      </p>
+      <p>
+        Current focus: high-volume email programmes for <strong>enterprise financial services</strong>
+        clients &mdash; automation setup, HTML/CSS email development, SQL, data-extension management,
+        and cross-team QA. Track record: <strong>zero in-market errors across 100+ live deployments</strong>
+        in a single year.
+      </p>
+    </section>
+
+    <section class="card" aria-labelledby="how">
+      <h2 id="how">How I Work</h2>
+      <p>
+        Remote-first, zero-defect delivery, and asynchronous-by-default.
+        I&rsquo;ve refined the workflow over years so that geography never becomes a bottleneck.
+        The job is part engineering, part operations, part translator &mdash; and it rewards the
+        person who reads the brief twice, anticipates the QA issue before it surfaces,
+        and ships it right the first time.
+      </p>
+      <p>
+        Outside of individual contributor work, I&rsquo;ve helped onboard
+        <strong>11 new team members</strong> across developer and campaign-manager roles,
+        and contributed the <strong>second-highest volume of peer reviews</strong>
+        on the team in a single year (425).
+      </p>
+    </section>
+
+    <section class="card" aria-labelledby="personal">
+      <h2 id="personal">Off the Clock</h2>
+      <p>
+        Based in New England. Dog dad to Mona, cat uncle to Stevie and Poe.
+        Running, cycling, swimming, yoga (500-hour teacher training), hiking, and
+        a long side-project habit &mdash; this very site, a handful of creative essays,
+        an arcade game, and an Irish-learning app are all floating around under <em>/driftwork</em>.
+      </p>
+      <p>
+        Fluent German, basic French and Spanish. Partial to mountains, beaches,
+        New England ponds, and the kind of late-afternoon walks where nothing gets solved
+        but everything feels lighter afterwards.
+      </p>
+    </section>
+
+    <section class="card" aria-labelledby="contact">
+      <h2 id="contact">Say Hello</h2>
+      <p style="margin-bottom: 18px;">
+        The best way to reach me is email. I read everything and reply to most things.
+      </p>
+      <div class="contact-grid">
+        <a class="contact-tile" href="mailto:n626@proton.me">
+          <span class="label">Email</span>
+          <span class="value">n626@proton.me</span>
+        </a>
+        <a class="contact-tile" href="https://www.linkedin.com/in/nick-weilbacher/" target="_blank" rel="noopener">
+          <span class="label">LinkedIn</span>
+          <span class="value">/in/nick-weilbacher</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/">Arcade</a>
+      <a href="/about/">About</a>
+      <a href="/work/">Work</a>
+      <a href="mailto:n626@proton.me">Email</a>
+      <a href="https://www.linkedin.com/in/nick-weilbacher/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div>&copy; 2026 Nick (Weilbacher) McCarthy&#8209;Yates &nbsp;·&nbsp; driftwork.dev</div>
+  </footer>
+</body>
+</html>
