@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics 4 — cookieless -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QKHXVFXY4W', {
-    anonymize_ip: true,
-    client_storage: 'none'
-  });
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brilliantly Free</title>
+  <meta name="theme-color" content="#07090f">
+  <title>Brilliantly Free — A tribute to the people who made something worth making</title>
+  <meta name="description" content="A tribute to talent, craft, and the people who made something worth making. An interactive letter in gold and smoke.">
+  <meta name="author" content="Nick (Weilbacher) McCarthy-Yates">
+
+  <link rel="canonical" href="https://driftwork.dev/brilliantly-free/">
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://driftwork.dev/brilliantly-free/">
+  <meta property="og:title" content="Brilliantly Free — For the brilliant ones">
+  <meta property="og:description" content="A tribute to talent, craft, and the people who made something worth making.">
+  <meta property="og:site_name" content="driftwork.dev">
+  <meta property="og:image" content="https://driftwork.dev/images/og-brilliantly-free.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Deep navy sky scattered with gold-star constellations; italic serif title Brilliantly Free — For the brilliant ones, a tribute.">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Brilliantly Free — For the brilliant ones">
+  <meta name="twitter:description" content="A tribute to talent, craft, and the people who made something worth making.">
+  <meta name="twitter:image" content="https://driftwork.dev/images/og-brilliantly-free.png">
+
+  <!-- Favicon: gold star SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23e8b448' d='M8 1l1.8 4.5L14 6l-3 3 0.8 4.5L8 11l-3.8 2.5L5 9 2 6l4.2-0.5z'/%3E%3C/svg%3E">
+
+  <!-- Google Analytics 4 — cookieless -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QKHXVFXY4W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QKHXVFXY4W', {
+      anonymize_ip: true,
+      client_storage: 'none'
+    });
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -371,9 +396,43 @@
       .chapter { padding: 5.5rem 1.4rem; }
       .chapter-heading { margin-bottom: 2rem; }
     }
+
+    /* ─── A11Y: focus, reduced motion, skip link ─── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--gold2);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--gold);
+      color: var(--bg);
+      font-family: var(--sans);
+      padding: 10px 16px;
+      z-index: 9999;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .skip-link:focus { left: 16px; top: 16px; outline: 2px solid var(--cream); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      html { scroll-behavior: auto; }
+    }
   </style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
+
+<a href="#hero" class="skip-link">Skip to content</a>
 
 <section id="hero">
   <canvas id="heroCanvas"></canvas>
