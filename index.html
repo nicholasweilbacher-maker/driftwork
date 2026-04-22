@@ -658,6 +658,19 @@ body {
   color: #000;
   box-shadow: 0 0 12px rgba(57,255,20,0.5);
 }
+.footer-replay {
+  display: inline-block;
+  margin-top: 0.6rem;
+  color: #8a8a8a;
+  text-decoration: none;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  transition: color 0.15s, text-shadow 0.15s;
+}
+.footer-replay:hover {
+  color: var(--crt-green);
+  text-shadow: 0 0 6px rgba(57,255,20,0.4);
+}
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 600px) {
@@ -976,7 +989,7 @@ body {
   </nav>
 
   <header class="arcade-header">
-    <h1 class="glitch">NICK (WEILBACHER) <span style="display: inline-block;">McCARTHY-YATES</span></h1>
+    <h1 class="glitch">NICK (WEILBACHER) McCARTHY-YATES</h1>
     <div class="subtitle">DIGITAL MARKETING OPS &nbsp;×&nbsp; EMAIL CHANNEL SPECIALIST</div>
     <div class="hi-score">HI-SCORE: 10+ YRS CAMPAIGN OPERATIONS &nbsp; &nbsp; ★ &nbsp; LEVEL: SENIOR</div>
   </header>
@@ -1185,7 +1198,8 @@ body {
       <a href="mailto:n626@proton.me" class="sec">EMAIL</a>
     </div>
     © 2026 NICK (WEILBACHER) McCARTHY-YATES &nbsp;|&nbsp; ALL RIGHTS RESERVED<br>
-    BUILT WITH ♥ AND 8-BIT DREAMS
+    BUILT WITH ♥ AND 8-BIT DREAMS<br>
+    <a href="/?intro=1" class="footer-replay" aria-label="Replay the boot-screen intro">▶ REPLAY INTRO</a>
   </footer>
 
 </main>
@@ -1445,6 +1459,13 @@ let bootIndex = 0;
 const bootEl = document.getElementById('boot-text');
 const bootPrompt = document.getElementById('boot-prompt');
 
+// Remember that the visitor has seen the intro so repeat visits skip it.
+// Escape hatch: append ?intro=1 to the URL to force-replay the intro.
+const INTRO_KEY = 'driftwork_intro_seen';
+const forceIntro = new URLSearchParams(window.location.search).has('intro');
+let introAlreadySeen = false;
+try { introAlreadySeen = !!localStorage.getItem(INTRO_KEY); } catch (e) { /* private mode */ }
+
 function typeBoot() {
   if (bootIndex >= bootLines.length) {
     bootPrompt.style.display = 'block';
@@ -1464,10 +1485,23 @@ function typeBoot() {
   }, 18);
 }
 
-setTimeout(typeBoot, 600);
+if (introAlreadySeen && !forceIntro) {
+  // Returning visitor — skip the boot entirely, no fade, no sound
+  document.getElementById('boot-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+  document.getElementById('coin-counter').style.display = 'flex';
+  setTimeout(() => {
+    document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.width + '%';
+    });
+  }, 300);
+} else {
+  setTimeout(typeBoot, 600);
+}
 
 // Start on click
 function startGame() {
+  try { localStorage.setItem(INTRO_KEY, '1'); } catch (e) { /* private mode */ }
   chip.sfxBoot();
   document.getElementById('boot-screen').classList.add('hidden');
   document.getElementById('main-content').style.display = 'block';
